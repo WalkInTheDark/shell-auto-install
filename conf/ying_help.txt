@@ -1,0 +1,11 @@
+Tip: All services are installed by default! If you customize the installation location or other settings, please edit the service name
+
+install httpd    	 Install httpd
+remove  httpd    	 Uninstall httpd
+get     httpd    	 Download httpd required packages in advance
+edit	httpd		 Edit httpd for custom settings
+
+list             	 List the supported services
+help             	 Operational assistance is displayed
+lang    1        	 Set the language to Chinese
+lang    2        	 Set the language to English
