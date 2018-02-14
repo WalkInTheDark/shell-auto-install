@@ -1,20 +1,38 @@
-redis                  3.2.9
+Name	       Version                   Types
+
+redis                  3.2.9             server
 redis-port
 redis-cluster
 redis-sentinel
 
-redi-browser           0.4.0
+redi-browser           0.4.0		 server
 
-zookeeper	       3.5.2
+zookeeper	       3.5.2		 server
 zookeeper-cluster
 
-kafka		       2.12
+kafka		       2.12		 server
 kafka-cluste
 
-kafka-manager          1.3.3.14
+kafka-manager          1.3.3.14		 server
 
-nodejs		       8.9.3
+nodejs		       8.9.3		 server
 
-ruby		       2.4.1
+ruby		       2.4.1		 server
 
-jenkins		       2.104
+jenkins		       2.104		 server
+
+cha                    1.0               sys-man
+
+ip-location	       1.0               sys-man
+
+drawing		       1.0               game
+
+xian-draw              1.0               game
+
+hit-boss               1.2               game
+
+card-life              1.4               game
+
+tetris		       1.0               game
+
+mine		       1.0               game
