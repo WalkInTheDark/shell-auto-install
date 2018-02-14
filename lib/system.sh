@@ -42,4 +42,3 @@ system_ipv6(){
 system_iospeed() {
     (LANG=C dd if=/dev/zero of=test_xx bs=64k count=16k conv=fdatasync && rm -f test_xx ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//'
 }
-
