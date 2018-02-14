@@ -18,7 +18,7 @@ remove_mine() {
 
 
 info_mine() {
-    if [ $language -eq 1];then
+    if [ $language -eq 1 ];then
         echo "功能：扫雷游戏"
         echo
         echo "使用：mine"
