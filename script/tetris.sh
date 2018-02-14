@@ -18,7 +18,7 @@ remove_tetris() {
 
 
 info_tetris() {
-    if [ $language -eq 1];then
+    if [ $language -eq 1 ];then
         echo "功能：大家熟悉的俄罗斯方块"
         echo
         echo "使用：tetris"
