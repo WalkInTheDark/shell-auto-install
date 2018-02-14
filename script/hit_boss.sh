@@ -18,7 +18,7 @@ remove_hit_boss() {
 
 
 info_hit_boss() {
-    if [ $language -eq 1];then
+    if [ $language -eq 1 ];then
         echo "功能：魔兽风格，回合制打boos游戏"
         echo
         echo "使用：hit-boss"
