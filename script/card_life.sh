@@ -18,7 +18,7 @@ remove_card_life() {
 
 
 info_card_life() {
-    if [ $language -eq 1];then
+    if [ $language -eq 1 ];then
         echo "功能：抽卡人生shell版本，你被困在地牢里，目标是逃出去"
         echo
         echo "使用：card-life"
