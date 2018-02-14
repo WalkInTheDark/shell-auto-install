@@ -111,3 +111,4 @@ process_char(){
     stty echo
     stty $SAVEDSTTY
 }
+
