@@ -1,11 +1,16 @@
 提示：所有服务的安装均为默认设置！若自定义安装位置或其它设置请 edit 服务名
 
-install httpd    	 则安装httpd
-remove  httpd    	 则卸载httpd
-get     httpd    	 则提前下载httpd所需要的包
-edit	httpd		 则编辑httpd进行自定义设置
+install httpd    	 安装 httpd
+remove  httpd    	 卸载 httpd
+get     httpd    	 下载 httpd 所需要的包
+info    httpd            查询 httpd 详细信息
+edit	httpd		 编辑 httpd 进行自定义设置
 
-list             	 则列出支持的服务
-help             	 则显示操作帮助
-lang    1        	 则设置语言为中文
-lang    2        	 则设置语言为英文
+list             	 列出 支持  的脚本
+list    httpd            列出 httpd 相关脚本
+type     		 列出 所有  的分类
+type    sys-man          列出 系统  类型脚本
+
+help             	 显示 使用  帮助
+lang    1        	 设置 语言  为中文
+lang    2        	 设置 语言  为英文
