@@ -29,9 +29,13 @@ test_install会判断是否安装上，而不是没装上还进行下一步，�
 
 ## 使用方法
 yum -y install git
+
 git clone https://github.com/goodboy23/shell-auto-install.git
+
 cd shell-auto-install
+
 chmod +x sai.sh
+
 ./sai.sh
 
 以上操作后即可使用，建议多看帮助
