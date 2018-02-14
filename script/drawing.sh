@@ -18,7 +18,7 @@ remove_drawing() {
 
 
 info_drawing() {
-    if [ $language -eq 1];then
+    if [ $language -eq 1 ];then
         echo "功能：画图"
         echo
         echo "使用：drawing"
