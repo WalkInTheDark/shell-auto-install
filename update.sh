@@ -7,6 +7,8 @@ load() {
     done
 }
 
+load
+
 xin() {
 test_install git
 
