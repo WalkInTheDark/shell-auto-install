@@ -18,7 +18,7 @@ a=`pwd`
 b=`echo ${a##*/}`
 ver=`cat conf/version.txt`
 new_ver=`curl https://raw.githubusercontent.com/goodboy23/shell-auto-install/master/conf/version.txt`
-c=`process $ver $new_var`
+c=`process_big $ver $new_var`
 
 if [ "$c" == "$new_ver" ];then
    cd ..
