@@ -18,7 +18,7 @@ remove_ip_location() {
 
 
 info_ip_location() {
-    if [ $language -eq 1];then
+    if [ $language -eq 1 ];then
         echo "功能：查询ip所在地"
         echo
         echo "使用：ip-location -i 8.8.8.8 查询此ip所在地"
