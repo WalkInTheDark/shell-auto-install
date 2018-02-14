@@ -18,7 +18,7 @@ remove_xian-draw() {
 
 
 info_xian-draw() {
-    if [ $language -eq 1];then
+    if [ $language -eq 1 ];then
         echo "功能：显示画的图"
         echo
         echo "使用：xian-draw"
