@@ -43,10 +43,13 @@ chmod +x sai.sh
 ## 截图
 
 ### 帮助
-! [帮助 ] (https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180214140335.png)
+
+ ![xx](https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180214140335.png)
 
 #### 查找
+
 ! [查找] (https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180214140421.png)
 
 ### 运行
+
 ! [运行] (https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180214140552.png)
