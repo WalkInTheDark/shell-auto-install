@@ -15,7 +15,7 @@ remove_menu() {
 }
 
 
-info_mine() {
+info_menu() {
     if [ $language -eq 1 ];then
         echo "功能：显示一个表格，可用上下键来移动"
         echo
