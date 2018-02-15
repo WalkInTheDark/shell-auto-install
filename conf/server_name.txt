@@ -36,3 +36,5 @@ card-life              1.4               game
 tetris		       1.0               game
 
 mine		       1.0               game
+
+pxe 		       2.0               server
