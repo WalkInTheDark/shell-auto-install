@@ -38,3 +38,7 @@ tetris		       1.0               game
 mine		       1.0               game
 
 pxe 		       2.0               server
+
+cons_mem 		   1.0               sys-man
+
+menu 		       1.0               game
