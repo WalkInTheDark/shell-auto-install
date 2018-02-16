@@ -19,7 +19,7 @@ remove_card_life() {
 
 info_card_life() {
     if [ $language -eq 1 ];then
-        echo "名字：card-life"
+        echo "名字：card-life
 类型：游戏
 版本：1.4
 作者：book
@@ -27,7 +27,7 @@ info_card_life() {
 提示：将会生成wiki_book.ttt的一个存档，如果想开挂，修改里面数值即可。
 使用：card-life进入游戏，输入1-6来购买卡牌"
     else
-        echo "Name：card-life"
+        echo "Name：card-life
 Type：game
 version：1.4
 Author：book
