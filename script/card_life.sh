@@ -19,17 +19,6 @@ remove_card_life() {
 
 info_card_life() {
     if [ $language -eq 1 ];then
-        echo "功能：抽卡人生shell版本，你被困在地牢里，目标是逃出去"
-        echo
-        echo "使用：card-life"
-    else
-        echo "Function: Shell life shell version, you are trapped in the dungeon, the goal is to escape"
-        echo
-        echo "use：card-life"
-    fi
-}
-
-    if [ $language -eq 1 ];then
         echo "名字：card-life"
         echo
         echo "类型：游戏"
@@ -58,3 +47,5 @@ info_card_life() {
         echo
         echo "use：card-life into the game, enter 1-6 to buy cards"
     fi
+
+}
