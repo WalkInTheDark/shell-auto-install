@@ -19,12 +19,34 @@ remove_ip_location() {
 
 info_ip_location() {
     if [ $language -eq 1 ];then
-        echo "功能：查询ip所在地"
+        echo "名字：ip-location"
         echo
-        echo "使用：ip-location -i 8.8.8.8 查询此ip所在地"
+        echo "类型：系统"
+        echo
+        echo "版本：1.0"
+        echo
+        echo "作者：book"
+        echo
+        echo "介绍：查询当前外网ip所在地"
+        echo
+        echo "提示：需要可以上外网"
+        echo
+        echo "使用：ip-location -i 8.8.8.8 来查询这个ip的外网地址"
+        echo "      ip-location -q         查询尝试登陆此服务器的ip"
     else
-        echo "Function: Query ip location"
+        echo "Name：ip-location"
         echo
-        echo "use：ip-location -i 8.8.8.8 Querying the location of this ip"
+        echo "Type：sys"
+        echo
+        echo "version：1.0"
+        echo
+        echo "Author：book"
+        echo
+        echo "Introduction：Query current ip network location"
+        echo
+        echo "Prompt：Need to be on the Internet"
+        echo
+        echo "use：ip-location -i 8.8.8.8 to query the IP's external network address"
+        echo "     ip-location-q query ip attempt to log in to this server"
     fi
 }
