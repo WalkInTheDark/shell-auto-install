@@ -1,23 +1,24 @@
 #!/usr/bin/env bash
 
-get_xian-draw() {
+get_xian_draw() {
     [ $language -eq 1 ] && echo "不用下载" || ehco "Do not download"
 }
 
-install_xian-draw() {
+install_xian_draw() {
     cp conf/alone/xian-draw /usr/local/bin/xian-draw
     chmod +x /usr/local/bin/xian-draw
 
+    echo "xian-draw" >> conf/installed.txt
     [ $language -eq 1 ] && echo "xian-draw安装完毕，使用xian-draw 显示画的图" || ehco "cha installation is completed, use xian-draw Display picture"
 }
 
-remove_xian-draw() {
+remove_xian_draw() {
     rm -rf /usr/local/bin/xian-draw
     [ $language -eq 1 ] && echo "xian-draw已卸载" || ehco "xian-draw Uninstalled"
 }
 
 
-info_xian-draw() {
+info_xian_draw() {
     if [ $language -eq 1 ];then
         echo "名字：xian-draw"
         echo
