@@ -8,6 +8,7 @@ install_mine() {
     cp conf/alone/mine /usr/local/bin/mine
     chmod +x /usr/local/bin/mine
 
+    echo "mine" >> conf/installed.txt
     [ $language -eq 1 ] && echo "mine安装完毕，使用mine 开始游戏" || ehco "mine installation is completed, use mine Start the game"
 }
 
