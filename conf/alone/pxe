@@ -151,9 +151,9 @@ if [ "$kick" != "book" ];then
 	a=`echo ${kick##*/}`
 	cp $kick /var/www/html/
 	sed  -i "64c append initrd=initrd.img ks=http://${ipdizhi}/$a" pxelinux.cfg/default
-clear
-
-echo "完事"
+	clear
+	echo "完事"
+fi
 }
 
 
