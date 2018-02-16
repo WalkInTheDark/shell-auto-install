@@ -6,6 +6,7 @@ install_cons_mem() {
     cp conf/alone/cons_mem /usr/local/bin/cons_mem
     chmod +x /usr/local/bin/cons_mem
 
+    echo "cons-mem" >> conf/installed.txt
     [ $language -eq 1 ] && echo "cons-mem安装完毕，使用cons-mem 开始游戏" || ehco "cons-mem installation is completed, use cons-mem Start the game"
 }
 
