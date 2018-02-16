@@ -30,3 +30,34 @@ info_cons_mem() {
         echo "Enter directly to see the current percentage of memory, or enter the percentage of memory you want to consume"
     fi
 }
+    if [ $language -eq 1 ];then
+        echo "名字：cons-mem"
+        echo
+        echo "类型：系统"
+        echo
+        echo "版本：1.0"
+        echo
+        echo "作者：LingYi"
+        echo
+        echo "介绍：监控或消耗内存资源，　指定需要消耗到的百分比"
+        echo
+        echo "提示：无"
+        echo
+        echo "使用：mine命令进入后，1-3来选择难度，4退出"
+        echo "      wasd移动，j挖，f放旗子，n返回上一级，x退出"
+    else
+        echo "Name：cons-mem"
+        echo
+        echo "Type：sys"
+        echo
+        echo "version：1.0"
+        echo
+        echo "Author：LingYi"
+        echo
+        echo "Introduction：minesweeper game, you can choose the difficulty."
+        echo
+        echo "Prompt：none"
+        echo
+        echo "use：mine command to enter, 1-3 to choose the difficulty, 4 exit"
+        echo "     wasd move, j dig, f put flag, n return to the previous level, x exit"
+    fi
