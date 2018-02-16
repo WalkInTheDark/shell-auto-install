@@ -36,6 +36,30 @@ list_all() {
     echo
 }
 
+up() {
+test_install git
+
+test_www www.baidu.com
+
+a=`pwd`
+b=`echo ${a##*/}`
+ver=`cat conf/version.txt`
+new_ver=`curl https://raw.githubusercontent.com/goodboy23/shell-auto-install/master/conf/version.txt`
+c=`process_big $ver $new_ver`
+
+if [ "$c" != "$new_ver" ];then
+   cd ..
+   rm -rf $b
+   git clone https://github.com/goodboy23/shell-auto-install.git
+   if [ -d shell-auto-install ];then
+       [ $language -eq 1 ] && echo "更新完成" || echo "update completed"
+   else
+       [ $language -eq 1 ] && echo "更新失败" || echo "Update failed"
+else
+   [ $language -eq 1 ] && echo "版本一致，不用更新" || echo "The same version, without updating"
+fi
+}
+
 server() {
     local a=`process_bian $2`
 
@@ -88,6 +112,8 @@ elif [ "$1" == "help" ];then
     help_all
 elif [ "$1" == "lang" ];then
     lang $2
+elif [ "$1" == "update" ];then
+    up
 else
     server $1 $2
 fi
