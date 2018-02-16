@@ -8,6 +8,7 @@ install_tetris() {
     cp conf/alone/tetris /usr/local/bin/tetris
     chmod +x /usr/local/bin/tetris
 
+    echo "tetris" >> conf/installed.txt
     [ $language -eq 1 ] && echo "tetris安装完毕，使用tetris 开始游戏" || ehco "tetris installation is completed, use tetris Start the game"
 }
 
