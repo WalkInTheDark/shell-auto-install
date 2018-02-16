@@ -62,7 +62,7 @@ fi
 }
 
 server() {
-    local a=`process_bian $2` b=`conf/installed.txt`
+    local a=`process_bian $2`
 
     if [ -f script/${a}.sh ];then
         source script/${a}.sh
@@ -70,13 +70,13 @@ server() {
         if [ "$1" == "install" ];then
             test_root
             test_www www.baidu.com
-            grep "^${a}" $b &> /dev/null
+            grep "^${a}" conf/installed.txt &> /dev/null
             [ $? -eq 0 ] && test_exit "${a}已安装" "${a} is already installed"
             install_${a}
         elif [ "$1" == "remove" ];then
-            grep "^${a}" $b &> /dev/null
-            [ $? -eq 0 ] && sed "/^${a}/d" $b
-            sed -i '/^$/d' $b
+            grep "^${a}" conf/installed.txt &> /dev/null
+            [ $? -eq 0 ] && sed "/^${a}/d" conf/installed.txt
+            sed -i '/^$/d' conf/installed.txt
             remove_${a}
         elif [ "$1" == "get" ];then
             get_${a}
