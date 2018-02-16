@@ -19,12 +19,32 @@ remove_xian-draw() {
 
 info_xian-draw() {
     if [ $language -eq 1 ];then
-        echo "功能：显示画的图"
+        echo "名字：xian-draw"
         echo
-        echo "使用：xian-draw"
+        echo "类型：游戏"
+        echo
+        echo "版本：1.0"
+        echo
+        echo "作者：未知"
+        echo
+        echo "介绍：显示画的图"
+        echo
+        echo "提示：无"
+        echo
+        echo "使用：xian-draw命令即可显示用drawing脚本画的图，需要读取存档文件"
     else
-        echo "Function: Display picture"
+        echo "Name：xian-draw"
         echo
-        echo "use：xian-draw"
+        echo "Type：game"
+        echo
+        echo "version：1.0"
+        echo
+        echo "Author：unknown"
+        echo
+        echo "Introduction：Display picture"
+        echo
+        echo "Prompt：none"
+        echo
+        echo "use：xian-draw command to display the drawing script drawing, you need to read the archive file"
     fi
 }
