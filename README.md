@@ -43,9 +43,7 @@ chmod +x sai.sh
 ## 更新方法
 cd shell-auto-install
 
-chmod +x update.sh
-
-./update.sh
+./sai.sh update
 
 ## 截图
 
@@ -53,10 +51,10 @@ chmod +x update.sh
 
  ![xx](https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180216193838.png)
 
-### 查找
+### 安装
 
 ![dd](https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180216194310.png)
 
-### 运行
+### 使用
 
 ![zz](https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180214140552.png)
