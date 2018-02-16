@@ -99,8 +99,15 @@ elif [ "$1" == "list" ];then
     if [ $# -eq 1  ];then
         list_all
     else
-        [ $language -eq 1 ] && echo "$2 相关脚本：" || echo "$2 Related script"
-        grep $2 conf/server_name.txt
+        if [ "$2" == "installed" ];then
+            for i in `cat conf/installed.txt`
+            do
+                grep "^${i}" conf/server_name.txt | head -1
+            done
+        else
+            [ $language -eq 1 ] && echo "$2 相关脚本：" || echo "$2 Related script"
+            grep $2 conf/server_name.txt
+        fi
     fi
 elif [ "$1" == "type" ];then
     if [ $# -eq 1 ];then
