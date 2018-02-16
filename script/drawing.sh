@@ -19,12 +19,32 @@ remove_drawing() {
 
 info_drawing() {
     if [ $language -eq 1 ];then
-        echo "功能：画图"
+        echo "名字：drawing"
         echo
-        echo "使用：drawing"
+        echo "类型：游戏"
+        echo
+        echo "版本：1.0"
+        echo
+        echo "作者：book"
+        echo
+        echo "介绍：画图游戏，目前只支持蓝色画笔"
+        echo
+        echo "提示：将会生成goodboy.txt的一个存档，用来xian-draw脚本读取显示画的图"
+        echo
+        echo "使用：drawing进入游戏，按空格来切换画笔和橡皮擦，p退出"
     else
-        echo "Function: Drawing"
+        echo "Name：drawing"
         echo
-        echo "use：drawing"
+        echo "Type：game"
+        echo
+        echo "version：1.0"
+        echo
+        echo "Author：book"
+        echo
+        echo "Introduction：Drawing games, currently only supports blue brush"
+        echo
+        echo "Prompt：Will generate a goodboy.txt archive, used to read the xian-draw script draw pictures"
+        echo
+        echo "use：drawing into the game, press the space bar to switch the brush and eraser, p exit"
     fi
-}
+ }
