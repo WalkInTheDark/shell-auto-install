@@ -47,7 +47,7 @@ ver=`cat conf/version.txt`
 new_ver=`curl https://raw.githubusercontent.com/goodboy23/shell-auto-install/master/conf/version.txt`
 c=`process_big $ver $new_ver`
 
-if [ "$c" != "$new_ver" ];then
+if [ "$c" != "$ver" ];then
    cd ..
    rm -rf $b
    git clone https://github.com/goodboy23/shell-auto-install.git
