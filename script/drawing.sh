@@ -8,6 +8,7 @@ install_drawing() {
     cp conf/alone/drawing /usr/local/bin/drawing
     chmod +x /usr/local/bin/drawing
 
+    echo "drawing" >> conf/installed.txt
     [ $language -eq 1 ] && echo "drawing安装完毕，使用drawing 开始游戏" || ehco "cha installation is completed, use drawing Start the game"
 }
 
