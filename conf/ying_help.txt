@@ -8,6 +8,7 @@ edit	  httpd      Edit         httpd for custom settings
 
 list               List supported scripts
 list    httpd      List httpd related scripts
+list    installed  Lists all installed scripts
 type               List all the categories
 type    sys        List system    type scripts
 
