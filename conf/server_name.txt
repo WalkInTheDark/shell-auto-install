@@ -41,3 +41,5 @@ pxe                2.0                   server
 cons_mem           1.0                   sys
 
 menu               1.0                   game
+
+chat               1.0                   game
