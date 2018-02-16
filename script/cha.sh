@@ -8,6 +8,7 @@ install_cha() {
     cp conf/alone/cha /usr/local/bin/cha
     chmod +x /usr/local/bin/cha
 
+    echo "cha" >> conf/installed.txt
     [ $language -eq 1 ] && echo "cha安装完毕，使用cha -c 显示中文系统信息" || ehco "cha installation is completed, use cha -c display Chinese system information"
 }
 
