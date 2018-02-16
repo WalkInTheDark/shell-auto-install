@@ -1,0 +1,135 @@
+#!/bin/bash
+# LingYi
+# 2016.03.23
+ 
+#package: command
+#coreutils: whoami
+ 
+ 
+[[ -n $1 ]] && [[ -d $1 ]] && tmp_dir=${1%/}
+ 
+username=${2:-$(whoami)}
+username=${username:-NoBody}
+tmp_dir=${tmp_dir:-/tmp}
+message_file=.talk_${username}.$(date +%s)
+message_judge_file=${message_file}.renew
+lock_file=.talk.lock
+ 
+#设置字体颜色
+MY_COLOR='45;1;39'
+my_color='32'
+OTHER_COLOR='46;1;39'
+other_color='34'
+ 
+#同一个临时目录下，只能有两个用户同时使用
+if [[ -e ${tmp_dir}/${lock_file} ]]; then
+    echo there have been two guys using the directory [\"${tmp_dir}\"], you can change it, and run again !!
+    echo Like this: sh talk.sh /mnt [UserName]
+    exit 2
+fi
+ 
+#创建两个临时文件，一个用于存储用户交互信息，另一个用于判断对方是否更新了信息
+touch ${tmp_dir}/$message_file || exit 3
+touch ${tmp_dir}/$message_judge_file || exit 3
+chmod 666 ${tmp_dir}/$message_judge_file
+echo 0 >${tmp_dir}/$message_judge_file
+ 
+#判断对方是否在线，若在线，则设置对方相关信息，否则等待
+function get_other_man()
+{
+    if [[ $(ls -a ${tmp_dir} | grep talk |grep -E -v "$message_file|renew|lock" | wc -l) -eq 1 ]]; then
+        other_message_file=$( ls -a ${tmp_dir} | grep talk | grep -E -v "$message_file|renew|lock")
+        other_man=$( echo $other_message_file | awk -F '[._]' '{print $3}' )
+        other_message_judge_file=${other_message_file}.renew
+        other_message=$(cat ${tmp_dir}/$other_message_file)
+        [[ ! -f ${tmp_dir}/${lock_file}  ]] && touch ${tmp_dir}/${lock_file}
+    fi
+}
+ 
+#后台监控函数
+#用户监控对方是否仍然在线，以及是否更新了信息，如果更新了则打印对方发送的信息，并处理判断文件
+function monitor()
+{
+    local stop_monitor=false
+    trap 'stop_monitor=true' 20
+    while ! $stop_monitor
+    do
+        #若对方的临时文件消失，则标示对方已离线，自己退出对话
+       if [[ ! -e ${tmp_dir}/$other_message_judge_file ]]; then
+            echo -e "\033[1;31m${other_man} is offline !!!\033[0m"
+            echo -e "\033[1;32mBye!!!\033[0m"
+            kill -20 $MYPID
+            break
+        fi
+        #对方写入信息到自己的信息存储文件之后，会将此文件置为“1”，表示更新了信息
+        if [[ $(cat ${tmp_dir}/$other_message_judge_file) -eq 1 ]]; then
+            echo -e "\033[${OTHER_COLOR}mFrom $other_man\033[0m\033[1;31m:\033[0m"
+            echo -e "\033[${other_color}m$(cat ${tmp_dir}/$other_message_file)\n\033[0m"
+            echo -ne "\033[${my_color}m"
+            #打印了对方的信息之后，将对方的判断文件置为“0”，标示为已读
+            echo 0 >${tmp_dir}/$other_message_judge_file
+        fi
+        sleep 0.2
+    done
+    echo -ne "\033[0m"
+}
+ 
+#对方离线或自行退出后执行
+function talk_over()
+{
+    kill -20 $monitor_pid &>/dev/null
+    rm -fr ${tmp_dir}/$message_file
+    rm -fr ${tmp_dir}/$message_judge_file
+    rm -fr ${tmp_dir}/$lock_file &>/dev/null
+    sleep 0.2
+    STOP=true
+    echo
+    exit
+}
+ 
+trap 'talk_over' 2
+clear
+ 
+ 
+#判断对方是否在线，若不在线则一直等待，指导对方上线
+get_other_man
+[[ -z $other_man ]] && echo -e "\033[1;31mNo man to talk, please wait ...\033[0m"
+while [[ -z $other_man ]]; do get_other_man; done
+echo -e "\033[32m${other_man} is online, you can talk now.\033[0m"
+ 
+MYPID=$$
+monitor &
+monitor_pid=$!
+ 
+STOP=false
+trap 'talk_over; STOP=true' 20
+message="this is initialized words"
+#stty erase ^H
+#stty erase ^?
+ 
+#对话主程序
+while ! $STOP
+do 
+    [[ -z $other_man ]] && get_other_man
+    [[ -n $message ]] && echo -e "\033[${MY_COLOR}mI say\033[0m\033[1;31m:\033[0m"
+    echo -ne "\033[${my_color}m"
+    read message
+    echo -ne "\033[0m"
+    [[ $message == 'q' ]] && talk_over
+    [[ -z  $message    ]] && continue
+    #定义command:开头的字符串处理方式
+    #command:
+    if echo $message | grep -q '^command:'; then
+        $(echo $message | awk -F':' '{print $2}')
+        continue
+    fi
+    #定义ly:开头的字符串处理方式
+    #ly:
+    if echo $message | grep -q '^ly:'; then
+        message=$($(echo $message | awk -F':' '{print $2}'))
+    fi
+    #若有信息输入，则将信息写入自己的信息存储文件，并将判断文件置“1”（表示更新了文件）
+    echo "$message" >${tmp_dir}/$message_file
+    echo 1 >${tmp_dir}/$message_judge_file
+done
+echo
