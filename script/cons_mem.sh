@@ -18,33 +18,20 @@ remove_cons_mem() {
 
 info_cons_mem() {
     if [ $language -eq 1 ];then
-        echo "名字：cons-mem"
-        echo
-        echo "类型：系统"
-        echo
-        echo "版本：1.0"
-        echo
-        echo "作者：LingYi"
-        echo
-        echo "介绍：监控或消耗内存资源，　指定需要消耗到的百分比"
-        echo
-        echo "提示：无"
-        echo
-        echo "使用：直接回车，查看当前内存的百分比，或者输入欲消耗的内存百分比，消耗固定内存"
+        echo "名字：cons-mem
+类型：系统
+版本：1.0
+作者：LingYi
+介绍：监控或消耗内存资源，　指定需要消耗到的百分比
+提示：无
+使用：直接回车，查看当前内存的百分比，或者输入欲消耗的内存百分比，消耗固定内存"
     else
-        echo "Name：cons-mem"
-        echo
-        echo "Type：sys"
-        echo
-        echo "version：1.0"
-        echo
-        echo "Author：LingYi"
-        echo
-        echo "Introduction：Monitor or consume memory resources, specifying the percentage that needs to be consumed"
-        echo
-        echo "Prompt：none"
-        echo
-        echo "use：Enter directly to see the current percentage of memory, or enter the percentage of memory to consume, consume fixed memory"
+        echo "Name：cons-mem
+Type：sys
+version：1.0
+Author：LingYi
+Introduction：Monitor or consume memory resources, specifying the percentage that needs to be consumed
+Prompt：none
+use：Enter directly to see the current percentage of memory, or enter the percentage of memory to consume, consume fixed memory"
     fi
-
 }
