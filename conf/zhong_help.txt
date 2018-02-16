@@ -1,17 +1,17 @@
 提示：所有服务的安装均为默认设置！若自定义安装位置或其它设置请 edit 服务名
 
-install httpd    	 安装 httpd
-remove  httpd    	 卸载 httpd
-get     httpd    	 下载 httpd 所需要的包
-info    httpd            查询 httpd 详细信息
-edit	httpd		 编辑 httpd 进行自定义设置
+install httpd      安装 httpd
+remove  httpd      卸载 httpd
+get     httpd      下载 httpd 所需要的包
+info    httpd      查询 httpd 详细信息
+edit    httpd      编辑 httpd 进行自定义设置
 
-list             	 列出 支持  的脚本
-list    httpd            列出 httpd 相关脚本
-type     		 列出 所有  的分类
-type    sys-man          列出 系统  类型脚本
+list               列出 支持   的脚本
+list    httpd      列出 httpd 相关脚本
+type               列出 所有   的分类
+type    game       列出 游戏   类型脚本
 
-help             	 显示 使用  帮助
-update             升级 sai  版本
-lang    1        	 设置 语言  为中文
-lang    2        	 设置 语言  为英文
+help               显示 使用   帮助
+update             升级 sai   版本
+lang    1          设置 语言  为中文
+lang    2          设置 语言  为英文
