@@ -12,5 +12,6 @@ type     		 列出 所有  的分类
 type    sys-man          列出 系统  类型脚本
 
 help             	 显示 使用  帮助
-lang    1        	 设置 语言  为中文
+update             升级 sai  版本
+lang    1        	 设置 语言  为中文
 lang    2        	 设置 语言  为英文
