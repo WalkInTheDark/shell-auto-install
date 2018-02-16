@@ -6,6 +6,7 @@ install_menu() {
     cp conf/alone/menu /usr/local/bin/menu
     chmod +x /usr/local/bin/menu
 
+    echo "menu" >> conf/installed.txt
     [ $language -eq 1 ] && echo "menu安装完毕，使用menu 开始游戏" || ehco "menu installation is completed, use menu Start the game"
 }
 
