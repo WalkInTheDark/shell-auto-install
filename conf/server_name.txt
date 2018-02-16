@@ -45,3 +45,5 @@ menu               1.0                   game
 chat               1.0                   game
 
 snake              1.0                   game
+
+gobang             1.0                   game
