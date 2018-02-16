@@ -20,32 +20,20 @@ remove_hit_boss() {
 
 info_hit_boss() {
     if [ $language -eq 1 ];then
-        echo "名字：hit-boss"
-        echo
-        echo "类型：游戏"
-        echo
-        echo "版本：1.2"
-        echo
-        echo "作者：book"
-        echo
-        echo "介绍：魔兽风格，回合制打boos游戏，你将要面对大法师的攻击"
-        echo
-        echo "提示：无"
-        echo
-        echo "使用：hit-boss命令开始游戏，输入用户名后看游戏介绍"
+        echo "名字：hit-boss
+类型：游戏
+版本：1.2
+作者：book
+介绍：魔兽风格，回合制打boos游戏，你将要面对大法师的攻击
+提示：无
+使用：hit-boss命令开始游戏，输入用户名后看游戏介绍"
     else
-        echo "Name：hit-boss"
-        echo
-        echo "Type：game"
-        echo
-        echo "version：1.2"
-        echo
-        echo "Author：book"
-        echo
-        echo "Introduction：Warcraft style, turn-based boos boos game, you will have to face the Grand Master's attack"
-        echo
-        echo "Prompt：none"
-        echo
-        echo "use：hit-boss command to start the game, enter the user name to see the game introduction"
+        echo "Name：hit-boss
+Type：game
+version：1.2
+Author：book
+Introduction：Warcraft style, turn-based boos boos game, you will have to face the Grand Master's attack
+Prompt：none
+use：hit-boss command to start the game, enter the user name to see the game introduction"
     fi
 }
