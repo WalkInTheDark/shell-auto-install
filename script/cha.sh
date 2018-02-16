@@ -19,17 +19,6 @@ remove_cha() {
 
 info_cha() {
     if [ $language -eq 1 ];then
-        echo "功能：显示系统信息"
-        echo
-        echo "使用：cha"
-    else
-        echo "Function: Display system information"
-        echo
-        echo "use：cha"
-    fi
-}
-
-    if [ $language -eq 1 ];then
         echo "名字：cha"
         echo
         echo "类型：系统"
@@ -59,3 +48,4 @@ info_cha() {
         echo "use：cha command to display English system information, -c display Chinese"
 
     fi
+}
