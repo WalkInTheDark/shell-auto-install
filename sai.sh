@@ -55,6 +55,7 @@ if [ "$c" != "$new_ver" ];then
        [ $language -eq 1 ] && echo "更新完成" || echo "update completed"
    else
        [ $language -eq 1 ] && echo "更新失败" || echo "Update failed"
+   fi
 else
    [ $language -eq 1 ] && echo "版本一致，不用更新" || echo "The same version, without updating"
 fi
