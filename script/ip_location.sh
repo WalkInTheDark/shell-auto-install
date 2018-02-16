@@ -8,6 +8,7 @@ install_ip_location() {
     cp conf/alone/ip-location /usr/local/bin/ip-location
     chmod +x /usr/local/bin/ip-location
 
+    echo "ip-location" >> conf/installed.txt
     [ $language -eq 1 ] && echo "ip-location安装完毕，使用ip-location 查询ip所在地" || ehco "ip-location After installation, use ip-location to query the IP address"
 }
 
