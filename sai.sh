@@ -70,8 +70,12 @@ server() {
         if [ "$1" == "install" ];then
             test_root
             test_www www.baidu.com
+            grep "^${a}" conf/installed.txt &> /dev/null
+            [ $? -eq 0 ] && test_exit "${a}已安装" "${a} is already installed"
             install_${a}
         elif [ "$1" == "remove" ];then
+            grep "^${a}" conf/installed.txt &> /dev/null
+            [ $? -eq 0 ] && sed "/^${a}/d" conf/installed.txt
             remove_${a}
         elif [ "$1" == "get" ];then
             get_${a}
