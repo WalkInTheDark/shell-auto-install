@@ -5,17 +5,23 @@ get_card_life() {
 }
 
 install_card_life() {
+    grep "^card-life" conf/installed.txt &> /dev/null
+    [ $? -eq 0 ] && test_exit "card-life已安装" "card-life is already installed"
+
     cp conf/alone/card-life /usr/local/bin/card-life
     chmod +x /usr/local/bin/card-life
 
+    echo "card-life" >> conf/installed.txt
     [ $language -eq 1 ] && echo "card-life安装完毕，使用card-life 开始游戏" || ehco "card-life installation is completed, use card-life Start the game"
 }
 
 remove_card_life() {
+    grep "^card-life" conf/installed.txt &> /dev/null
+    [ $? -eq 0 ] && sed "/^card-life/d" conf/installed.txt
+    
     rm -rf /usr/local/bin/card-life
     [ $language -eq 1 ] && echo "card-life已卸载" || ehco "card-life Uninstalled"
 }
-
 
 info_card_life() {
     if [ $language -eq 1 ];then
