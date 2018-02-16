@@ -16,13 +16,33 @@ remove_menu() {
 
 
 info_menu() {
-    if [ $language -eq 1 ];then
-        echo "功能：显示一个表格，可用上下键来移动"
+   if [ $language -eq 1 ];then
+        echo "名字：menu"
         echo
-        echo "使用：menu"
+        echo "类型：游戏"
+        echo
+        echo "版本：1.0"
+        echo
+        echo "作者：LingYi"
+        echo
+        echo "介绍：显示一个表格，可用上下键来移动"
+        echo
+        echo "提示：无"
+        echo
+        echo "使用：menu命令开始游戏"
     else
-        echo "Function: Display a table, use the up and down keys to move"
+        echo "Name：menu"
         echo
-        echo "use：menu"
+        echo "Type：game"
+        echo
+        echo "version：1.0"
+        echo
+        echo "Author：LingYi"
+        echo
+        echo "Introduction：Display a table, use the up and down keys to move"
+        echo
+        echo "Prompt：none"
+        echo
+        echo "use：menu command to start the game"
     fi
 }
