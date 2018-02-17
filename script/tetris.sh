@@ -21,19 +21,31 @@ remove_tetris() {
 info_tetris() {
     if [ $language -eq 1 ];then
         echo "名字：tetris
+        
 类型：游戏
+
 版本：1.0
+
 作者：未知
+
 介绍：大家熟悉的俄罗斯方块
+
 提示：无
+
 使用：tetris命令进入后即可开始游戏"
     else
         echo "Name：tetris
+        
 Type：game
+
 version：1.0
+
 Author：unknown
+
 Introduction：Everyone is familiar Tetris
+
 Prompt：none
+
 use：tetris command to enter the game to start"
     fi
 }
