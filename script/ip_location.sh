@@ -21,20 +21,32 @@ remove_ip_location() {
 info_ip_location() {
     if [ $language -eq 1 ];then
         echo "名字：ip-location
+        
 类型：系统
+
 版本：1.0
+
 作者：book
+
 介绍：查询当前外网ip所在地
+
 提示：需要可以上外网
+
 使用：ip-location -i 8.8.8.8 来查询这个ip的外网地址
       ip-location -q         查询尝试登陆此服务器的ip"
     else
         echo "Name：ip-location
+        
 Type：sys
+
 version：1.0
+
 Author：book
+
 Introduction：Query current ip network location
+
 Prompt：Need to be on the Internet
+
 use：ip-location -i 8.8.8.8 to query the IP's external network address
      ip-location-q query ip attempt to log in to this server"
     fi
