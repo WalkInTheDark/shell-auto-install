@@ -19,19 +19,31 @@ remove_menu() {
 info_menu() {
    if [ $language -eq 1 ];then
         echo "名字：menu
+        
 类型：游戏
+
 版本：1.0
+
 作者：LingYi
+
 介绍：显示一个表格，可用上下键来移动
+
 提示：无
+
 使用：menu命令开始游戏"
     else
         echo "Name：menu
+        
 Type：game
+
 version：1.0
+
 Author：LingYi
+
 Introduction：Display a table, use the up and down keys to move
+
 Prompt：none
+
 use：menu command to start the game"
     fi
 }
