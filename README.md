@@ -28,33 +28,29 @@ sai不是单纯的一键安装脚本，它是脚本管理平台，让脚本编�
 服务之间互相依赖，当前功能不满意，只需要更改少量代码即可
 
 ## 使用方法
-yum -y install git
+yum -y install git #安装git
 
-git clone https://github.com/goodboy23/shell-auto-install.git
+git clone https://github.com/goodboy23/shell-auto-install.git #下载包
 
-cd shell-auto-install
+cd shell-auto-install #移动到包中，以后使用也是到包中
 
-chmod +x sai.sh
+chmod +x sai.sh #给脚本增加执行权限
 
-./sai.sh
-
-以上操作后即可使用，建议多看帮助和使用info查看服务的信息
+./sai.sh #查看帮助
 
 ## 更新方法
 cd shell-auto-install
 
 ./sai.sh update
 
-## 截图
-
-### 帮助
+## 查看帮助
 
  ![xx](https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180216193838.png)
 
-### 安装
+## 安装脚本
 
 ![dd](https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180216194310.png)
 
-### 使用
+## 使用
 
 ![zz](https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180214140552.png)
