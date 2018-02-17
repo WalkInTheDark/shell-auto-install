@@ -21,19 +21,31 @@ remove_drawing() {
 info_drawing() {
     if [ $language -eq 1 ];then
         echo "名字：drawing
+        
 类型：游戏
+
 版本：1.0
+
 作者：book
+
 介绍：画图游戏，目前只支持蓝色画笔
+
 提示：将会生成goodboy.txt的一个存档，用来xian-draw脚本读取显示画的图
+
 使用：drawing进入游戏，按空格来切换画笔和橡皮擦，p退出"
     else
         echo "Name：drawing
+        
 Type：game
+
 version：1.0
+
 Author：book
+
 Introduction：Drawing games, currently only supports blue brush
+
 Prompt：Will generate a goodboy.txt archive, used to read the xian-draw script draw pictures
+
 use：drawing into the game, press the space bar to switch the brush and eraser, p exit"
     fi
  }
