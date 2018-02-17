@@ -21,19 +21,31 @@ remove_cha() {
 info_cha() {
     if [ $language -eq 1 ];then
         echo "名字：cha
+        
 类型：系统
+
 版本：1.0
+
 作者：book
+
 介绍：显示系统信息
+
 提示：无
+
 使用：cha命令显示英文系统信息，-c显示中文"
     else
         echo "Name：cha
+        
 Type：sys
+
 version：1.0
+
 Author：book
+
 Introduction：Display system information
+
 Prompt：none
+
 use：cha command to display English system information, -c display Chinese"
     fi
 }
