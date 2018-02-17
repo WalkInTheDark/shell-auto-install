@@ -21,11 +21,17 @@ remove_chat() {
 info_chat() {
     if [ $language -eq 1 ];then
         echo "名字：chat
+        
 类型：游戏
+
 版本：1.0
+
 作者：LingYi
+
 介绍：类似qq的聊天工具，可以远程聊天
+
 提示：对话双方必须指定相同目录
+
 使用：chat /mnt lisi 将会进入等待，等待其他用户进入/mnt将会开始对话
      第一个参数放临时文件，双方必须指定一样的，如果是不同机器，可以用nfs挂载目录
      同一个目录下仅支持2人，q键或ctrl+c退出，一方终止对话，另一方自动关闭
@@ -33,11 +39,17 @@ info_chat() {
      以“l say：”开头的，则会将其后指令的执行结果发送给对方。"
     else
         echo "Name：mine
+        
 Type：game
+
 version：1.0
+
 Author：LingYi
+
 Introduction：Similar qq chat tool, you can chat remotely
+
 Prompt：Both parties to the conversation must specify the same directory
+
 use：chat / mnt lisi will wait, waiting for other users to enter / mnt will start the conversation
      The first parameter temporary files, both sides must specify the same, if it is a different machine, you can use nfs mount directory
      The same directory only supports 2 people, q key or ctrl + c to exit, one to terminate the conversation, the other automatically shut down
