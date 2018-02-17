@@ -6,13 +6,13 @@ get     httpd      下载 httpd 所需要的包
 info    httpd      查询 httpd 详细信息
 edit    httpd      编辑 httpd 进行自定义设置
 
-list               列出 支持   的脚本
+list               列出 支持  的脚本
 list    httpd      列出 httpd 相关脚本
-list    installed  列出 所有   已安装脚本
-type               列出 所有   的分类
-type    game       列出 游戏   类型脚本
+list    installed  列出 所有  已安装脚本
+type               列出 所有  的分类
+type    game       列出 游戏  类型脚本
 
-help               显示 使用   帮助
+help               显示 使用  帮助
 update             升级 sai   版本
 lang    1          设置 语言  为中文
 lang    2          设置 语言  为英文
