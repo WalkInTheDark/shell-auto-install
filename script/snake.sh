@@ -21,19 +21,31 @@ remove_snake() {
 info_snake() {
     if [ $language -eq 1 ];then
         echo "名字：snake
+        
 类型：游戏
+
 版本：1.0
+
 作者：LingYi
+
 介绍：大家熟知的贪吃蛇
+
 提示：无
+
 使用：snake命令进入游戏，wasd移动来吃点"
     else
         echo "Name：snake
+        
 Type：game
+
 version：1.0
+
 Author：LingYi
+
 Introduction：We all know the snake
+
 Prompt：none
+
 use：snake command into the game, wasd move to eat"
     fi
 }
