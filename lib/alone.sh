@@ -60,6 +60,7 @@ test_package() {
     done
     
     if [ $a -eq 0 ];then
+        test_www www.baidu.com
         wget -0 package/${1} $2
         test_package
     fi
