@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+a=${install_dir}/${jenkins_dir}/jenkins.war
+b=${log_dir}/${jenkins_dir}/jenkins.log
+
+
+if [ "$1" == "start" ];then
+    java -jar $a &> $b &
+elif [ "$1" == "stop" ];then
+    pid=`netstat -unltp | grep :8080 | awk  '{print $7}' | awk -F'/' '{print $1}'`
+    kill -9 $pid
+elif [ "$1" == "status" ];then
+    netstat -unltp | grep :8080 &> /dev/null
+    [ $? -eq 0 ] && echo "jenkins ok" || echo "jenkins error"
+else
+    echo "start | stop | status"
+fi
