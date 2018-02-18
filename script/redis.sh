@@ -36,6 +36,7 @@ install_redis() {
         echo 'PATH=$PATH':${install_dir}/${redis_dir}/bin >> /etc/profile
     fi
     
+    echo "redis" >> conf/installed.txt
     clear
     if [ $language -eq 1 ];then
         echo "redis 安装成功，请安装redis-port来启动一个实例
