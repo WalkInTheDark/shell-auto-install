@@ -12,7 +12,7 @@ get_nodejs() {
 install_nodejs() {
     get_nodejs
 
-    tar -xf server/nodejs/node-v8.9.3-linux-x64.tar.xz
+    tar -xf package/node-v8.9.3-linux-x64.tar.xz
     mv node-v8.9.3-linux-x64 /usr/local/nodejs
     
     ln -s /usr/local/nodejs/bin/node /usr/local/bin/node
