@@ -48,7 +48,7 @@ install_redis_browser() {
         
         b=`echo $i | awk -F':' '{print $1}'` 
         c=`echo $i | awk -F':' '{print $2}'`
-        cp conf/redis_browser.yuml ./one #复制一份格式文件做修改
+        cp conf/redis/redis_browser.yuml ./one #复制一份格式文件做修改
         
         sed -i "1s/service3:/${cluster_name[$d]}" one
         sed -i "2s/host: 192.168.1.3/host: $b/g" one
