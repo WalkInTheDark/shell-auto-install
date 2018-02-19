@@ -101,8 +101,6 @@ info_redis_port() {
     if [ $language -eq 1 ];then
         echo "名字：redis-port
         
-类型：服务
-
 版本：3.2.9
 
 作者：book
@@ -114,9 +112,7 @@ info_redis_port() {
 使用：man-redis 来查看帮助"
     else
         echo "Name：redis-port
-        
-Type：server
-
+       
 version：3.2.9
 
 Author：book
