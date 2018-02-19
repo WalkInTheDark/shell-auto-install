@@ -45,8 +45,8 @@ cd shell-auto-install
 
 ## 查看帮助
 
- ![xx](https://github.com/goodboy23/shell-auto-install/blob/master/package/a.png)
+ ![xx](https://github.com/goodboy23/shell-auto-install/blob/master/package/c.png)
 
 ## 安装使用
 
-![dd](https://github.com/goodboy23/shell-auto-install/blob/master/package/b.png)
+![dd](https://github.com/goodboy23/shell-auto-install/blob/master/package/d.png)
