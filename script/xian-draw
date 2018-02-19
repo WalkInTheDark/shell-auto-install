@@ -21,8 +21,6 @@ remove_xian_draw() {
 info_xian_draw() {
     if [ $language -eq 1 ];then
         echo "名字：xian-draw
-        
-类型：游戏
 
 版本：1.0
 
@@ -35,8 +33,6 @@ info_xian_draw() {
 使用：xian-draw命令即可显示用drawing脚本画的图，需要读取存档文件"
     else
         echo "Name：xian-draw
-        
-Type：game
 
 version：1.0
 
