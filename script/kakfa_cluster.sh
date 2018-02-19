@@ -12,8 +12,8 @@
 #服务目录名
 kafka_cluster_dir=kafka_cluster
 
-#zookeeper集群的ip用,分隔
-zookeeper_cluster="192.168.2.108:2181,192.168.2.109:2181"
+#zookeeper集群的ip，包括他自己
+cluster_ip=(192.168.2.108:2181 192.168.2.109:2181)
 
 get_kafka_cluster() {
     test_package kafka_2.12-0.10.2.1.tgz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka_2.12-0.10.2.1.tgz fab4b35ba536938144489105cb0091e0
@@ -36,11 +36,34 @@ install_kafka_cluster() {
     conf=${install_dir}/${kafka_cluster_dir}/config/server.properties
     rm -rf $conf #删除旧的
     cp conf/kafka/server.properties $conf
+    
+    local id ip cluster_dizhi="" #找出本机ip和id
+    num=${#cluster_ip[*]} #找出本地ip是数组第几位，
+    let num-- #-1
+
+    for i in `ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\."`
+    do
+        for e in `seq 0 $num`
+        do
+            echo ${cluster_ip[$e]} | grep -w $i &> /dev/null
+            [ $? -eq 0 ] && id=$e && ip=$i
+        done
+    done
+    let id++ #+1
+    
+    for i in `echo ${cluster_ip[*]}` #算出地址字符串
+    do
+        if [ "$i" == "${cluster_ip[0]}" ];then #刨去第一个，不然最前面会多个,
+            cluster_dizhi=`echo $i`
+        else
+            cluster_dizhi=`echo ${cluster_dizhi},$i`
+        fi
+    done
 
     sed -i "21s/broker.id=1/broker.id=${id}/g" $conf
     sed -i "35s/advertised.host.name=192.168.100.11/advertised.host.name=${ip}/g" $conf
     sed -i "63s,log.dirs=/ops/log/kafka,log.dirs=${log_dir}/${kafka_cluster_dir}/g" $conf
-    sed -i "119s/zookeeper.connect=B-S-01:2181/zookeeper.connect=${zookeeper_cluster}/g" $conf
+    sed -i "119s/zookeeper.connect=B-S-01:2181/zookeeper.connect=${cluster_dizhi}/g" $conf
 
     command=/usr/local/bin/man-kafka
     cp conf/kafka/man-kafka $command
