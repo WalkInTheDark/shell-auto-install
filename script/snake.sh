@@ -21,8 +21,6 @@ remove_snake() {
 info_snake() {
     if [ $language -eq 1 ];then
         echo "名字：snake
-        
-类型：游戏
 
 版本：1.0
 
@@ -35,8 +33,6 @@ info_snake() {
 使用：snake命令进入游戏，wasd移动来吃点"
     else
         echo "Name：snake
-        
-Type：game
 
 version：1.0
 
