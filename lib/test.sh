@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #test组  测试，不成功将给出返回值，或者退出报错
-set -u #使用不存在变量将退出报错
 
 
 
@@ -10,27 +9,6 @@ test_64bit(){
         return 0
     else
         return 1
-    fi
-}
-
-#测试网络
-test_network() {
-    ping -c 2 www.baidu.com
-    [[ $? -eq 0 ]] || test_exit "无法访问百度，请设置访问外网" "Can not access Baidu, please set to access the Internet"
-}
-
-#测试yum是否正常
-test_yum(){
-    local repolist
-
-    if [[ -f /etc/yum/pluginconf.d/subscription-manager.conf ]];then
-        sed -i '/enabled/s/1/0/' /etc/yum/pluginconf.d/subscription-manager.conf
-    fi
-
-    yum clean all
-    repolist=$(yum repolist 2>/dev/null |awk '/repolist:/{print $2}'|sed 's/,//')
-    if [[ $repolist -le 0 ]];then
-        test_exit "本机YUM不可用，请正确配置YUM后重试" "The machine YUM is not available, please correct configuration YUM retry"
     fi
 }
 
@@ -61,8 +39,6 @@ else
 	return 1
 fi
 }
-
-
 
 #位置变量1是中文，位置变量2是英文
 test_exit() {
