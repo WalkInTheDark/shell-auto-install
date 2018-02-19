@@ -45,12 +45,8 @@ cd shell-auto-install
 
 ## 查看帮助
 
- ![xx](https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180216193838.png)
+ ![xx](https://github.com/goodboy23/shell-auto-install/blob/master/package/a.png)
 
-## 安装脚本
+## 安装使用
 
-![dd](https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180216194310.png)
-
-## 使用
-
-![zz](https://github.com/goodboy23/shell-auto-install/blob/master/package/QQ%E6%88%AA%E5%9B%BE20180214140552.png)
+![dd](https://github.com/goodboy23/shell-auto-install/blob/master/package/b.png)
