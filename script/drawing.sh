@@ -22,8 +22,6 @@ info_drawing() {
     if [ $language -eq 1 ];then
         echo "名字：drawing
         
-类型：游戏
-
 版本：1.0
 
 作者：book
@@ -36,8 +34,6 @@ info_drawing() {
     else
         echo "Name：drawing
         
-Type：game
-
 version：1.0
 
 Author：book
