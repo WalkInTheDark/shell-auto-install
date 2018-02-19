@@ -21,9 +21,7 @@ remove_mine() {
 info_mine() {
     if [ $language -eq 1 ];then
         echo "名字：mine
-        
-类型：游戏
-
+       
 版本：1.0
 
 作者：未知
@@ -36,9 +34,7 @@ info_mine() {
      wasd移动，j挖，f放旗子，n返回上一级，x退出"
     else
         echo "Name：mine
-        
-Type：game
-
+       
 version：1.0
 
 Author：unknown
