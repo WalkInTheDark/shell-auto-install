@@ -23,8 +23,6 @@ info_pxe() {
     if [ $language -eq 1 ];then
         echo "名字：pxe
         
-类型：服务
-
 版本：2.0
 
 作者：book
@@ -38,8 +36,6 @@ info_pxe() {
     else
         echo "Name：pxe
         
-Type：server
-
 version：2.0
 
 Author：book
