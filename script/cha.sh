@@ -22,8 +22,6 @@ info_cha() {
     if [ $language -eq 1 ];then
         echo "名字：cha
         
-类型：系统
-
 版本：1.0
 
 作者：book
@@ -36,8 +34,6 @@ info_cha() {
     else
         echo "Name：cha
         
-Type：sys
-
 version：1.0
 
 Author：book
