@@ -49,9 +49,7 @@ remove_redis_cluster() {
 info_redis_cluster() {
     if [ $language -eq 1 ];then
         echo "名字：redis-cluster
-        
-类型：服务
-
+       
 版本：3.2.9
 
 作者：book
@@ -64,8 +62,6 @@ info_redis_cluster() {
     else
         echo "Name：redis-cluster
         
-Type：server
-
 version：3.2.9
 
 Author：book
