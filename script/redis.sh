@@ -66,8 +66,6 @@ info_redis() {
     if [ $language -eq 1 ];then
         echo "名字：redis
         
-类型：服务
-
 版本：3.2.9
 
 作者：book
@@ -80,8 +78,6 @@ info_redis() {
     else
         echo "Name：cha
         
-Type：server
-
 version：3.2.9
 
 Author：book
