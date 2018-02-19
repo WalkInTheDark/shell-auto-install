@@ -84,8 +84,6 @@ info_zookeeper_cluster() {
     if [ $language -eq 1 ];then
         echo "名字：zookeeper-cluster
         
-类型：服务
-
 版本：3.5.2
 
 作者：book
@@ -97,8 +95,6 @@ info_zookeeper_cluster() {
 使用：使用man-zookeeper 管理"
     else
         echo "Name：zookeeper-cluster
-        
-Type：server
 
 version：3.5.2
 
