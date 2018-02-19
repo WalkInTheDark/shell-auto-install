@@ -57,7 +57,7 @@ install_zookeeper_cluster() {
         for e in `seq 0 $num`
         do
             if [ "$i" == "${cluster_ip[$e]}" ];then
-                id=$i
+                id=$e
             fi
         done
     done
