@@ -22,8 +22,6 @@ info_chat() {
     if [ $language -eq 1 ];then
         echo "名字：chat
         
-类型：游戏
-
 版本：1.0
 
 作者：LingYi
@@ -40,8 +38,6 @@ info_chat() {
     else
         echo "Name：mine
         
-Type：game
-
 version：1.0
 
 Author：LingYi
