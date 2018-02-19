@@ -3,7 +3,8 @@ language=`cat conf/lang.txt`
 
 
 
-master_dir() { #可修改
+#可修改，全局默认安装目录
+master_dir() {
     install_dir=/ops/server
     log_dir=/ops/log
 }
@@ -27,62 +28,74 @@ lang() {
 
 help_all() {
     [ $language -eq 1 ] && cat conf/zhong_help.txt || cat conf/ying_help.txt
-    echo
 }
 
-list_all() {
-    [ $language -eq 1 ] && echo "没有版本号的，皆为扩展" || echo "No version number, are all extensions"
-    cat conf/server_name.txt
-    echo
+list_all() {    
+    if [ $# -eq 1  ];then
+        cat conf/server_name.txt
+    else
+        if [ "$2" == "installed" ];then
+            for i in `cat conf/installed.txt`
+            do
+                grep "^${i}" conf/server_name.txt | head -1
+            done
+        else
+            [ $language -eq 1 ] && echo "$2 相关脚本：" || echo "$2 Related script"
+            grep "^$2" conf/server_name.txt
+        fi
+    fi
 }
 
 up() {
-test_install git
+    test_install git
+    test_www www.baidu.com
 
-test_www www.baidu.com
+    local a=`pwd`
+    local b=`echo ${a##*/}`
+    local c=`cat conf/installed.txt` #将已安装文件读取
+    local old_ver=`cat conf/version.txt`
+    local new_ver=`curl https://raw.githubusercontent.com/goodboy23/shell-auto-install/master/conf/version.txt`
+    local ver=`process_big $old_ver $new_ver` #得出最大值
 
-a=`pwd`
-b=`echo ${a##*/}`
-ver=`cat conf/version.txt`
-new_ver=`curl https://raw.githubusercontent.com/goodboy23/shell-auto-install/master/conf/version.txt`
-c=`process_big $ver $new_ver`
-
-if [ "$c" != "$ver" ];then
-   cd ..
-   rm -rf $b
-   git clone https://github.com/goodboy23/shell-auto-install.git
-   if [ -d shell-auto-install ];then
-       [ $language -eq 1 ] && echo "更新完成" || echo "update completed"
-   else
-       [ $language -eq 1 ] && echo "更新失败" || echo "Update failed"
-   fi
-else
-   [ $language -eq 1 ] && echo "版本一致，不用更新" || echo "The same version, without updating"
-fi
+    if [ "$ver" != "$old_ver" ];then #如果最大值和当前版本一致，将不更新
+        cd ..
+        rm -rf $b
+        git clone https://github.com/goodboy23/shell-auto-install.git
+        if [ -d shell-auto-install ];then
+            [ $language -eq 1 ] && echo "更新完成" || echo "update completed"
+            echo $c >> shell-auto-install/conf/installed.txt
+        else
+            [ $language -eq 1 ] && echo "更新失败" || echo "Update failed"
+        fi
+    else
+        [ $language -eq 1 ] && echo "版本一致，不用更新" || echo "The same version, without updating"
+    fi
 }
 
 server() {
-    local a=`process_bian $2`
+    local a=`process_bian $2` #将-变成_，好加载文件
 
     if [ -f script/${a}.sh ];then
         source script/${a}.sh
-        
         if [ "$1" == "install" ];then
             test_root
+            
             grep "^${a}" conf/installed.txt &> /dev/null
             [ $? -eq 0 ] && test_exit "${a}已安装" "${a} is already installed"
+            
             install_${a}
         elif [ "$1" == "remove" ];then
             grep "^${a}" conf/installed.txt &> /dev/null
             [ $? -eq 0 ] && sed "/^${a}/d" conf/installed.txt
-            sed -i '/^$/d' conf/installed.txt
+            sed -i '/^$/d' conf/installed.txt #删除空行
+            
             remove_${a}
         elif [ "$1" == "get" ];then
             get_${a}
         elif [ "$1" == "info" ];then   
             info_${a}
         elif [ "$1" == "edit" ];then
-            vi script/${a}.sh
+            vi script/${a}.sh #可以更换编辑器成vim
         else
             help_all
         fi
@@ -100,19 +113,7 @@ master_dir
 if [ "$#" -eq 0 ];then
     help_all
 elif [ "$1" == "list" ];then 
-    if [ $# -eq 1  ];then
-        list_all
-    else
-        if [ "$2" == "installed" ];then
-            for i in `cat conf/installed.txt`
-            do
-                grep "^${i}" conf/server_name.txt | head -1
-            done
-        else
-            [ $language -eq 1 ] && echo "$2 相关脚本：" || echo "$2 Related script"
-            grep "^$2" conf/server_name.txt
-        fi
-    fi
+    list_all $1 $2
 elif [ "$1" == "help" ];then
     help_all
 elif [ "$1" == "lang" ];then
