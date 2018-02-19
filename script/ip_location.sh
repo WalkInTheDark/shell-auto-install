@@ -22,8 +22,6 @@ info_ip_location() {
     if [ $language -eq 1 ];then
         echo "名字：ip-location
         
-类型：系统
-
 版本：1.0
 
 作者：book
@@ -37,8 +35,6 @@ info_ip_location() {
     else
         echo "Name：ip-location
         
-Type：sys
-
 version：1.0
 
 Author：book
