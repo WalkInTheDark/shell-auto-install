@@ -110,15 +110,8 @@ elif [ "$1" == "list" ];then
             done
         else
             [ $language -eq 1 ] && echo "$2 相关脚本：" || echo "$2 Related script"
-            grep $2 conf/server_name.txt
+            grep "^$2" conf/server_name.txt
         fi
-    fi
-elif [ "$1" == "type" ];then
-    if [ $# -eq 1 ];then
-        echo "servre lang sys game"
-    else
-        [ $language -eq 1 ] && echo "$2 类型脚本：" || echo "$2 Related type script"
-        grep -w $2 conf/server_name.txt
     fi
 elif [ "$1" == "help" ];then
     help_all
