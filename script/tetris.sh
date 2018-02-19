@@ -22,8 +22,6 @@ info_tetris() {
     if [ $language -eq 1 ];then
         echo "名字：tetris
         
-类型：游戏
-
 版本：1.0
 
 作者：未知
@@ -36,8 +34,6 @@ info_tetris() {
     else
         echo "Name：tetris
         
-Type：game
-
 version：1.0
 
 Author：unknown
