@@ -35,8 +35,6 @@ info_nodejs() {
     if [ $language -eq 1 ];then
         echo "名字：nodejs
         
-类型：语言
-
 版本：8.9.3
 
 作者：book
@@ -49,8 +47,6 @@ info_nodejs() {
     else
         echo "Name：nodejs
         
-Type：lang
-
 version：8.9.3
 
 Author：book
