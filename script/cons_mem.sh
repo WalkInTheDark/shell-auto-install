@@ -20,8 +20,6 @@ info_cons_mem() {
     if [ $language -eq 1 ];then
         echo "名字：cons-mem
         
-类型：系统
-
 版本：1.0
 
 作者：LingYi
@@ -34,8 +32,6 @@ info_cons_mem() {
     else
         echo "Name：cons-mem
         
-Type：sys
-
 version：1.0
 
 Author：LingYi
