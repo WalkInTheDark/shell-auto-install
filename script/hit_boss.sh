@@ -22,8 +22,6 @@ info_hit_boss() {
     if [ $language -eq 1 ];then
         echo "名字：hit-boss
         
-类型：游戏
-
 版本：1.2
 
 作者：book
@@ -36,8 +34,6 @@ info_hit_boss() {
     else
         echo "Name：hit-boss
         
-Type：game
-
 version：1.2
 
 Author：book
