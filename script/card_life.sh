@@ -20,8 +20,6 @@ remove_card_life() {
 info_card_life() {
     if [ $language -eq 1 ];then
         echo "名字：card-life
-        
-类型：游戏
 
 版本：1.4
 
@@ -35,8 +33,6 @@ info_card_life() {
     else
         echo "Name：card-life
         
-Type：game
-
 version：1.4
 
 Author：book
