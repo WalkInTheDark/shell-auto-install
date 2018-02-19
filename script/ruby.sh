@@ -43,8 +43,6 @@ remove_ruby() {
 info_ruby() {
     if [ $language -eq 1 ];then
         echo "名字：ruby
-        
-类型：语言
 
 版本：2.4.1
 
@@ -57,8 +55,6 @@ info_ruby() {
 使用：无"
     else
         echo "Name：ruby
-        
-Type：lang
 
 version：2.4.1
 
