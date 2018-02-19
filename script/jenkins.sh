@@ -54,8 +54,6 @@ info_jenkins() {
     if [ $language -eq 1 ];then
         echo "名字：jenkins
         
-类型：服务
-
 版本：2.104
 
 作者：book
@@ -68,8 +66,6 @@ info_jenkins() {
     else
         echo "Name：jenkins
         
-Type：server
-
 version：2.104
 
 Author：book
