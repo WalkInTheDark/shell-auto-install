@@ -1,49 +1,49 @@
-Name               Version               Types
+Name               Version               Description
 
-redis              3.2.9                 server
+redis              3.2.9                 无
 redis-port
 redis-cluster
 redis-sentinel
 
-redi-browser       0.4.0                 server
+redi-browser       0.4.0                 无
 
-zookeeper          3.5.2                 server
+zookeeper          3.5.2                 无
 zookeeper-cluster
 
-kafka              2.12                  server
+kafka              2.12                  无
 kafka-cluste
 
-kafka-manager      1.3.3.14              server
+kafka-manager      1.3.3.14              无
 
-nodejs             8.9.3                 lang
+nodejs             8.9.3                 无
 
-ruby               2.4.1                 lang
+ruby               2.4.1                 无
 
-jenkins            2.104                 server
+jenkins            2.104                 无
 
-cha                1.0                   sys
+pxe                2.0                   无
 
-ip-location        1.0                   sys
+cha                1.0                   查看系统信息
 
-drawing            1.0                   game
-xian-draw
+ip-location        1.0                   查询外网ip所在地
 
-hit-boss           1.2                   game
+drawing            1.0                   字符画图
+xian-draw                                显示画的图
 
-card-life          1.4                   game
+hit-boss           1.2                   回合打boss游戏
 
-tetris             1.0                   game
+card-life          1.4                   抽卡人生游戏
 
-mine               1.0                   game
+tetris             1.0                   俄罗斯方块
 
-pxe                2.0                   server
+mine               1.0                   扫雷
 
-cons_mem           1.0                   sys
+cons_mem           1.0                   消耗指定内存
 
-menu               1.0                   game
+menu               1.0                   显示一个表格
 
-chat               1.0                   game
+chat               1.0                   远程聊天
 
-snake              1.0                   game
+snake              1.0                   贪吃蛇
 
-gobang             1.0                   game
+gobang             1.0                   五子棋
