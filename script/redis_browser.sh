@@ -84,8 +84,6 @@ remove_redis_browser() {
 info_redis_browser() {
     if [ $language -eq 1 ];then
         echo "名字：redis-browser
-        
-类型：服务
 
 版本：0.4.0
 
@@ -99,8 +97,6 @@ info_redis_browser() {
     else
         echo "Name：redis-browser
         
-Type：server
-
 version：0.4.0
 
 Author：book
