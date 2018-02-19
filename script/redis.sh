@@ -65,7 +65,7 @@ remove_redis() {
 info_redis() {
     if [ $language -eq 1 ];then
         echo "名字：redis
-        
+
 版本：3.2.9
 
 作者：book
