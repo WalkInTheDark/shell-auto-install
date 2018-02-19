@@ -22,8 +22,6 @@ info_gobang() {
     if [ $language -eq 1 ];then
         echo "名字：gobang
         
-类型：游戏
-
 版本：1.0
 
 作者：yinyuemi
@@ -37,8 +35,6 @@ info_gobang() {
     else
         echo "Name：gobang
         
-Type：game
-
 version：1.0
 
 Author：yinyuemi
