@@ -47,3 +47,11 @@ chat               1.0                   远程聊天
 snake              1.0                   贪吃蛇
 
 gobang             1.0                   五子棋
+
+clock              1.0                   显示时间
+
+snake2             1.0                   贪吃蛇2
+
+trans              1.0                   英汉互译
+
+tetris2            1.0                   俄罗斯方块2
