@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+get_tetris2() {
+    [ $language -eq 1 ] && echo "不用下载" || ehco "Do not download"
+}
+
+install_tetris2() {
+    cp conf/alone/tetris2 /usr/local/bin/tetris2
+    chmod +x /usr/local/bin/tetris2
+
+    echo "tetris2" >> conf/installed.txt
+    [ $language -eq 1 ] && echo "tetris2安装完毕，使用tetris2 开始游戏" || ehco "tetris2 installation is completed, use tetris2 Start the game"
+}
+
+remove_tetris2() {
+    rm -rf /usr/local/bin/tetris2
+    [ $language -eq 1 ] && echo "tetris2已卸载" || ehco "tetris2 Uninstalled"
+}
+
+
+info_tetris2() {
+    if [ $language -eq 1 ];then
+        echo "名字：tetris2
+        
+版本：1.0
+
+作者：liungkejin
+
+介绍：大家熟悉的俄罗斯方块2
+
+提示：无
+
+使用：tetris2命令开始游戏"
+    else
+        echo "Name：tetris2
+        
+version：1.0
+
+Author：liungkejin
+
+Introduction：Familiar Tetris 2
+
+Prompt：none
+
+use：tetris2 command Start the game"
+    fi
+}
