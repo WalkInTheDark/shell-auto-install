@@ -110,7 +110,7 @@ test_package() {
 
     for i in `ls package/`
     do
-        if [ "$i" == "$2" ];then
+        if [ "$i" == "$1" ];then
             echo $i
             break
         fi
