@@ -71,15 +71,19 @@ install_redis_port() {
 remove_redis_port() {
     local des_port=() sou_port=`man-redis -p` i e a=0 b=0
     
-    for i in `echo ${sou_port[*]}` #端口放进数组
+    source script/redis.sh
+    
+    [ ! -n "$sou_port" ] && echo ""
+    
+    for i in `echo $sou_port` #端口放进数组
     do
         des_port[a]=$i
         let a++
     done
     
-    for i in `echo ${port[*]}` #和已存端口进行比对
+    for i in `echo ${port[*]}`
     do
-        for e in `echo ${des_port[*]}`
+        for e in `echo ${des_port[*]}` #和已存端口进行比对
         do
             if [ "$i" == "$e" ];then
                 man-redis stop $i
