@@ -21,7 +21,7 @@ install_redis_port() {
     
     command=/usr/local/bin/man-redis #创建一个管理脚本
     if [ ! -f $command ];then
-        cp conf/redis/man-redis.sh $command
+        cp conf/redis/man-redis $command
         
         sed -i "2a install_dir=${install_dir}" $command
         sed -i "3a log_dir=${log_dir}" $command
