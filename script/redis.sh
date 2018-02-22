@@ -16,19 +16,14 @@ redis_dir=redis
 
 get_redis() {
     test_package redis-3.2.9.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-3.2.9.tar.gz  0969f42d1675a44d137f0a2e05f9ebd2
-    if [ $language -eq 1 ];then
-        echo "redis-3.2.9.tar.gz 下载完成"
-    else
-        echo "redis-3.2.9.tar.gz Download completed"
-    fi
 }
 
 install_redis() {
     test_dir_master
     test_dir $redis_dir
-    get_redis
+    bao=`get_redis`
 
-    tar -xf package/redis-3.2.9.tar.gz
+    tar -xf package/$bao
     mv redis ${install_dir}/${redis_dir}
 
     grep -w 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile &> /dev/null
