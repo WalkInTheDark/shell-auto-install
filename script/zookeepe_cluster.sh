@@ -49,20 +49,8 @@ install_zookeeper_cluster() {
         let d++
     done
 
-    num=${#cluster_ip[*]} #找出本地ip是数组第几位，获得myid文件的号码
-    let num-- #-1
-
-    for i in `ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\."`
-    do
-        for e in `seq 0 $num`
-        do
-            if [ "$i" == "${cluster_ip[$e]}" ];then
-                id=$e
-            fi
-        done
-    done
-
-    let id++ #+1
+    id=`test_id`
+    
     echo "$id" > ${install_dir}/${zookeeper_cluster_dir}/data/myid
 
     command=/usr/local/bin/man-zookeeper
