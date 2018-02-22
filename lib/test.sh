@@ -111,8 +111,9 @@ test_package() {
     for i in `ls package/`
     do
         if [ "$i" == "$1" ];then
-            echo $i
+            echo $1
             break
+	    a=1
         fi
     done
     
