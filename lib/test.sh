@@ -104,14 +104,13 @@ test_install() {
     done
 }
 
-#下载效验，$1为包名，$2为网络下载地址，$3为md5值，最后返回正确包名
+#下载效验，$1为包名，$2为网络下载地址，最后返回正确包名
 test_package() {
     local a=0 i
 
     for i in `ls package/`
     do
-        md5sum package/$i | grep ${3} &> /dev/null
-        if [ $? -eq 0 ];then
+        if [ "$i" == "$2" ];then
             echo $i
             break
         fi
