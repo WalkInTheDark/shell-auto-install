@@ -1,7 +1,6 @@
 #!/bin/bash
 
 
-port=()
 
 a=${install_dir}/${redis_dir}/bin/redis-server
 b=${install_dir}/${redis_dir}/cluster/
@@ -9,56 +8,32 @@ c=${log_dir}/${redis_dir}
 
 
 start() {
-netstat -unltp | awk -F':' '{print $2}' | grep -w ${1} &> /dev/null
-if [ $? -ne 0 ];then
-    $a $b/${1}/${1}.conf >> $c/redis_${1}.log &
-fi
+    netstat -unltp | awk -F':' '{print $2}' | grep -w ${port} &> /dev/null
+    if [ $? -ne 0 ];then
+        $a $b/${port}/${port}.conf >> $c/redis_${1}.log &
+    fi
 }
 
 stop() {
-netstat -unltp | awk -F':' '{print $2}' | grep -w ${1} &> /dev/null
-if [ $? -eq 0 ];then
-    pid=`cat ${install_dir}/${redis_dir}/cluster/${1}/redis_${1}.pid `
-    kill -9 $pid &> /dev/null
-fi
+    netstat -unltp | awk -F':' '{print $2}' | grep -w ${port} &> /dev/null
+    if [ $? -eq 0 ];then
+        pid=`cat ${install_dir}/${redis_dir}/cluster/${1}/redis_${1}.pid `
+        kill -9 $pid &> /dev/null
+    fi
 }
 
 status() {
-netstat -unltp | awk -F':' '{print $2}' | grep -w ${1} &> /dev/null
-[ $? -eq 0 ] && echo "redis port:${1} ok" || echo "redis port:${1} error"
+    netstat -unltp | awk -F':' '{print $2}' | grep -w ${port} &> /dev/null
+    [ $? -eq 0 ] && echo "redis port:${1} ok" || echo "redis port:${1} error"
 }
 
-panduan() {
+
 if [ "$1" == "start" ];then
-    start $2
+    start
 elif [ "$1" == "stop" ];then
-    stop $2
+    stop
 elif [ "$1" == "status" ];then
-    status $2
-fi
-}
-
-if [ $# -eq 2 ];then
-    if [ "$2" == "all" ];then
-        for i in `echo ${port[*]}`
-        do
-            panduan $1 $i
-        done
-    else
-        panduan $1 $2
-    fi
-elif [ $# -eq 3 ];then
-    for i in `seq $2 $3`
-    do
-        panduan $1 $i
-    done
-elif [ "$1" == "-p" ];then
-    echo "${port[*]}"
+    status
 else
-    echo "start | stop | status
-    start 7000          Will start 7000 port
-    start 7000 7003     Will start 7000 7001 7002 7003 port
-    start all           Will start all port
-    The same is true for stop and status
-    "   
+    echo "start | stop | status"
 fi
