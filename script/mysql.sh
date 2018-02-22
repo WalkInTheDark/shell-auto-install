@@ -21,7 +21,7 @@ get_mysql() {
 
 install_mysql() {
     test_dir_master
-    test_dir $redis_dir
+    test_dir $mysql_dir
     package=`get_mysql`
 
     #清理mariadb的东西
