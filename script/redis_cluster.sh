@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-#这里只进行集群管理端的创建，端口使用redis_port创建
+
 
 #[使用设置]
+
 #所有要加入集群的节点，前一半节点皆为主
 cluster_ip="127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005"
 
@@ -10,17 +11,13 @@ cluster_ip="127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.
 node=1
 
 
-
+source script/redis.sh
 get_redis_cluster() {
-    source script/redis.sh
     get_redis
 }
 
-install_redis_cluster() {
-    source script/redis.sh
-   
-    bash sai.sh list installed | grep "^redis" &> dev/null
-    [ $? -ne 0 ] && test_exit "请先安装redis" "Please install redis"
+install_redis_cluster() {  
+    test_rely redis
 
     test_install ruby-devel rubygems rpm-build
     bash sai.sh install ruby #这个手动装好点
@@ -28,13 +25,8 @@ install_redis_cluster() {
     
     ${install_dir}/${redis_dir}/src/redis-trib.rb create --replicas ${node} ${cluster_ip}
     
-    if [ $language -eq 1 ];then
-        clear
-        echo "redis集群已启动完成"
-    else
-        clear
-        echo "redis cluster has started to complete"
-    fi
+    clear
+    [ $language -eq 1 ] && echo "redis集群已启动完成" || echo "redis cluster has started to complete"
 }
 
 
