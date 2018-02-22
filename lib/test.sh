@@ -104,7 +104,7 @@ test_install() {
     done
 }
 
-#下载效验，$1为包名，$2为网络下载地址，$3为md5值
+#下载效验，$1为包名，$2为网络下载地址，$3为md5值，最后返回正确包名
 test_package() {
     local a=0 i
 
@@ -112,14 +112,14 @@ test_package() {
     do
         md5sum package/$i | grep ${3} &> /dev/null
         if [ $? -eq 0 ];then
-            a=1
+            echo $i
             break
         fi
     done
     
     if [ $a -eq 0 ];then
         test_www www.baidu.com
-        wget -0 package/${1} $2
+        wget -O package/${1} $2
         test_package
     fi
 }
