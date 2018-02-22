@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
-#此脚本只进行redis的安装，若要使用，请安装redis_port
+
 
 #[使用设置]
+
 #主目录，相当于/usr/local
-#install_dir=/ops/server
+#install_dir=
 
 #日志主目录，相当于/var/log
-#log_dir=/ops/log
+#log_dir=
 
 #服务目录名
 redis_dir=redis
@@ -21,9 +22,9 @@ get_redis() {
 install_redis() {
     test_dir_master
     test_dir $redis_dir
-    bao=`get_redis`
+    package=`get_redis`
 
-    tar -xf package/$bao
+    tar -xf package/$package
     mv redis ${install_dir}/${redis_dir}
 
     grep -w 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile &> /dev/null
@@ -32,6 +33,7 @@ install_redis() {
     fi
     
     echo "redis" >> conf/installed.txt
+    
     clear
     if [ $language -eq 1 ];then
         echo "redis 安装成功，请安装redis-port来启动一个实例
@@ -49,14 +51,15 @@ Environment variable is set, please exit the current terminal and re-enter"
 }
 
 remove_redis() {
-    if [ -f /usr/local/bin/man-redis ];then
-        man-redis stop alll
-        rm -rf /usr/local/bin/man-redis
-    fi
+    for i in `ls /usr/local/bin/man-redis*`
+    do
+        $i stop
+        rm -rf $i
+    done
     
     rm -rf ${install_dir}/${redis_dir}
 
-    [ $language -eq 1 ] && echo "redis已卸载" || echo "redis Uninstalled"
+    [ $language -eq 1 ] && echo "redis卸载完成" || echo "redis uninstall completed"
 }
 
 info_redis() {
@@ -73,7 +76,7 @@ info_redis() {
 
 使用：安装redis-port 来创建一个实例"
     else
-        echo "Name：cha
+        echo "Name：redis
         
 version：3.2.9
 
