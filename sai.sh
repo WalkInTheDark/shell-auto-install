@@ -16,34 +16,8 @@ load() {
     done
 }
 
-lang() {
-    if [ $1 -eq 1 ];then
-        echo "1" > conf/lang.txt
-    elif [ $1 -eq 2 ];then
-        echo "2" > conf/lang.txt
-    else
-        test_exit "选项错误" "Wrong option"
-    fi
-}
-
 help_all() {
     [ $language -eq 1 ] && cat conf/zhong_help.txt || cat conf/ying_help.txt
-}
-
-list_all() {
-    if [ $# -eq 1  ];then
-        cat conf/server_name.txt
-    else
-        if [ "$2" == "installed" ];then
-            for i in `cat conf/installed.txt`
-            do
-                grep "^${i}" conf/server_name.txt | head -1
-            done
-        else
-            [ $language -eq 1 ] && echo "$2 相关脚本：" || echo "$2 Related script"
-            grep "^$2" conf/server_name.txt
-        fi
-    fi
 }
 
 up() {
@@ -111,16 +85,36 @@ server() {
 load
 master_dir
 
-if [ "$#" -eq 0 ];then
+if [ $# -eq 0 ];then
     help_all
-elif [ "$1" == "list" ];then 
-    list_all $1 $2
-elif [ "$1" == "help" ];then
-    help_all
-elif [ "$1" == "lang" ];then
-    lang $2
-elif [ "$1" == "update" ];then
-    up
-else
-    server $1 $2
+elif [ $# -eq 1 ];then
+    if [ "$1" == "list" ];then
+        cat conf/server_name.txt
+    elif [ "$1" == "help" ];then
+        help_all
+    elif [ "$1" == "update" ];then
+        up
+    fi
+elif [ $# -eq 2 ];then
+    if [ "$1" == "list" ];then
+        if [ "$2" == "installed" ];then
+            for i in `cat conf/installed.txt`
+            do
+                grep "^${i}" conf/server_name.txt | head -1
+            done
+        else
+            [ $language -eq 1 ] && echo "$2 相关脚本：" || echo "$2 Related script"
+            grep "^$2" conf/server_name.txt
+        fi
+    elif [ "$1" == "lang" ];then
+            if [ $1 -eq 1 ];then
+                echo "1" > conf/lang.txt
+            elif [ $1 -eq 2 ];then
+                echo "2" > conf/lang.txt
+            else
+                test_exit "选项错误" "Wrong option"
+            fi
+    else
+        server $1 $2
+    fi
 fi
