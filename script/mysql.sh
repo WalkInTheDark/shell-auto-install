@@ -16,7 +16,7 @@ mysql_dir=mysql
 
 
 get_mysql() {
-    test_package mysql-5.6.39-linux-glibc2.12-x86_64.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/mysql-5.6.39-linux-glibc2.12-x86_64.tar.gz 1bc406d2fe18dd877182a0bd603e7bd4
+    test_package mysql-5.6.39-linux-glibc2.12-x86_64.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/mysql-5.6.39-linux-glibc2.12-x86_64.tar.gz b2e3a6ba8741ce80e7fcecee4f85c2d4
 }
 
 install_mysql() {
