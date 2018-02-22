@@ -123,3 +123,8 @@ test_package() {
         echo $1
     fi
 }
+
+test_rely() {
+    bash sai.sh list installed | grep "^${1}" &> /dev/null
+    [ $? -ne 0 ] && test_exit "请先安装${1}" "Please install ${1}"
+}
