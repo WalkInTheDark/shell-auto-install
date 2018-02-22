@@ -92,9 +92,9 @@ remove_redis_port() {
         done 
     done
     
-    sed -i "/^port=/cport=(${des_port[*]})" /usr/local/bin/redis-man 
+    sed -i "/^port=/cport=(${des_port[*]})" /usr/local/bin/man-redis
 
-    [ $language -eq 1 ] && echo "redis ${port[*]} 端口已卸载" "redis ${port[*]} port Uninstalled" 
+    [ $language -eq 1 ] && echo "redis ${port[*]} 端口已卸载" || "redis ${port[*]} port Uninstalled" 
 }
 
 info_redis_port() {
