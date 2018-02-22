@@ -86,7 +86,7 @@ server() {
             install_${a}
         elif [ "$1" == "remove" ];then
             grep "^${a}" conf/installed.txt &> /dev/null
-            [ $? -eq 0 ] && sed "/^${a}/d" conf/installed.txt
+            [ $? -eq 0 ] && sed -i "/^${a}/d" conf/installed.txt
             sed -i '/^$/d' conf/installed.txt #删除空行
             
             remove_${a}
