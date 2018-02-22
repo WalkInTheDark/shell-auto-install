@@ -95,6 +95,7 @@ Environment variable is set, please exit the current terminal and re-enter"
 
 remove_mysql() {
     systemctl stop mysql ; systemctl disable mysql
+    rm -rf /usr/lib/systemd/system/mysql.service
     
     hang=`grep -n 'PATH=$PATH':${install_dir}/${mysql_dir}/bin /etc/profile &> /dev/null`
     sed -i "${hang} d" /etc/profile
