@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #process组 字符文本处理，返回处理后的值
-set -u #使用不存在变量将退出报错
+
+
 
 #从位置变量中找出是数字的部分
 process_number() {
