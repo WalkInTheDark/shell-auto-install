@@ -20,6 +20,28 @@ help_all() {
     [ $language -eq 1 ] && cat conf/zhong_help.txt || cat conf/ying_help.txt
 }
 
+list_all() {
+    if [ "$1" == "installed" ];then
+        for i in `cat conf/installed.txt`
+        do
+            grep "^${i}" conf/server_name.txt | head -1
+        done
+    else
+        [ $language -eq 1 ] && echo "$1 相关脚本：" || echo "$1 Related script："
+        grep "^$1" conf/server_name.txt
+    fi
+}
+
+yuyan() {
+    if [ $1 -eq 1 ];then
+        echo "1" > conf/lang.txt
+    elif [ $1 -eq 2 ];then
+        echo "2" > conf/lang.txt
+    else
+        test_exit "选项错误" "Wrong option"
+    fi
+}
+
 up() {
     test_install git
     test_www www.baidu.com
@@ -94,26 +116,14 @@ elif [ $# -eq 1 ];then
         help_all
     elif [ "$1" == "update" ];then
         up
+    else
+        test_exit "没有这个服务" "Without this service"
     fi
 elif [ $# -eq 2 ];then
     if [ "$1" == "list" ];then
-        if [ "$2" == "installed" ];then
-            for i in `cat conf/installed.txt`
-            do
-                grep "^${i}" conf/server_name.txt | head -1
-            done
-        else
-            [ $language -eq 1 ] && echo "$2 相关脚本：" || echo "$2 Related script"
-            grep "^$2" conf/server_name.txt
-        fi
+        list_all $2
     elif [ "$1" == "lang" ];then
-            if [ $1 -eq 1 ];then
-                echo "1" > conf/lang.txt
-            elif [ $1 -eq 2 ];then
-                echo "2" > conf/lang.txt
-            else
-                test_exit "选项错误" "Wrong option"
-            fi
+        yuyan $2
     else
         server $1 $2
     fi
