@@ -112,8 +112,8 @@ test_package() {
     do
         if [ "$i" == "$1" ];then
             echo $1
-            break
 	    a=1
+            break
         fi
     done
     
