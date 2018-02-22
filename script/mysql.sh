@@ -16,7 +16,7 @@ mysql_dir=mysql
 
 
 get_mysql() {
-    test_package mysql-5.6.39-linux-glibc2.12-x86_64.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/mysql-5.6.39-linux-glibc2.12-x86_64.tar.gz b2e3a6ba8741ce80e7fcecee4f85c2d4
+    test_package mysql-5.6.39-linux-glibc2.12-x86_64.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/mysql-5.6.39-linux-glibc2.12-x86_64.tar.gz
 }
 
 install_mysql() {
@@ -34,11 +34,13 @@ install_mysql() {
     
     tar -xf package/$package
     mv mysql-5.6.39-linux-glibc2.12-x86_64 ${install_dir}/${mysql_dir}
+    touch ${log_dir}/${mysql_dir}/mysql.log #要创建
     mkdir ${install_dir}/${mysql_dir}/data
     chown -R mysql:mysql ${install_dir}/${mysql_dir}
     chown -R mysql:mysql ${log_dir}/${mysql_dir}
     
-    echo "default-character-set=utf8
+    echo "[mysql]
+default-character-set=utf8
 socket=${install_dir}/${mysql_dir}/mysql.sock
 [mysqld]
 skip-name-resolve
