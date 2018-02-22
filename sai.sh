@@ -30,7 +30,7 @@ help_all() {
     [ $language -eq 1 ] && cat conf/zhong_help.txt || cat conf/ying_help.txt
 }
 
-list_all() {    
+list_all() {
     if [ $# -eq 1  ];then
         cat conf/server_name.txt
     else
@@ -59,10 +59,11 @@ up() {
 
     if [ "$ver" != "$old_ver" ];then #如果最大值和当前版本一致，将不更新
         cd ..
-        rm -rf $b
-        git clone https://github.com/goodboy23/shell-auto-install.git
-        if [ -d shell-auto-install ];then
+        git clone https://github.com/goodboy23/shell-auto-install.git temporary
+        if [ -d 52wiki.cn ];then
             [ $language -eq 1 ] && echo "更新完成" || echo "update completed"
+            rm -rf $b
+            mv 52wiki.cn shell-auto-install
             echo $c >> shell-auto-install/conf/installed.txt
         else
             [ $language -eq 1 ] && echo "更新失败" || echo "Update failed"
@@ -73,7 +74,7 @@ up() {
 }
 
 server() {
-    local a=`process_bian $2` #将-变成_，好加载文件
+    local a=`process_bian $2` #将-变成_，统一规划
 
     if [ -f script/${a}.sh ];then
         source script/${a}.sh
