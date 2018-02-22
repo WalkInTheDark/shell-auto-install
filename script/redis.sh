@@ -28,9 +28,7 @@ install_redis() {
     mv redis ${install_dir}/${redis_dir}
 
     grep -w 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile &> /dev/null
-    if [ $? -ne 0 ];then
-        echo 'PATH=$PATH':${install_dir}/${redis_dir}/bin >> /etc/profile
-    fi
+    [ $? -ne 0 ] && echo 'PATH=$PATH':${install_dir}/${redis_dir}/bin >> /etc/profile
     
     echo "redis" >> conf/installed.txt
     
@@ -51,6 +49,9 @@ Environment variable is set, please exit the current terminal and re-enter"
 }
 
 remove_redis() {
+    hang=`grep -n 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile &> /dev/null`
+    sed -i "${hang} d" /etc/profile
+
     for i in `ls /usr/local/bin/man-redis*`
     do
         $i stop
