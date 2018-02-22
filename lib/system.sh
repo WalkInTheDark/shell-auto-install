@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #system组 系统，返回各种系统信息
-set -u #使用不存在变量将退出报错
 
 
 
