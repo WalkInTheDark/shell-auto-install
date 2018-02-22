@@ -37,19 +37,7 @@ install_kafka_cluster() {
     rm -rf $conf #删除旧的
     cp conf/kafka/server.properties $conf
     
-    local id ip cluster_dizhi="" #找出本机ip和id
-    num=${#cluster_ip[*]} #找出本地ip是数组第几位，
-    let num-- #-1
-
-    for i in `ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\."`
-    do
-        for e in `seq 0 $num`
-        do
-            echo ${cluster_ip[$e]} | grep -w $i &> /dev/null
-            [ $? -eq 0 ] && id=$e && ip=$i
-        done
-    done
-    let id++ #+1
+    id=`test_id`
     
     for i in `echo ${cluster_ip[*]}` #算出地址字符串
     do
