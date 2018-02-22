@@ -49,6 +49,11 @@ Environment variable is set, please exit the current terminal and re-enter"
 }
 
 remove_redis() {
+    if [ -f /usr/local/bin/man-redis ];then
+        man-redis stop alll
+        rm -rf /usr/local/bin/man-redis
+    fi
+    
     rm -rf ${install_dir}/${redis_dir}
 
     [ $language -eq 1 ] && echo "redis已卸载" || echo "redis Uninstalled"
