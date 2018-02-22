@@ -16,12 +16,12 @@ get_redis_port() {
 install_redis_port() {
     source script/redis.sh
 
-    bash sai.sh list installed | grep "^redis" &> dev/null
+    bash sai.sh list installed | grep "^redis" &> /dev/null
     [ $? -ne 0 ] && test_exit "请先安装redis" "Please install redis"
     
     command=/usr/local/bin/man-redis #创建一个管理脚本
     if [ ! -f $command ];then
-        cp conf/redis/redis-man.sh $command
+        cp conf/redis/man-redis.sh $command
         
         sed -i "2a install_dir=${install_dir}" $command
         sed -i "3a log_dir=${log_dir}" $command
