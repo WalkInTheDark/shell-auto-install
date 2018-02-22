@@ -124,7 +124,29 @@ test_package() {
     fi
 }
 
+#扩展服务使用，$1写必须安装的服务名
 test_rely() {
     bash sai.sh list installed | grep "^${1}" &> /dev/null
     [ $? -ne 0 ] && test_exit "请先安装${1}" "Please install ${1}"
+}
+
+#集群使用，根据本地ip算出id号，统一cluster_ip，返回他在数组第几号
+test_id() {
+ 	local num=${#cluster_ip[*]} id
+    	let num--
+
+	for i in `ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\."`
+	do
+		for e in `seq 0 $num`
+		do
+            		echo ${cluster_ip[$e]} | grep $i
+        		if [ $? -eq 0 ];then
+               			id=$e
+                		break
+        		fi
+        	done
+    	done
+	
+	let id++
+	echo $id
 }
