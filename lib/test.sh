@@ -133,7 +133,7 @@ test_id() {
 		[ $a -eq 0 ] && break
 		for e in `seq 0 $num`
 		do
-            		echo ${cluster_ip[$e]} | grep $i
+            		echo ${cluster_ip[$e]} | grep $i &> /dev/null
         		if [ $? -eq 0 ];then
                			id=$e
 				a=0
@@ -143,5 +143,5 @@ test_id() {
     	done
 	
 	let id++
-	return $id
+	echo $id
 }
