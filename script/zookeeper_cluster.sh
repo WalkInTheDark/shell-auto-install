@@ -53,6 +53,7 @@ dynamicConfigFile=${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg.dynamic" 
     command=/usr/local/bin/man-zookeeper
     ln -s ${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh $command
 
+    clear
     [ $language -eq 1 ] && echo "zookeeper-cluster安装完毕，使用man-zookeeper 管理" || ehco "zookeeper_cluster installation is completed, Man-zookeeper management"
 }
 
