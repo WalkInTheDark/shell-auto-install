@@ -55,7 +55,7 @@ dynamicConfigFile=${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg.dynamic" 
 
     
     echo "#!/bin/bash
-${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh $1" > /usr/local/bin/man-zookeeper
+${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh" '$1' > /usr/local/bin/man-zookeeper
     chmod +x /usr/local/bin/man-zookeeper
 
     clear
