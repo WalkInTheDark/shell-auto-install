@@ -23,7 +23,7 @@ get_kafka_cluster() {
 install_kafka_cluster() {
     test_dir_master
     test_dir $kafka_cluster_dir
-    test_yum java-1.8.0-openjdk
+    test_install java-1.8.0-openjdk
     
     get_kafka_cluster
     tar -xf package/kafka_2.12-0.10.2.1.tgz
@@ -47,7 +47,7 @@ install_kafka_cluster() {
 
     sed -i "21s/broker.id=1/broker.id=${id}/g" $conf
     sed -i "35s/advertised.host.name=192.168.100.11/advertised.host.name=${ip}/g" $conf
-    sed -i "63s,log.dirs=/ops/log/kafka,log.dirs=${log_dir}/${kafka_cluster_dir}/g" $conf
+    sed -i "63s,log.dirs=/ops/log/kafka,log.dirs=${log_dir}/${kafka_cluster_dir},g" $conf
     sed -i "119s/zookeeper.connect=B-S-01:2181/zookeeper.connect=${cluster_dizhi}/g" $conf
 
     command=/usr/local/bin/man-kafka
