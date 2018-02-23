@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
 
+
 #[使用设置]
+
 #主目录，相当于/usr/local
-#install_dir=/ops/server
+#install_dir=
 
 #日志主目录，相当于/var/log
-#log_dir=/ops/log
+#log_dir=
 
 #服务目录名
 zookeeper_cluster_dir=zookeeper
@@ -17,12 +19,7 @@ cluster_ip=(192.168.2.108 192.168.2.109)
 
 
 get_zookeeper_cluster() {
-    test_package zookeeper-3.5.2-alpha.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/zookeeper-3.5.2-alpha.tar.gz adc27d412f283c0dc6ec9d08e30f4ec0
-    if [ $language -eq 1 ];then
-        echo "zookeeper-3.5.2-alpha.tar.gz 下载完成"
-    else
-        echo "zookeeper-3.5.2-alpha.tar.gz Download completed"
-    fi
+    test_package zookeeper-3.5.2-alpha.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/zookeeper-3.5.2-alpha.tar.gz
 }
 
 install_zookeeper_cluster() {
@@ -34,14 +31,14 @@ install_zookeeper_cluster() {
     tar -xf   package/zookeeper-3.5.2-alpha.tar.gz
     mv zookeeper-3.5.2-alpha ${install_dir}/${zookeeper_cluster_dir}
     
-    conf=${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg
-    cp conf/zookeeper/zoo.cfg ${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg
+    echo "clientPort=2181
+dataDir=${install_dir}/${zookeeper_cluster_dir}/data
+syncLimit=5
+tickTime=2000
+initLimit=10
+dataLogDir=${install_dir}/${zookeeper_cluster_dir}
+dynamicConfigFile=${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg.dynamic" > ${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg
 
-    sed -i "2s,dataDir=/ops/server/zookeeper/data,dataDir=${install_dir}/${zookeeper_cluster_dir}/data,g" $conf
-    sed -i "6s,dataLogDir=/ops/log/zookeeper,dataLogDir=${log_dir}/${zookeeper_cluster_dir},g" $conf
-    sed -i "7s,dynamicConfigFile=/ops/server/zookeeper/conf/zoo.cfg.dynamic,dynamicConfigFile=${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg.dynamic,g" $conf
-
-    mkdir ${install_dir}/${zookeeper_cluster_dir}/data
     d=1
     for i in `${cluster_ip[*]}`
     do
@@ -49,8 +46,8 @@ install_zookeeper_cluster() {
         let d++
     done
 
+    mkdir ${install_dir}/${zookeeper_cluster_dir}/data
     id=`test_id`
-    
     echo "$id" > ${install_dir}/${zookeeper_cluster_dir}/data/myid
 
     command=/usr/local/bin/man-zookeeper
