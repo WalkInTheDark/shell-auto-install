@@ -50,10 +50,12 @@ dynamicConfigFile=${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg.dynamic" 
     id=`test_id`
     echo "$id" > ${install_dir}/${zookeeper_cluster_dir}/data/myid
     
-    sed -i '139,"-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}" \,"-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Djava.net.preferIPv4Stack=true"  "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}" \,g' ${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh
+    #监听ipv4，默认ipv6
+    sed -i '139c "-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Djava.net.preferIPv4Stack=true"  "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}"' ${install_dir}/${zookeeper_cluster_dir}/bin/zkSserver.sh
 
-    command=/usr/local/bin/man-zookeeper
-    ln -s ${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh $command
+    
+    echo "#!/bin/bash
+${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh $1" > /usr/local/bin/man-zookeeper
 
     clear
     [ $language -eq 1 ] && echo "zookeeper-cluster安装完毕，使用man-zookeeper 管理" || ehco "zookeeper_cluster installation is completed, Man-zookeeper management"
