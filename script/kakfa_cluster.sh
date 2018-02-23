@@ -3,11 +3,12 @@
 
 
 #[使用设置]
+
 #主目录，相当于/usr/local
-#install_dir=/ops/server
+#install_dir=
 
 #日志主目录，相当于/var/log
-#log_dir=/ops/log
+#log_dir=
 
 #服务目录名
 kafka_cluster_dir=kafka_cluster
@@ -16,20 +17,15 @@ kafka_cluster_dir=kafka_cluster
 cluster_ip=(192.168.2.108:2181 192.168.2.109:2181)
 
 get_kafka_cluster() {
-    test_package kafka_2.12-0.10.2.1.tgz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka_2.12-0.10.2.1.tgz fab4b35ba536938144489105cb0091e0
-    if [ $language -eq 1 ];then
-        echo "kafka_2.12-0.10.2.1.tgz 下载完成"
-    else
-        echo "kafka_2.12-0.10.2.1.tgz Download completed"
-    fi
+    test_package kafka_2.12-0.10.2.1.tgz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka_2.12-0.10.2.1.tgz
 }
 
 install_kafka_cluster() {
-    test_yum java-1.8.0-openjdk
     test_dir_master
     test_dir $kafka_cluster_dir
-    get_kafka_cluster
+    test_yum java-1.8.0-openjdk
     
+    get_kafka_cluster
     tar -xf package/kafka_2.12-0.10.2.1.tgz
     mv kafka_2.12-0.10.2.1 ${install_dir}/${kafka_cluster_dir}
 
