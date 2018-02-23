@@ -37,6 +37,11 @@ system_ipv6(){
     wget -qO- -t1 -T2 ipv6.icanhazip.com
 }
 
+#$1为ip，根据输入ip返回所在地
+system_location() {
+    curl -s "http://ip138.com/ips138.asp?ip=${1}&action=2"| iconv -f gb2312 -t utf-8|grep '<ul class="ul1"><li>' |awk -F '<' '{print $4}' | awk -F'：' '{print $2}'
+}
+
 #硬盘读写速度
 system_iospeed() {
     (LANG=C dd if=/dev/zero of=test_xx bs=64k count=16k conv=fdatasync && rm -f test_xx ) 2>&1 | awk -F, '{io=$NF} END { print io}' | sed 's/^[ \t]*//;s/[ \t]*$//'
