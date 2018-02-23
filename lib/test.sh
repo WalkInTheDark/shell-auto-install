@@ -125,11 +125,12 @@ test_rely() {
 
 #集群使用，根据本地ip算出id号，统一cluster_ip，返回他在数组第几号
 test_id() {
- 	local num=${#cluster_ip[*]} id i e
+ 	local num=`echo ${#cluster_ip[*]}` id a=1 i e
     	let num--
 
 	for i in `ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\."`
 	do
+		[ $a -eq 0 ] && break
 		for e in `seq 0 $num`
 		do
             		echo ${cluster_ip[$e]} | grep $i
