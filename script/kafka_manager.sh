@@ -27,11 +27,11 @@ install_kafka_manager() {
     test_dir ${kafka_manager_dir}
     
     get_kafka_manager
-    unzip package/kafka-manager-1.3.3.14.zip
+    unzip package/kafka-manager-1.3.3.14.zip &> /dev/null
     mv kafka-manager-1.3.3.14 ${install_dir}/${kafka_manager_dir}
     
     conf=${install_dir}/${kafka_manager_dir}/conf/application.conf
-    a=kafka-manager.zkhosts='"'${zookeeper_cluster}'"'
+    a=kafka-manager.zkhosts='"'${cluster_ip}'"'
     sed -i "23c $a" $conf
 
     command=/usr/local/bin/man-kafka-manager
@@ -40,7 +40,7 @@ install_kafka_manager() {
 
     sed -i "2a port=9000" $command
     sed -i "3a dir=${install_dir}/${kafka_manager_dir}" $command
-    sed -i "4a log=${log_dir}/${kafka_manager_dir}"$command
+    sed -i "4a log=${log_dir}/${kafka_manager_dir}" $command
 
     echo "kafka-manager" >> conf/installed.txt
     [ $language -eq 1 ] && echo "kafka-manager安装完毕，使用man-kafka-manager 管理，登陆http://127.0.0.1:9000 进行查看设置" || ehco "kafka_manager installation is completed, use Man-kafka-manager management，Login http://127.0.0.1:9000 view settings"
