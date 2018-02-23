@@ -145,3 +145,24 @@ test_id() {
 	let id++
 	echo $id
 }
+
+#集群使用，根据本地ip算出当前绑定ip，统一cluster_ip，返回绑定ip
+test_ip() {
+ 	local num=`echo ${#cluster_ip[*]}` ip a=1 i e
+    	let num--
+
+	for i in `ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\."`
+	do
+		[ $a -eq 0 ] && break
+		for e in `seq 0 $num`
+		do
+            		echo ${cluster_ip[$e]} | grep $i &> /dev/null
+        		if [ $? -eq 0 ];then
+               			ip=${cluster_ip[$e]}
+				a=0
+                		break
+        		fi
+        	done
+    	done
+	echo $ip
+}
