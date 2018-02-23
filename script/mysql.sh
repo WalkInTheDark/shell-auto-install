@@ -74,6 +74,8 @@ PrivateTmp=true
 [Install]
 WantedBy=multi-user.target" > /usr/lib/systemd/system/mysql.service
 
+    systemctl daemon-reload
+
     grep 'PATH=$PATH':${install_dir}/${mysql_dir}/bin /etc/profile &> /dev/null
     [ $? -eq 0 ] || echo 'PATH=$PATH':${install_dir}/${mysql_dir}/bin >> /etc/profile
     
