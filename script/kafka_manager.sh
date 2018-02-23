@@ -3,11 +3,12 @@
 
 
 #[使用设置]
+
 #主目录，相当于/usr/local
-#install_dir=/ops/server
+#install_dir=
 
 #日志主目录，相当于/var/log
-#log_dir=/ops/log
+#log_dir=
 
 #服务目录名
 kafka_manager_dir=kafka-manager
@@ -17,25 +18,21 @@ cluster_ip="192.168.2.108:2181,192.168.2.109:2181"
 
 
 get_kafka_manager() {
-    test_package kafka-manager-1.3.3.14.zip http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka-manager-1.3.3.14.zip 297da17fa75969bc66207e991118b35d
-    if [ $language -eq 1 ];then
-        echo "kafka-manager-1.3.3.14.zip 下载完成"
-    else
-        echo "kafka-manager-1.3.3.14.zip Download completed"
-    fi
+    test_package kafka-manager-1.3.3.14.zip http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka-manager-1.3.3.14.zip
     }
 
 install_kafka_manager() {
     test_install unzip
     test_dir_master
     test_dir ${kafka_manager_dir}
+    
+    get_kafka_manager
     unzip package/kafka-manager-1.3.3.14.zip
     mv kafka-manager-1.3.3.14 ${install_dir}/${kafka_manager_dir}
     
     conf=${install_dir}/${kafka_manager_dir}/conf/application.conf
-    sed -i '23d' $conf
     a=kafka-manager.zkhosts='"'${zookeeper_cluster}'"'
-    sed -i "22a $a" $conf
+    sed -i "23c $a" $conf
 
     command=/usr/local/bin/man-kafka-manager
     cp conf/kafka/man-kafka-manager $command
