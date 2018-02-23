@@ -92,8 +92,8 @@ test_install() {
     yum -y install $@ &> /dev/null
     for i in `echo $@`
     do
-        rpm -q $i $> /dev/null
-        [ $? - 0 ] || test_exit "${1}软件包找不到，请手动安装" "${1} software package can not find, please manually install"
+        rpm -q $i &> /dev/null
+        [ $? -eq 0 ] || test_exit "${1}软件包找不到，请手动安装" "${1} software package can not find, please manually install"
     done
 }
 
