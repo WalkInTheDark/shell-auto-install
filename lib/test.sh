@@ -136,11 +136,12 @@ test_id() {
             		echo ${cluster_ip[$e]} | grep $i
         		if [ $? -eq 0 ];then
                			id=$e
+				a=0
                 		break
         		fi
         	done
     	done
 	
 	let id++
-	echo $id
+	return $id
 }
