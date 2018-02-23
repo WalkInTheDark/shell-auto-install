@@ -49,6 +49,8 @@ dynamicConfigFile=${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg.dynamic" 
     mkdir ${install_dir}/${zookeeper_cluster_dir}/data
     id=`test_id`
     echo "$id" > ${install_dir}/${zookeeper_cluster_dir}/data/myid
+    
+    sed -i '139,"-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}" \,"-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Djava.net.preferIPv4Stack=true"  "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}" \,g' ${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh
 
     command=/usr/local/bin/man-zookeeper
     ln -s ${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh $command
