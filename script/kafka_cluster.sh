@@ -11,7 +11,7 @@
 #log_dir=
 
 #服务目录名
-kafka_cluster_dir=kafka_cluster
+kafka_cluster_dir=kafka
 
 #zookeeper集群的ip，包括他自己
 cluster_ip=(192.168.2.108:2181 192.168.2.109:2181)
