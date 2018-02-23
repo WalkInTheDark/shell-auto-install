@@ -104,7 +104,7 @@ remove_mysql() {
     
     rm -rf ${install_dir}/${mysql_dir}
     
-    [ $language -eq 1 ] && echo "mysql卸载完成" || ehco "mysql Uninstall completed"
+    [ $language -eq 1 ] && echo "mysql卸载完成" || echo "mysql Uninstall completed"
 }
 
 
