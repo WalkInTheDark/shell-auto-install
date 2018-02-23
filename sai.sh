@@ -16,6 +16,11 @@ load() {
     done
 }
 
+prompt() {
+    [ $language -eq 1 ] && echo "请等待安装，安装后会出现完成信息，安装出现错误，将会退出并给出解决办法。" || echo "Please wait for the installation, the installation will be completed after the completion of information, installation error, will exit and give a solution."  
+    sleep 1
+}
+
 help_all() {
     [ $language -eq 1 ] && cat conf/zhong_help.txt || cat conf/ying_help.txt
 }
@@ -80,6 +85,7 @@ server() {
             grep "^${a}" conf/installed.txt &> /dev/null
             [ $? -eq 0 ] && test_exit "${a}已安装" "${a} is already installed"
             
+            prompt
             install_${a}
         elif [ "$1" == "remove" ];then
             grep "^${a}" conf/installed.txt &> /dev/null
