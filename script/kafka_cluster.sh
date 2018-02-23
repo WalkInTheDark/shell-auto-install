@@ -34,6 +34,7 @@ install_kafka_cluster() {
     cp conf/kafka/server.properties $conf
     
     id=`test_id`
+    ip=`test_ip`
     
     for i in `echo ${cluster_ip[*]}` #算出地址字符串
     do
