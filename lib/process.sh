@@ -60,6 +60,18 @@ process_encode() {
     echo 论坛 | tr -d "\n" | xxd -i | sed -e "s/ 0x/%/g" | tr -d " ,\n"
 }
 
+#英语变汉语，位置变量写英语，但不能加标点符号
+process_en_ch() {
+    local a=""
+    for i in `echo $@`
+    do
+        [ "$i" == "$1" ] && a=$1  &&continue
+        a="$a+$i" 
+    done
+    curl -s  http://dict.baidu.com/s?wd=${a} | egrep -o "<a href=[^>]*>" | sed -n '5p' | awk  -F'=' '{print $3}' | awk -F'"' '{print $1}'
+}
+
+
 #转换大小写，$1为字符串，$2为1则大转小，为2则小转大，默认1
 process_capital() {
     local a=1
