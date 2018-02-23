@@ -93,9 +93,7 @@ test_install() {
     for i in `echo $@`
     do
         rpm -q $i $> /dev/null
-        if [[ $? -ne 0 ]];then
-            test_exit "${1}软件包找不到，请手动安装" "${1} software package can not find, please manually install"
-        fi
+        [ $? - 0 ] || test_exit "${1}软件包找不到，请手动安装" "${1} software package can not find, please manually install"
     done
 }
 
