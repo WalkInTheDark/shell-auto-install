@@ -44,8 +44,16 @@ install_redis_port() {
         sed -i "/^dir/cdir ${install_dir}/${redis_dir}/cluster/${i}" $conf 
     done
 
+    echo "#!/bin/bash
+
+for i in `ls man-redis*`
+do  
+    [ "$i" == "man-redis" ] && continue || $i $1
+done" >> /usr/local/bin/man-redis
+    chmod + /usr/local/bin/man-redis
+
     clear
-    [ $language -eq 1 ] && echo "使用man-redis端口 命令来管理这些端口实例" || echo "Use the man-redis port command to manage these port instances"
+    [ $language -eq 1 ] && echo "使用man-redis命令来管理这些端口实例" || echo "Use the man-rediscommand to manage these port instances"
 }
 
 remove_redis_port() {
@@ -71,7 +79,7 @@ info_redis_port() {
 
 提示：不管安装或卸载端口，都会安装配置文件写的来
 
-使用：man-redis端口 来查看帮助"
+使用：man-redis来查看帮助"
     else
         echo "Name：redis-port
        
@@ -83,6 +91,6 @@ Introduction：Only start the instance port, you need to install redis
 
 Prompt：Whether to install or uninstall the port, will be installed to write the configuration file
 
-use：man-redis port to see help"
+use：man-redis to see help"
     fi
 }
