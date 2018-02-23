@@ -89,17 +89,12 @@ test_dir() {
 
 #位置变量皆为软件包名
 test_install() {
+    yum -y install $@
     for i in `echo $@`
     do
         rpm -q $i
-    
         if [[ $? -ne 0 ]];then
-            yum -y install $1
-            rpm -q $1
-        
-            if [[ $? -ne 0 ]];then
-                test_exit "${1}软件包找不到，请手动安装" "${1} software package can not find, please manually install"
-            fi
+            test_exit "${1}软件包找不到，请手动安装" "${1} software package can not find, please manually install"
         fi
     done
 }
