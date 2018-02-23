@@ -57,7 +57,7 @@ log-error=${log_dir}/${mysql_dir}/mysql.log
 pid-file=${log_dir}/${mysql_dir}/mysql.pid
 bind-address = 0.0.0.0" > /etc/my.cnf #这里改需要的配置
 
-    cd ${install_mysql}/${mysql_dir}
+    cd ${install_dir}/${mysql_dir}
     ./scripts/mysql_install_db --user=mysql --basedir=${install_dir}/${mysql_dir} --datadir=${install_dir}/${mysql_dir}/data/
     
     echo "[Unit]
