@@ -40,7 +40,7 @@ dataLogDir=${install_dir}/${zookeeper_cluster_dir}
 dynamicConfigFile=${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg.dynamic" > ${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg
 
     d=1
-    for i in `${cluster_ip[*]}`
+    for i in `echo ${cluster_ip[*]}`
     do
         echo "server.${d}=${i}:2888:3888" >> ${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg.dynamic
         let d++
