@@ -51,7 +51,7 @@ dynamicConfigFile=${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg.dynamic" 
     echo "$id" > ${install_dir}/${zookeeper_cluster_dir}/data/myid
     
     #监听ipv4，默认ipv6
-    sed -i '139c "-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Djava.net.preferIPv4Stack=true"  "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}"' ${install_dir}/${zookeeper_cluster_dir}/bin/zkSserver.sh
+    sed -i '150c "-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Djava.net.preferIPv4Stack=true"  "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}" \/' ${install_dir}/${zookeeper_cluster_dir}/bin/zkSserver.sh
 
     
     echo "#!/bin/bash
