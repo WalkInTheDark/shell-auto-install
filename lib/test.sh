@@ -158,7 +158,7 @@ test_ip() {
 		do
             		echo ${cluster_ip[$e]} | grep $i &> /dev/null
         		if [ $? -eq 0 ];then
-               			ip=${cluster_ip[$e]}
+               			ip=$i
 				a=0
                 		break
         		fi
