@@ -24,18 +24,21 @@ get_redis() {
 }
 
 install_redis() {
+    #检测目录
     test_dir_master
     test_dir $redis_dir
+    
+    #安装服务
     package=`get_redis 1`
-
     tar -xf package/$package
     mv redis ${install_dir}/${redis_dir}
 
+    #环境变量
     grep -w 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile &> /dev/null
     [ $? -ne 0 ] && echo 'PATH=$PATH':${install_dir}/${redis_dir}/bin >> /etc/profile
     
+    #安装完成
     echo "redis" >> conf/installed.txt
-    
     clear
     if [ $language -eq 1 ];then
         echo "redis 安装成功，请安装redis-port来启动一个实例
@@ -57,14 +60,16 @@ Environment variable is set, please exit the current terminal and re-enter"
 }
 
 remove_redis() {
+    #删除环境变量
     hang=`grep -n 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile | awk -F: '{print $1}' &> /dev/null`
     sed -i "${hang} d" /etc/profile
-
+    
+    #停止服务并删除
     man-redis stop
     rm -rf /usr/local/bin/man-redis*
-    
     rm -rf ${install_dir}/${redis_dir}
 
+    #卸载完成
     [ $language -eq 1 ] && echo "redis卸载完成" || echo "redis uninstall completed"
 }
 
