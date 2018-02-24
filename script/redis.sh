@@ -42,11 +42,15 @@ install_redis() {
         
 安装目录：${install_dir}/${redis_dir}
 
+日志目录：${log_dir}/${redis_dir}
+
 环境变量设置完毕，请退出当前终端后重新进入"
     else
         echo "redis installed successfully, please install redis-port to start an instance
         
 installation manual：${install_dir}/${redis_dir}
+
+Log directory：${log_dir}/${redis_dir}
 
 Environment variable is set, please exit the current terminal and re-enter"
     fi
