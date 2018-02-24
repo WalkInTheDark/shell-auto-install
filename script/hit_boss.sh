@@ -9,7 +9,7 @@ install_hit_boss() {
     chmod +x /usr/local/bin/hit-boss
 
     echo "hit-boss" >> conf/installed.txt
-    [ $language -eq 1 ] && echo "hit-boss安装完毕，使用hit-boss 开始游戏" || ehco "cha installation is completed, use hit-boss  Start the game"
+    [ $language -eq 1 ] && echo "hit-boss安装完毕，使用hit-boss 开始游戏" || echo "cha installation is completed, use hit-boss  Start the game"
 }
 
 remove_hit_boss() {
