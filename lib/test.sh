@@ -112,7 +112,7 @@ test_package() {
     
     if [ $a -eq 0 ];then
         test_www www.baidu.com
-        wget -O package/${1} $2
+        wget -O package/${1} $2 &> /dev/null
         echo $1
     fi
 }
