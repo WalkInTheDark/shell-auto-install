@@ -29,12 +29,36 @@ list_all() {
     if [ "$1" == "installed" ];then
         for i in `cat conf/installed.txt`
         do
-            grep "^${i}" conf/server_name.txt | head -1
+            grep "^${i}" conf/${server_name} | head -1
         done
     else
         [ $language -eq 1 ] && echo "$1 相关脚本：" || echo "$1 Related script："
-        grep "^$1" conf/server_name.txt
+        grep "^$1" conf/${server_name}
     fi
+}
+
+list_generate() {
+    for i in `ls script/`
+    do
+        #i=`echo ${i%%.*}`
+        a=`bash sai.sh info $i | awk  -F'：' '{print $2}' | sed -n '1p'`
+        b=`bash sai.sh info $i | awk  -F'：' '{print $2}' | sed -n '3p'`
+        c=`bash sai.sh info $i | awk  -F'：' '{print $2}' | sed -n '5p'`
+        d=`bash sai.sh info $i | awk  -F'：' '{print $1}' | sed -n '3p'`
+        [ "$d" == "依赖" -o "$d" == "rely" ] && b=" "
+        echo "$a:$b:$c" >> conf/a.txt
+    done
+    sort -n conf/a.txt >> conf/b.txt
+    
+    while read list
+    do
+        name=`echo $list |awk -F: '{print $1}'`
+        version=`echo $list |awk -F: '{print $2}'`
+        intr=`echo $list |awk -F: '{print $3}'`
+        awk 'BEGIN{printf "%-20s%-20s%-20s\n","'"$name"'","'"$version"'","'"$intr"'";}' >> conf/${server_name}
+        echo " " >> conf/${server_name}
+        done < conf/b.txt
+        rm -rf conf/a.txt conf/b.txt
 }
 
 yuyan() {
@@ -113,11 +137,16 @@ server() {
 load
 master_dir
 
+a=`cat conf/lang.txt`
+server_name=list_${a}.txt
+[ -f conf/${server_name} ] || list_generate
+
+
 if [ $# -eq 0 ];then
     help_all
 elif [ $# -eq 1 ];then
     if [ "$1" == "list" ];then
-        cat conf/server_name.txt
+        cat conf/${server_name}
     elif [ "$1" == "help" ];then
         help_all
     elif [ "$1" == "update" ];then
