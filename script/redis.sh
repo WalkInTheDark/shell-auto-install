@@ -16,13 +16,17 @@ redis_dir=redis
 
 
 get_redis() {
-    test_package redis-3.2.9.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-3.2.9.tar.gz  0969f42d1675a44d137f0a2e05f9ebd2
+    test_package redis-3.2.9.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-3.2.9.tar.gz
+    
+    if [ ! -n "$1" ];then
+        [ $language -eq 1 ] && "下载完成" || "Download completed"
+    fi
 }
 
 install_redis() {
     test_dir_master
     test_dir $redis_dir
-    package=`get_redis`
+    package=`get_redis 1`
 
     tar -xf package/$package
     mv redis ${install_dir}/${redis_dir}
@@ -49,14 +53,11 @@ Environment variable is set, please exit the current terminal and re-enter"
 }
 
 remove_redis() {
-    hang=`grep -n 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile &> /dev/null`
+    hang=`grep -n 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile | awk -F: '{print $1}' &> /dev/null`
     sed -i "${hang} d" /etc/profile
 
-    for i in `ls /usr/local/bin/man-redis*`
-    do
-        $i stop
-        rm -rf $i
-    done
+    man-redis stop
+    rm -rf /usr/local/bin/man-redis*
     
     rm -rf ${install_dir}/${redis_dir}
 
@@ -69,9 +70,9 @@ info_redis() {
 
 版本：3.2.9
 
-作者：book
+介绍：仅安装redis
 
-介绍：仅安装redis，但并不启动实例
+作者：book
 
 提示：可以修改安装路径
 
@@ -81,9 +82,9 @@ info_redis() {
         
 version：3.2.9
 
-Author：book
-
 Introduction：Only redis is installed, but it does not start the instance
+
+Author：book
 
 Prompt：You can modify the installation path
 
