@@ -20,7 +20,7 @@ remove_snake2() {
 
 info_snake2() {
     if [ $language -eq 1 ];then
-        echo "名字：snake2
+        echo "名字：snake
         
 版本：1.0
 
@@ -32,7 +32,7 @@ info_snake2() {
 
 使用：snake2命令进入游戏，jkil来吃点"
     else
-        echo "Name：snake2
+        echo "Name：snake
         
 version：1.0
 
