@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+
+
 get_clock() {
-    [ $language -eq 1 ] && echo "不用下载" || ehco "Do not download"
+    [ $language -eq 1 ] && echo "不用下载" || echo "Do not download"
 }
 
 install_clock() {
@@ -9,14 +11,16 @@ install_clock() {
     chmod +x /usr/local/bin/clock
 
     echo "clock" >> conf/installed.txt
-    [ $language -eq 1 ] && echo "clock安装完毕，使用clock 显示时间" || ehco "clock installation is completed, use clock display time"
+    
+    clear
+    [ $language -eq 1 ] && echo "clock安装完毕，使用clock 显示时间" || echo "clock installation is completed, use clock display time"
 }
 
 remove_clock() {
     rm -rf /usr/local/bin/clock
-    [ $language -eq 1 ] && echo "clock已卸载" || ehco "clock Uninstalled"
+    
+    [ $language -eq 1 ] && echo "clock已卸载" || echo "clock Uninstalled"
 }
-
 
 info_clock() {
     if [ $language -eq 1 ];then
@@ -24,9 +28,9 @@ info_clock() {
         
 版本：1.0
 
-作者：liungkejin
+介绍：显示时间
 
-介绍：display time
+作者：liungkejin
 
 提示：无
 
@@ -36,9 +40,9 @@ info_clock() {
         
 version：1.0
 
-Author：liungkejin
-
 Introduction：display time
+
+Author：liungkejin
 
 Prompt：none
 
