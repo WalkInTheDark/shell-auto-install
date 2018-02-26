@@ -19,16 +19,20 @@ install_ruby() {
     echo "ruby_url=https://cache.ruby-china.org/pub/ruby" > ~/.rvm/user/db
 
     echo "ruby" >> conf/installed.txt
-    if [ $language -eq 1 ];then
-        clear
-        echo "ruby安装完成"
-        echo
-        echo "环境变量设置完毕，请退出当前终端后重新进入"
-    else
+    
     clear
-        echo "ruby installation is complete"
-        echo " "
-        echo "Environment variable is set, please exit the current terminal and re-enter"
+    if [ $language -eq 1 ];then
+        echo "ruby安装完成
+
+安装目录：/usr/local/rvm
+        
+环境变量设置完毕，请退出当前终端后重新进入"
+    else
+        echo "ruby installation is complete
+
+Installation directory: /usr/local/rvm
+
+Environment variable is set, please exit the current terminal and re-enter"
     fi
 }
 
@@ -37,7 +41,7 @@ remove_ruby() {
     rm -rf /etc/profile.d/rvm.sh
     rm -rf /usr/local/rvm
     
-    [ $language -eq 1 ] && echo "rvm已卸载" "rvm Uninstalled" 
+    [ $language -eq 1 ] && echo "rvm已卸载" || echo "rvm Uninstalled" 
 }
 
 info_ruby() {
@@ -46,9 +50,9 @@ info_ruby() {
 
 版本：2.4.1
 
-作者：book
-
 介绍：ruby语言安装
+
+作者：book
 
 提示：使用rvm进行安装
 
@@ -58,9 +62,9 @@ info_ruby() {
 
 version：2.4.1
 
-Author：book
-
 Introduction：ruby language installation
+
+Author：book
 
 Prompt：Use rvm to install
 
