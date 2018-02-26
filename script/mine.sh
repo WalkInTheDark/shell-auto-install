@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+
+
 get_mine() {
-    [ $language -eq 1 ] && echo "不用下载" || ehco "Do not download"
+    [ $language -eq 1 ] && echo "不用下载" || echo "Do not download"
 }
 
 install_mine() {
@@ -9,14 +11,16 @@ install_mine() {
     chmod +x /usr/local/bin/mine
 
     echo "mine" >> conf/installed.txt
+    
+    clear
     [ $language -eq 1 ] && echo "mine安装完毕，使用mine 开始游戏" || echo "mine installation is completed, use mine Start the game"
 }
 
 remove_mine() {
     rm -rf /usr/local/bin/mine
-    [ $language -eq 1 ] && echo "mine已卸载" || ehco "mine Uninstalled"
+    
+    [ $language -eq 1 ] && echo "mine已卸载" || echo "mine Uninstalled"
 }
-
 
 info_mine() {
     if [ $language -eq 1 ];then
@@ -24,9 +28,9 @@ info_mine() {
        
 版本：1.0
 
-作者：未知
+介绍：扫雷小游戏
 
-介绍：扫雷小游戏，可以选择难度
+作者：未知
 
 提示：无
 
@@ -37,9 +41,9 @@ info_mine() {
        
 version：1.0
 
-Author：unknown
+Introduction：minesweeper game
 
-Introduction：minesweeper game, you can choose the difficulty
+Author：unknown
 
 Prompt：none
 
