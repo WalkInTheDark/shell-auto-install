@@ -83,7 +83,7 @@ info_kafka_manager() {
         
 版本：1.3.3.14
 
-介绍：安装kafka-manager，kafka可视化管理工具
+介绍：安装kafka-manager
 
 作者：book
 
@@ -95,7 +95,7 @@ info_kafka_manager() {
         
 version：1.3.3.14
 
-Introduction：Install kafka-manager, kafka visualization management tool
+Introduction：Install kafka-manager
 
 Author：book
 
