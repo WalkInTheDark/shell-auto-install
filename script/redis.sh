@@ -15,11 +15,12 @@ redis_dir=redis
 
 
 
+#$1有值则不显示下载完成，只显示包名
 get_redis() {
     test_package redis-3.2.9.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-3.2.9.tar.gz
     
     if [ ! -n "$1" ];then
-        [ $language -eq 1 ] && "下载完成" || "Download completed"
+        [ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
     fi
 }
 
@@ -41,7 +42,7 @@ install_redis() {
     echo "redis" >> conf/installed.txt
     clear
     if [ $language -eq 1 ];then
-        echo "redis 安装成功，请安装redis-port来启动一个实例
+        echo "redis安装成功，请安装redis-port来启动一个实例
         
 安装目录：${install_dir}/${redis_dir}
 
