@@ -8,6 +8,8 @@
 port=(6379)
 
 
+
+#加载它的依赖
 source script/redis.sh
 
 get_redis_port() {
@@ -15,11 +17,11 @@ get_redis_port() {
 }
 
 install_redis_port() {
-    test_rely redis
+    test_rely redis #检测依赖是否安装
     
     for i in `echo ${port[*]}`
     do
-        command=/usr/local/bin/man-redis${i} #创建一个管理脚本
+        command=/usr/local/bin/man-redis${i} #创建单独管理脚本
         if [ ! -f $command ];then
             cp conf/redis/man-redis $command
         
@@ -30,11 +32,11 @@ install_redis_port() {
         
             chmod +x $command
         else
-            continue #如果管理脚本存在，则不创建了
+            continue #如果管理脚本存在，则跳过这个端口
         fi
 
         conf=${install_dir}/${redis_dir}/cluster/${i}/${i}.conf
-    
+        
         mkdir -p ${install_dir}/${redis_dir}/cluster/${i}
         cp conf/redis/7000.conf $conf
     
@@ -44,12 +46,12 @@ install_redis_port() {
         sed -i "/^dir/cdir ${install_dir}/${redis_dir}/cluster/${i}" $conf 
     done
 
-    echo "#!/bin/bash
+    echo '#!/bin/bash
 
 for i in `ls man-redis*`
 do  
     [ "$i" == "man-redis" ] && continue || $i $1
-done" >> /usr/local/bin/man-redis
+done' >> /usr/local/bin/man-redis
     chmod + /usr/local/bin/man-redis
 
     clear
@@ -64,33 +66,33 @@ remove_redis_port() {
         rm -rf ${install_dir}/${redis_dir}/cluster/${i}
     done
 
-    [ $language -eq 1 ] && echo "redis ${port[*]} 端口卸载完成" || "redis ${port[*]} Port uninstallation is complete" 
+    [ $language -eq 1 ] && echo "redis ${port[*]} 端口卸载完成" || echo "redis ${port[*]} Port uninstallation is complete" 
 }
 
 info_redis_port() {
     if [ $language -eq 1 ];then
         echo "名字：redis-port
         
-版本：3.2.9
+依赖：redis
+
+介绍：仅启动实例端口
 
 作者：book
 
-介绍：仅启动实例端口，需要先安装redis
-
 提示：不管安装或卸载端口，都会安装配置文件写的来
 
-使用：man-redis来查看帮助"
+使用：man-redis来管理端口"
     else
         echo "Name：redis-port
        
-version：3.2.9
+rely：redis
+
+Introduction：Only start the instance port
 
 Author：book
 
-Introduction：Only start the instance port, you need to install redis
-
 Prompt：Whether to install or uninstall the port, will be installed to write the configuration file
 
-use：man-redis to see help"
+use：man-redis to manage the port"
     fi
 }
