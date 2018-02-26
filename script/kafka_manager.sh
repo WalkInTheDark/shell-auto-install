@@ -2,6 +2,7 @@
 
 
 
+
 #[使用设置]
 
 #主目录，相当于/usr/local
@@ -19,15 +20,19 @@ cluster_ip="192.168.2.108:2181,192.168.2.109:2181"
 
 get_kafka_manager() {
     test_package kafka-manager-1.3.3.14.zip http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka-manager-1.3.3.14.zip
-    }
+
+    if [ ! -n "$1" ];then
+        [ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
+    fi
+}
 
 install_kafka_manager() {
     test_install unzip
     test_dir_master
     test_dir ${kafka_manager_dir}
     
-    get_kafka_manager
-    unzip package/kafka-manager-1.3.3.14.zip &> /dev/null
+    package=`get_kafka_manager 1`
+    unzip package/${package} &> /dev/null
     mv kafka-manager-1.3.3.14 ${install_dir}/${kafka_manager_dir}
     
     conf=${install_dir}/${kafka_manager_dir}/conf/application.conf
@@ -43,7 +48,25 @@ install_kafka_manager() {
     sed -i "4a log=${log_dir}/${kafka_manager_dir}" $command
 
     echo "kafka-manager" >> conf/installed.txt
-    [ $language -eq 1 ] && echo "kafka-manager安装完毕，使用man-kafka-manager 管理，登陆http://127.0.0.1:9000 进行查看设置" || ehco "kafka_manager installation is completed, use Man-kafka-manager management，Login http://127.0.0.1:9000 view settings"
+    
+    clear
+    if [ $language -eq 1 ];then
+    echo "kafka-manager安装成功，使用man-kafka-manager管理
+        
+安装目录：${install_dir}/${kafka_manager_dir}
+
+日志目录：${log_dir}/${kafka_manager_dir}
+
+浏览器输入 http://127.0.0.1:9000登陆"
+    else
+        echo "kafka-manager installed successfully, using man-kafka-manager management
+        
+installation manual：${install_dir}/${kafka_manager_dir}
+
+Log directory：${log_dir}/${kafka_manager_dir}
+
+Browser input http://127.0.0.1:9000 login"
+    fi
 }
 
 remove_kafka_manager() {
@@ -51,7 +74,7 @@ remove_kafka_manager() {
     rm -rf /usr/local/bin/man-kafka-manager
     rm -rf ${install_dir}/${kafka_manager_dir}
     
-    [ $language -eq 1 ] && echo "kafka_manager已卸载" || ehco "kafka_manager Uninstalled"
+    [ $language -eq 1 ] && echo "kafka_manager已卸载" || echo "kafka_manager Uninstalled"
 }
 
 info_kafka_manager() {
@@ -60,9 +83,9 @@ info_kafka_manager() {
         
 版本：1.3.3.14
 
-作者：book
-
 介绍：安装kafka-manager，kafka可视化管理工具
+
+作者：book
 
 提示：只填写zookeeper集群地址即可
 
@@ -72,9 +95,9 @@ info_kafka_manager() {
         
 version：1.3.3.14
 
-Author：book
-
 Introduction：Install kafka-manager, kafka visualization management tool
+
+Author：book
 
 Prompt：Only fill in zookeeper cluster address can be
 
