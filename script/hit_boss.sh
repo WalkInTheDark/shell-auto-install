@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+
+
 get_hit_boss() {
-    [ $language -eq 1 ] && echo "不用下载" || ehco "Do not download"
+    [ $language -eq 1 ] && echo "不用下载" || echo "Do not download"
 }
 
 install_hit_boss() {
@@ -9,14 +11,16 @@ install_hit_boss() {
     chmod +x /usr/local/bin/hit-boss
 
     echo "hit-boss" >> conf/installed.txt
+    
+    clear
     [ $language -eq 1 ] && echo "hit-boss安装完毕，使用hit-boss 开始游戏" || echo "cha installation is completed, use hit-boss  Start the game"
 }
 
 remove_hit_boss() {
     rm -rf /usr/local/bin/hit-boss
-    [ $language -eq 1 ] && echo "hit-boss已卸载" || ehco "hit-boss Uninstalled"
+    
+    [ $language -eq 1 ] && echo "hit-boss已卸载" || echo "hit-boss Uninstalled"
 }
-
 
 info_hit_boss() {
     if [ $language -eq 1 ];then
@@ -24,9 +28,10 @@ info_hit_boss() {
         
 版本：1.2
 
+介绍：回合打boss游戏
+
 作者：book
 
-介绍：魔兽风格，回合制打boos游戏，你将要面对大法师的攻击
 
 提示：无
 
@@ -36,9 +41,9 @@ info_hit_boss() {
         
 version：1.2
 
-Author：book
+Introduction：Round play boss game
 
-Introduction：Warcraft style, turn-based boos boos game, you will have to face the Grand Master's attack
+Author：book
 
 Prompt：none
 
