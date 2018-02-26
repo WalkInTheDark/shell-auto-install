@@ -39,13 +39,13 @@ install_mysql_many() {
     package=`get_mysql_many 1`
     tar -xf package/$package
     mv mysql-5.6.39-linux-glibc2.12-x86_64 ${install_dir}/${mysql_many_dir}
-    chown -R mysql:mysql ${install_dir}/${mysql_dir}
-    chown -R mysql:mysql ${log_dir}/${mysql_dir}
+    chown -R mysql:mysql ${install_dir}/${mysql_many_dir}
+    chown -R mysql:mysql ${log_dir}/${mysql_many_dir}
     
     echo "[mysqld_multi]
 mysqld=${install_dir}/${mysql_many_dir}/bin/mysqld_safe
 mysqladmin=${install_dir}/${mysql_many_dir}/bin/mysqladmin
-log=${log_dir}/${mysql_many_dir}mysqld_multi.log
+log=${log_dir}/${mysql_many_dir}/mysqld_multi.log
 
 [mysqld]
 user=mysql
