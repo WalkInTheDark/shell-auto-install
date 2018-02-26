@@ -17,12 +17,15 @@ mysql_dir=mysql
 
 get_mysql() {
     test_package mysql-5.6.39-linux-glibc2.12-x86_64.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/mysql-5.6.39-linux-glibc2.12-x86_64.tar.gz
+
+    if [ ! -n "$1" ];then
+        [ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
+    fi
 }
 
 install_mysql() {
     test_dir_master
     test_dir $mysql_dir
-    package=`get_mysql`
 
     #清理mariadb的东西
     for i in `rpm -qa | grep mariadb`; do rpm -e --nodeps $i; done
@@ -31,7 +34,7 @@ install_mysql() {
     groupadd mysql
     useradd -g mysql -s /sbin/nologin mysql
     
-    
+    package=`get_mysql 1`
     tar -xf package/$package
     mv mysql-5.6.39-linux-glibc2.12-x86_64 ${install_dir}/${mysql_dir}
     touch ${log_dir}/${mysql_dir}/mysql.log #要创建
@@ -56,6 +59,7 @@ max_allowed_packet=16M
 log-error=${log_dir}/${mysql_dir}/mysql.log
 pid-file=${log_dir}/${mysql_dir}/mysql.pid
 bind-address = 0.0.0.0" > /etc/my.cnf #这里改需要的配置
+    chown mysql:mysql /etc/my.cnf
 
     cd ${install_dir}/${mysql_dir}
     ./scripts/mysql_install_db --user=mysql --basedir=${install_dir}/${mysql_dir} --datadir=${install_dir}/${mysql_dir}/data/
@@ -87,11 +91,15 @@ WantedBy=multi-user.target" > /usr/lib/systemd/system/mysql.service
         
 安装目录：${install_dir}/${mysql_dir}
 
+日志目录：${log_dir}/${mysql_dir}
+
 环境变量设置完毕，请退出当前终端后重新进入"
     else
         echo "mysql installed successfully, please use the systemctl start mysql to start
         
 installation manual：${install_dir}/${redis_dir}
+
+Log directory：${log_dir}/${mysql_dir}
 
 Environment variable is set, please exit the current terminal and re-enter"
     fi
@@ -109,16 +117,15 @@ remove_mysql() {
     [ $language -eq 1 ] && echo "mysql卸载完成" || echo "mysql Uninstall completed"
 }
 
-
 info_mysql() {
     if [ $language -eq 1 ];then
         echo "名字：mysql
         
 版本：6.3.9
 
-作者：book
-
 介绍：安装mysql
+
+作者：book
 
 提示：无
 
@@ -128,9 +135,9 @@ info_mysql() {
         
 version：6.3.9
 
-Author：book
-
 Introduction：Install mysql
+
+Author：book
 
 Prompt：none
 
