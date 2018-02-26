@@ -16,8 +16,14 @@ kafka_cluster_dir=kafka
 #zookeeper集群的ip，包括他自己
 cluster_ip=(192.168.2.108:2181 192.168.2.109:2181)
 
+
+
 get_kafka_cluster() {
     test_package kafka_2.12-0.10.2.1.tgz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka_2.12-0.10.2.1.tgz
+
+    if [ ! -n "$1" ];then
+        [ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
+    fi
 }
 
 install_kafka_cluster() {
@@ -25,8 +31,8 @@ install_kafka_cluster() {
     test_dir $kafka_cluster_dir
     test_install java-1.8.0-openjdk
     
-    get_kafka_cluster
-    tar -xf package/kafka_2.12-0.10.2.1.tgz
+    package=`get_kafka_cluster 1`
+    tar -xf package/${package}
     mv kafka_2.12-0.10.2.1 ${install_dir}/${kafka_cluster_dir}
 
     conf=${install_dir}/${kafka_cluster_dir}/config/server.properties
@@ -56,16 +62,30 @@ install_kafka_cluster() {
     sed -i "2a dir=${install_dir}/${kafka_cluster_dir}" $command
     
     echo "kafka-cluster" >> conf/installed.txt
-    [ $language -eq 1 ] && echo "kafka-cluster安装完毕，使用man-kafka 管理" || ehco "kafka_cluster installation is completed,use Man-kafka management"
+
+    clear
+        if [ $language -eq 1 ];then
+        echo "kafka-cluster安装成功，请安装man-kafka管理
+        
+安装目录：${install_dir}/${kafka_cluster_dir}
+
+日志目录：${log_dir}/${kafka_cluster_dir}"
+    else
+        echo "kafka-cluster installed successfully, please install man-kafka management
+        
+installation manual：${install_dir}/${kafka_cluster_dir}
+
+Log directory：${log_dir}/${kafka_cluster_dir}"
+    fi
 }
 
 remove_kafka_cluster() {
     man-kafka stop
     rm -rf /usr/local/bin/kafka-kafka
     rm -rf ${install_dir}/${kafka_cluster_dir}
-    [ $language -eq 1 ] && echo "kafka_cluster已卸载" || ehco "kafka_cluster Uninstalled"
+    
+    [ $language -eq 1 ] && echo "kafka_cluster已卸载" || echo "kafka_cluster Uninstalled"
 }
-
 
 info_kafka_cluster() {
     if [ $language -eq 1 ];then
@@ -73,9 +93,9 @@ info_kafka_cluster() {
         
 版本：2.12
 
-作者：book
-
 介绍：安装kafka集群
+
+作者：book
 
 提示：只需要填写集群地址即可
 
@@ -85,9 +105,9 @@ info_kafka_cluster() {
         
 version：2.12
 
-Author：book
-
 Introduction：Install kafka cluster
+
+Author：book
 
 Prompt：Only need to fill in the cluster address can be
 
