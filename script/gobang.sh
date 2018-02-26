@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+
+
 get_gobang() {
-    [ $language -eq 1 ] && echo "不用下载" || ehco "Do not download"
+    [ $language -eq 1 ] && echo "不用下载" || echo "Do not download"
 }
 
 install_gobang() {
@@ -9,14 +11,16 @@ install_gobang() {
     chmod +x /usr/local/bin/gobang
 
     echo "gobang" >> conf/installed.txt
-    [ $language -eq 1 ] && echo "gobang安装完毕，使用gobang 开始游戏" || ehco "gobang installation is completed, use gobang Start the game"
+    
+    clear
+    [ $language -eq 1 ] && echo "gobang安装完毕，使用gobang开始游戏" || echo "gobang installation is completed, use gobang Start the game"
 }
 
 remove_gobang() {
     rm -rf /usr/local/bin/gobang
-    [ $language -eq 1 ] && echo "gobang已卸载" || ehco "gobang Uninstalled"
+    
+    [ $language -eq 1 ] && echo "gobang已卸载" || echo "gobang Uninstalled"
 }
-
 
 info_gobang() {
     if [ $language -eq 1 ];then
@@ -24,9 +28,9 @@ info_gobang() {
         
 版本：1.0
 
-作者：yinyuemi
+介绍：五子棋
 
-介绍：大家熟知的五子棋
+作者：yinyuemi
 
 提示：人机博弈需要等一段时间，机器需要反应
 
@@ -37,9 +41,9 @@ info_gobang() {
         
 version：1.0
 
-Author：yinyuemi
+Introduction：Gobang
 
-Introduction：We all know the backgammon
+Author：yinyuemi
 
 Prompt：Man-machine game needs to wait for a period of time, the machine needs to respond
 
