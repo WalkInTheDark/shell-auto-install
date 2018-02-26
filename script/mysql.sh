@@ -61,8 +61,10 @@ pid-file=${log_dir}/${mysql_dir}/mysql.pid
 bind-address = 0.0.0.0" > /etc/my.cnf #这里改需要的配置
     chown mysql:mysql /etc/my.cnf
 
+    echo "mysql" >> conf/installed.txt #后面将不会退出
+    
     cd ${install_dir}/${mysql_dir}
-    ./scripts/mysql_install_db --user=mysql --basedir=${install_dir}/${mysql_dir} --datadir=${install_dir}/${mysql_dir}/data/
+    ./scripts/mysql_install_db --user=mysql --basedir=${install_dir}/${mysql_dir} --datadir=${install_dir}/${mysql_dir}/data &> /dev/null
     
     echo "[Unit]
 Description=mysql
@@ -82,8 +84,6 @@ WantedBy=multi-user.target" > /usr/lib/systemd/system/mysql.service
 
     grep 'PATH=$PATH':${install_dir}/${mysql_dir}/bin /etc/profile &> /dev/null
     [ $? -eq 0 ] || echo 'PATH=$PATH':${install_dir}/${mysql_dir}/bin >> /etc/profile
-    
-    echo "mysql" >> conf/installed.txt
     
     clear
     if [ $language -eq 1 ];then
@@ -113,6 +113,7 @@ remove_mysql() {
     sed -i "${hang} d" /etc/profile
     
     rm -rf ${install_dir}/${mysql_dir}
+    userdel -r mysql
     
     [ $language -eq 1 ] && echo "mysql卸载完成" || echo "mysql Uninstall completed"
 }
