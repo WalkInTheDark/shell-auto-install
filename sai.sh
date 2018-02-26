@@ -12,7 +12,7 @@ install_dir=/ops/server
 log_dir=/ops/log
     
 #edit选项的编辑器，可选择vim或其他
-ditor=vi
+editor=vi
 
 
 
