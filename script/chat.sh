@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+
+
 get_chat() {
-    [ $language -eq 1 ] && echo "不用下载" || ehco "Do not download"
+    [ $language -eq 1 ] && echo "不用下载" || echo "Do not download"
 }
 
 install_chat() {
@@ -9,14 +11,16 @@ install_chat() {
     chmod +x /usr/local/bin/chat
 
     echo "chat" >> conf/installed.txt
-    [ $language -eq 1 ] && echo "chat安装完毕，使用chat 开始游戏" || ehco "chat installation is completed, use chat Start the game"
+    
+    clear
+    [ $language -eq 1 ] && echo "chat安装完毕，使用chat 开始游戏" || echo "chat installation is completed, use chat Start the game"
 }
 
 remove_chat() {
     rm -rf /usr/local/bin/chat
-    [ $language -eq 1 ] && echo "chat已卸载" || ehco "chat Uninstalled"
-}
 
+    [ $language -eq 1 ] && echo "chat已卸载" || echo "chat Uninstalled"
+}
 
 info_chat() {
     if [ $language -eq 1 ];then
@@ -24,9 +28,9 @@ info_chat() {
         
 版本：1.0
 
-作者：LingYi
+介绍：远程聊天
 
-介绍：类似qq的聊天工具，可以远程聊天
+作者：LingYi
 
 提示：对话双方必须指定相同目录
 
@@ -40,9 +44,9 @@ info_chat() {
         
 version：1.0
 
-Author：LingYi
-
 Introduction：Similar qq chat tool, you can chat remotely
+
+Author：LingYi
 
 Prompt：Both parties to the conversation must specify the same directory
 
