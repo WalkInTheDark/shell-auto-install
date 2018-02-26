@@ -38,7 +38,7 @@ install_mysql_many() {
     
     package=`get_mysql_many 1`
     tar -xf package/$package
-    mv mysql-5.6.39-linux-glibc2.12-x86_64 ${install_dir}/${mysql_dir}
+    mv mysql-5.6.39-linux-glibc2.12-x86_64 ${install_dir}/${mysql_many_dir}
     chown -R mysql:mysql ${install_dir}/${mysql_dir}
     chown -R mysql:mysql ${log_dir}/${mysql_dir}
     
