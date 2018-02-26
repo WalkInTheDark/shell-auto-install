@@ -3,17 +3,18 @@ language=`cat conf/lang.txt`
 
 
 
-#可修改，全局设置
-master_dir() {
-    #安装目录
-    install_dir=/ops/server
+#[实用设置]
+
+#安装目录
+install_dir=/ops/server
     
-    #日志目录
-    log_dir=/ops/log
+#日志目录
+log_dir=/ops/log
     
-    #edit选项的编辑器，可选择vim或其他
-    editor=vi
-}
+#edit选项的编辑器，可选择vim或其他
+ditor=vi
+
+
 
 #加载函数
 load() {
@@ -143,7 +144,6 @@ server() {
 
 #主体
 load
-master_dir
 
 a=`cat conf/lang.txt`
 server_name=list_${a}.txt #如语言改变，则生成新表
