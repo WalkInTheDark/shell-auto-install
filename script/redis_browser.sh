@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 
+
 #[使用设置]
 #主目录，相当于/usr/local
 #install_dir=/ops/server
@@ -69,7 +70,25 @@ install_redis_browser() {
     sed -i "5a one=${cluster_ip}" $command
 
     echo "redis-browser" >> conf/installed.txt
-    [ $language -eq 1 ] && echo "redis-browser安装完毕，使用man-redis-browser 管理，浏览器输入http://127.0.0.1:1212登陆" || ehco "redis-browser installation is completed, Man-redis-browser management，Browser enter http://127.0.0.1:1212 login"
+    
+    clear
+    if [ $language -eq 1 ];then
+    echo "redis-browser安装成功，使用man-redis-browser管理
+        
+安装目录：${install_dir}/${redis_browser_dir}
+
+日志目录：${log_dir}/${redis_browser_dir}
+
+浏览器输入 http://127.0.0.1:1212登陆"
+    else
+        echo "redis-browser installed successfully, using man-redis-browser management
+        
+installation manual：${install_dir}/${redis_browser_dir}
+
+Log directory：${log_dir}/${redis_browser_dir}
+
+Browser enter http://127.0.0.1:1212 login"
+    fi
 }
 
 remove_redis_browser() {
@@ -77,9 +96,8 @@ remove_redis_browser() {
     rm -rf /usr/local/bin/man-redis-browser
     rm -rf ${install_dir}/${redis_browser_dir}
     
-    [ $language -eq 1 ] && echo "redis-browser已卸载" || ehco "redis-browser Uninstalled"
+    [ $language -eq 1 ] && echo "redis-browser已卸载" || echo "redis-browser Uninstalled"
 }
-
 
 info_redis_browser() {
     if [ $language -eq 1 ];then
@@ -87,9 +105,9 @@ info_redis_browser() {
 
 版本：0.4.0
 
-作者：book
+介绍：安装redis-browser
 
-介绍：安装redis-browser，它是redis的可视化工具，可以从网页操作数据库
+作者：book
 
 提示：需要修改配置文件，填写redis节点
 
@@ -99,9 +117,9 @@ info_redis_browser() {
         
 version：0.4.0
 
-Author：book
-
 Introduction：Install redis-browser, which is a redis visualization tool that can manipulate the database from the web
+
+Author：book
 
 Prompt：Need to modify the configuration file, fill in the redis node
 
