@@ -46,12 +46,11 @@ list_all() {
 list_generate() {
     for i in `ls script/`
     do
-        #i=`echo ${i%%.*}`
+        i=`echo ${i%%.*}`
         a=`bash sai.sh info $i | awk  -F'：' '{print $2}' | sed -n '1p'`
         b=`bash sai.sh info $i | awk  -F'：' '{print $2}' | sed -n '3p'`
         c=`bash sai.sh info $i | awk  -F'：' '{print $2}' | sed -n '5p'`
         d=`bash sai.sh info $i | awk  -F'：' '{print $1}' | sed -n '3p'`
-        [ "$d" == "依赖" -o "$d" == "rely" ] && b=" " #依赖则不显示版本
         echo "$a:$b:$c" >> conf/a.txt
     done
     sort -n conf/a.txt >> conf/b.txt #排序一下
@@ -144,16 +143,14 @@ server() {
 
 #主体
 load
-
 a=`cat conf/lang.txt`
 server_name=list_${a}.txt #如语言改变，则生成新表
-[ -f conf/${server_name} ] || list_generate
-
 
 if [ $# -eq 0 ];then
     help_all
 elif [ $# -eq 1 ];then
     if [ "$1" == "list" ];then
+        [ -f conf/${server_name} ] || list_generate
         cat conf/${server_name}
     elif [ "$1" == "help" ];then
         help_all
