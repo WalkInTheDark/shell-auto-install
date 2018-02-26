@@ -37,7 +37,6 @@ install_mysql() {
     package=`get_mysql 1`
     tar -xf package/$package
     mv mysql-5.6.39-linux-glibc2.12-x86_64 ${install_dir}/${mysql_dir}
-    touch ${log_dir}/${mysql_dir}/mysql.log #要创建
     chown -R mysql:mysql ${install_dir}/${mysql_dir}
     chown -R mysql:mysql ${log_dir}/${mysql_dir}
     
