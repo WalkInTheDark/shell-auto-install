@@ -84,8 +84,8 @@ log-bin=${log_dir}/${mysql_many_dir}/mysql/mysql${i}_bin" > /etc/my.cnf.d/${i}.c
         ${install_dir}/${mysql_many_dir}/scripts/mysql_install_db --basedir=${install_dir}/${mysql_many_dir} --datadir=${install_dir}/${mysql_many_dir}/data${i} --defaults-file=/etc/my.cnf &> /dev/null
     done
 
-    grep 'PATH=$PATH':${install_dir}/${mysql_dir}/bin /etc/profile &> /dev/null
-    [ $? -eq 0 ] || echo 'PATH=$PATH':${install_dir}/${mysql_dir}/bin >> /etc/profile
+    grep 'PATH=$PATH':${install_dir}/${mysql_many_dir}/bin /etc/profile &> /dev/null
+    [ $? -eq 0 ] || echo 'PATH=$PATH':${install_dir}/${mysql_many_dir}/bin >> /etc/profile
     
     clear
     if [ $language -eq 1 ];then
@@ -116,7 +116,7 @@ Login：mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
 remove_mysql_many() {
     mysqld_multi
     
-    hang=`grep -n 'PATH=$PATH':${install_dir}/${mysql_dir}/bin /etc/profile &> /dev/null`
+    hang=`grep -n 'PATH=$PATH':${install_dir}/${mysql_many_dir}/bin /etc/profile &> /dev/null`
     sed -i "${hang} d" /etc/profile
     
     rm -rf ${install_dir}/${mysql_many_dir}
