@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 
+
 #[使用设置]
 #主目录，相当于/usr/local
 #install_dir=/ops/server
@@ -14,12 +15,11 @@ jenkins_dir=jenkins
 
 
 get_jenkins() {
-        test_package jenkins.war http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/jenkins.war 08386ff41dbf7dd069c750f3484cc140
-        if [ $language -eq 1 ];then
-            echo "jenkins.war 下载完成"
-        else
-            echo "jenkins.war Download completed"
-        fi
+        test_package jenkins.war http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/jenkins.war
+
+    if [ ! -n "$1" ];then
+        [ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
+    fi
 }
 
 install_jenkins() {
@@ -27,7 +27,8 @@ install_jenkins() {
     test_dir_master
     test_dir $jenkins
     
-    cp package/jenkins.war ${install_dir}/${jenkins_dir}/
+    package=`get_jenkins 1`
+    cp package/${package} ${install_dir}/${jenkins_dir}/
     
     command=/usr/local/bin/man-jenkins
     cp conf/jenkins/man-jenkins $command
@@ -38,7 +39,9 @@ install_jenkins() {
     sed -i "4a jenkins_dir=$jenkins_dir" $command
 
     echo "jenkins" >> conf/installed.txt
-    [ $language -eq 1 ] && echo "jenkins安装完毕，浏览器输入http://127.0.0.1:8080登陆jenkins" || ehco "jenkins installation is completed,Browser input http://127.0.0.1:8080 landing jenkins"
+    
+    clear
+    [ $language -eq 1 ] && echo "jenkins安装完毕，浏览器输入http://127.0.0.1:8080登陆jenkins" || echo "jenkins installation is completed,Browser input http://127.0.0.1:8080 landing jenkins"
 }
 
 remove_jenkins() {
@@ -46,9 +49,8 @@ remove_jenkins() {
     rm -rf /usr/local/bin/man-jenkins
     rm -rf ${install_dir}/${jenkins_dir}
     
-    [ $language -eq 1 ] && echo "jenkins已卸载" || ehco "jenkins Uninstalled"
+    [ $language -eq 1 ] && echo "jenkins已卸载" || echo "jenkins Uninstalled"
 }
-
 
 info_jenkins() {
     if [ $language -eq 1 ];then
@@ -56,9 +58,9 @@ info_jenkins() {
         
 版本：2.104
 
-作者：book
+介绍：安装jenkins
 
-介绍：安装jenkins，持续与集成工具
+作者：book
 
 提示：可以配置安装地址
 
@@ -68,9 +70,9 @@ info_jenkins() {
         
 version：2.104
 
-Author：book
-
 Introduction：Install jenkins, persistence and integration tools
+
+Author：book
 
 Prompt：You can configure the installation address
 
