@@ -66,12 +66,12 @@ info_redis() {
 版本：3.2.9
 介绍：仅安装redis
 作者：book
-提示：可以修改安装路径
-使用：安装redis-port 来创建一个实例" "
+提示：无
+使用：无" "
 Name：redis
 version：3.2.9
 Introduction：Only redis is installed, but it does not start the instance
 Author：book
-Prompt：You can modify the installation path
-use：Install redis-port to create an instance"
+Prompt：none
+use：none"
 }
