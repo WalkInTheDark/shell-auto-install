@@ -15,11 +15,11 @@ rely=0
 #加载依赖
 source script/mysql.sh
 
-get_mysql_many() {
+get_mysql_port() {
     get_mysql
 }
 
-install_mysql_many() {
+install_mysql_port() {
     [ $rely -eq 0 ] && test_rely mysql
  
      echo "[client]
