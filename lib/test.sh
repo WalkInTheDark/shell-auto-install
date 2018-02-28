@@ -97,23 +97,19 @@ test_install() {
     done
 }
 
-#下载效验，$1为包名，$2为网络下载地址，最后返回正确包名
+#下载效验，$1为网络下载地址，$2为md5值
 test_package() {
-    local a=0 i
+    local a=0 b=`echo ${1##*/}` c i
 
-    for i in `ls package/`
-    do
-        if [ "$i" == "$1" ];then
-            echo $1
-	    a=1
-            break
-        fi
-    done
+    if [ -f package/$b ];then
+        c=`md5 package/$b`
+        [ "$c" == "$2" ] && a=1 || rm -rf package/$b
+    fi
     
     if [ $a -eq 0 ];then
         test_www www.baidu.com
         wget -O package/${1} $2 &> /dev/null
-        echo $1
+        test_package $1 $2 #验证
     fi
 }
 
@@ -165,4 +161,13 @@ test_ip() {
         	done
     	done
 	echo $ip
+}
+
+#$1位中文信息，$2位英文信息，位置变量要加""
+test_info() {
+    clear
+    if [ $language -eq 1 ];then
+        for i in $1; do echo $i; echo; done
+        for i in $2; do echo $i; echo; done
+    fi
 }
