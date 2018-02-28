@@ -71,3 +71,19 @@ remove_mysql_single() {
     
     test_info "mysql-single卸载完成" "mysql-single uninstall completed" 
 }
+
+info_mysql_single() {
+test_info "
+名字：mysql-single
+依赖：mysql
+介绍：启动单机实例
+作者：book
+提示：无
+使用：systemctl管理" "
+Name：mysql-single
+rely：mysql
+Introduction：Only start the instance port
+Author：book
+Prompt：none
+use：systemctl management"
+}
