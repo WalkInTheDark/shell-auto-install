@@ -167,7 +167,8 @@ test_ip() {
 test_info() {
     clear
     if [ $language -eq 1 ];then
-        for i in $1; do echo $i; echo; done
-        for i in $2; do echo $i; echo; done
+        for i in $1; do echo $i; echo; echo $i >> log.txt; echo >> log.txt; done
+    else
+        for i in $2; do echo $i; echo; echo $i >> log.txt; echo >> log.txt; done
     fi
 }
