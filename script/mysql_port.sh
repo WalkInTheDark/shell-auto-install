@@ -50,10 +50,10 @@ socket=${install_dir}/${mysql_dir}/mysql_${i}.sock
 log-output=file  
 slow_query_log = 1  
 long_query_time = 1  
-slow_query_log_file =${install_dir}/${mysql_dir}/${i}_slow.log  
-log-error =${install_dir}/${mysql_dir}/${i}_error.log  
+slow_query_log_file =${log_dir}/${mysql_dir}/${i}_slow.log  
+log-error =${log_dir}/${mysql_dir}/${i}_error.log  
 binlog_format = mixed  
-log-bin =${install_dir}/${mysql_dir}/${i}_bin
+log-bin =${log_dir}/${mysql_dir}/${i}_bin
   " >> /etc/my.cnf
     done
     
