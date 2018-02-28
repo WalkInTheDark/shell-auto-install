@@ -83,24 +83,17 @@ up() {
     test_www www.baidu.com #是否连接外网
 
     local c=`cat conf/installed.txt` #将已安装文件读取
-    local old_ver=`cat conf/version.txt`
-    local new_ver=`curl https://raw.githubusercontent.com/goodboy23/shell-auto-install/master/conf/version.txt`
-    local ver=`process_big $old_ver $new_ver` #得出最大值
 
-    if [ "$ver" != "$old_ver" ];then #如果最大值和当前版本一致，将不更新
-        cd ..
-        git clone https://github.com/goodboy23/shell-auto-install.git temporary
-        if [ -d temporary ];then
-            rm -rf shell-auto-install
-            mv temporary shell-auto-install
-            echo $c >> shell-auto-install/conf/installed.txt
+    cd ..
+    git clone https://github.com/goodboy23/shell-auto-install.git temporary
+    if [ -d temporary ];then
+        rm -rf shell-auto-install
+        mv temporary shell-auto-install
+        echo $c >> shell-auto-install/conf/installed.txt
             
-            [ $language -eq 1 ] && echo "更新完成" || echo "update completed"
-        else
-            [ $language -eq 1 ] && echo "更新失败" || echo "Update failed"
-        fi
+        [ $language -eq 1 ] && echo "更新完成" || echo "update completed"
     else
-        [ $language -eq 1 ] && echo "版本一致，不用更新" || echo "The same version, without updating"
+        [ $language -eq 1 ] && echo "更新失败" || echo "Update failed"
     fi
 }
 
@@ -116,12 +109,11 @@ server() {
             grep "^${a}" conf/installed.txt &> /dev/null
             [ $? -eq 0 ] && test_exit "${a}已安装" "${a} is already installed"
             
-            [ $language -eq 1 ] && echo "请等待安装，安装后会出现完成信息，安装出现错误，将会退出并给出解决办法。" || echo "Please wait for the installation, the installation will be completed after the completion of information, installation error, will exit and give a solution."  
-            sleep 1
+            [ $language -eq 1 ] && echo "正在安装${2}，安装中出现错误，将会退出并给出解决办法" || echo "Installing $ {2}, an error occurred during installation, it will exit and give a solution"  
+            sleep 3
             install_${a}
         elif [ "$1" == "remove" ];then
-            grep "^${a}" conf/installed.txt &> /dev/null
-            [ $? -eq 0 ] && sed -i "/^${a}/d" conf/installed.txt
+            sed -i "/^${a}/d" conf/installed.txt
             sed -i '/^$/d' conf/installed.txt #删除空行
             
             remove_${a}
@@ -143,8 +135,7 @@ server() {
 
 #主体
 load
-a=`cat conf/lang.txt`
-server_name=list_${a}.txt #如语言改变，则生成新表
+server_name=list_${language}.txt #如语言改变，则生成新表
 
 if [ $# -eq 0 ];then
     help_all
@@ -156,8 +147,6 @@ elif [ $# -eq 1 ];then
         help_all
     elif [ "$1" == "update" ];then
         up
-    else
-        test_exit "没有这个服务" "Without this service"
     fi
 elif [ $# -eq 2 ];then
     if [ "$1" == "list" ];then
