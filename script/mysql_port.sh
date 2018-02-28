@@ -34,31 +34,26 @@ log=${log_dir}/${mysql_dir}/mysqld_multi.log
 [mysqld]
 user=mysql
 basedir=${install_dir}/${mysql_dir}
-sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES"  > /etc/my.cnf #基本配置
 
-!includedir /etc/my.cnf.d"  > /etc/my.cnf #基本配置
-
-    mkdir -p /etc/my.cnf.d &> /dev/null
-    
     for i in `echo ${cluster_ip[*]}`
     do
         [ -d ${install_dir}/${mysql_dir}/data${i} ] && continue
         mkdir ${install_dir}/${mysql_dir}/data${i}
-        echo "[mysql${i}]
-mysqld=mysqld
-mysqladmin=mysqladmin
-bind-address=0.0.0.0
-port=${i}
-server_id=${i}
+        echo "[mysqld${i}]  
+mysqld=mysqld  
+mysqladmin=mysqladmin  
 datadir=${install_dir}/${mysql_dir}/data${i}
-socket=${install_dir}/${mysql_dir}/data${i}/mysql_${i}.sock
-log-output=file
-slow_query_log=1
-long_query_time=1
-slow_query_log_file=${log_dir}/${mysql_dir}/mysql/${i}slow.log
-log-error=${log_dir}/${mysql_dir}/mysql/${i}error.log
-binlog_format=mixed
-log-bin=${log_dir}/${mysql_dir}/mysql/mysql${i}_bin" > /etc/my.cnf.d/${i}.conf
+port=${i}
+server_id=${i}  
+socket=${install_dir}/${mysql_dir}/mysql_${i}.sock  
+log-output=file  
+slow_query_log = 1  
+long_query_time = 1  
+slow_query_log_file =${install_dir}/${mysql_dir}/${i}_slow.log  
+log-error =${install_dir}/${mysql_dir}/${i}_error.log  
+binlog_format = mixed  
+log-bin =${install_dir}/${mysql_dir}/${i}_bin" >> /etc/my.cnf
     done
     
     chown -R mysql:mysql ${install_dir}/${mysql_dir}
