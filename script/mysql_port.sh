@@ -53,8 +53,8 @@ long_query_time = 1
 slow_query_log_file =${log_dir}/${mysql_dir}/${i}_slow.log  
 log-error =${log_dir}/${mysql_dir}/${i}_error.log  
 binlog_format = mixed  
-log-bin =${log_dir}/${mysql_dir}/${i}_bin
-  " >> /etc/my.cnf
+log-bin =${log_dir}/${mysql_dir}/${i}_bin" >> /etc/my.cnf
+echo >> /etc/my.cnf
     done
     
     chown -R mysql:mysql ${install_dir}/${mysql_dir}
