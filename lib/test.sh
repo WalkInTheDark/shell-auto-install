@@ -3,7 +3,7 @@
 
 
 
-#位置变量1是中文，位置变量2是英文
+#提示并退出脚本，$1中文，$2英文
 test_exit() {
 if [[ $language -eq 1 ]];then
     clear
@@ -61,14 +61,6 @@ else
 fi
 }
 
-#关闭各种墙
-test_wall(){
-    if [ -s /etc/selinux/config ] && grep 'SELINUX=enforcing' /etc/selinux/config; then
-        sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
-        setenforce 0
-    fi
-}
-
 #测试主目录是否存在
 test_dir_master() {
     if [[ ! -d ${install_dir} ]];then
@@ -76,7 +68,7 @@ test_dir_master() {
     fi
 }
 
-#$1是目录名
+#创建日志目录，并检测服务目录，$1是目录名
 test_dir() {
     if [[ ! -d ${log_dir}/$1 ]];then
         mkdir -p ${log_dir}/$1
@@ -89,15 +81,21 @@ test_dir() {
 
 #位置变量皆为软件包名
 test_install() {
-    yum -y install $@ &> /dev/null
+    yum -y install $@
     for i in `echo $@`
     do
-        rpm -q $i &> /dev/null
+        rpm -q $i
         [ $? -eq 0 ] || test_exit "${1}软件包找不到，请手动安装" "${1} software package can not find, please manually install"
     done
 }
 
-#下载效验，$1为网络下载地址，$2为md5值
+#扩展服务使用，$1写必须安装的服务名
+test_rely() {
+    bash sai.sh list installed | grep "^${1}"
+    [ $? -ne 0 ] && bash sai.sh install $1
+}
+
+#下载安装包，$1为网络下载地址，$2为md5值
 test_package() {
     local a=0 b=`echo ${1##*/}` c i
 
@@ -110,65 +108,5 @@ test_package() {
         test_www www.baidu.com
         wget -O package/${1} $2 &> /dev/null
         test_package $1 $2 #验证
-    fi
-}
-
-#扩展服务使用，$1写必须安装的服务名
-test_rely() {
-    bash sai.sh list installed | grep "^${1}" &> /dev/null
-    [ $? -ne 0 ] && test_exit "请先安装${1}" "Please install ${1}"
-}
-
-#集群使用，根据本地ip算出id号，统一cluster_ip，返回他在数组第几号
-test_id() {
- 	local num=`echo ${#cluster_ip[*]}` id a=1 i e
-    	let num--
-
-	for i in `ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\."`
-	do
-		[ $a -eq 0 ] && break
-		for e in `seq 0 $num`
-		do
-            		echo ${cluster_ip[$e]} | grep $i &> /dev/null
-        		if [ $? -eq 0 ];then
-               			id=$e
-				a=0
-                		break
-        		fi
-        	done
-    	done
-	
-	let id++
-	echo $id
-}
-
-#集群使用，根据本地ip算出当前绑定ip，统一cluster_ip，返回绑定ip
-test_ip() {
- 	local num=`echo ${#cluster_ip[*]}` ip a=1 i e
-    	let num--
-
-	for i in `ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\."`
-	do
-		[ $a -eq 0 ] && break
-		for e in `seq 0 $num`
-		do
-            		echo ${cluster_ip[$e]} | grep $i &> /dev/null
-        		if [ $? -eq 0 ];then
-               			ip=$i
-				a=0
-                		break
-        		fi
-        	done
-    	done
-	echo $ip
-}
-
-#$1位中文信息，$2位英文信息，位置变量要加""
-test_info() {
-    clear
-    if [ $language -eq 1 ];then
-        for i in $1; do echo $i; echo; echo $i >> log.txt; echo >> log.txt; done
-    else
-        for i in $2; do echo $i; echo; echo $i >> log.txt; echo >> log.txt; done
     fi
 }
