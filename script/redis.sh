@@ -68,7 +68,7 @@ remove_redis() {
     rm -rf ${install_dir}/${redis_dir}
 
     #卸载完成
-    test_info "redis卸载完成" "redis uninstall completed"
+    [ $language -eq 1 ] && "redis卸载完成" || "redis uninstall completed"
 }
 
 info_redis() {
