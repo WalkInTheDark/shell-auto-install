@@ -104,11 +104,12 @@ test_package() {
         [ "$c" == "$2" ] && a=1 || rm -rf package/$b
     else
     	[ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
+	a=1
     fi
     
     if [ $a -eq 0 ];then
         test_www www.baidu.com
-        wget -O package/${1} $2 &> /dev/null
+        wget -O package/${1} $2
         test_package $1 $2 #验证
     fi
 }
