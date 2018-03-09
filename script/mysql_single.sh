@@ -62,28 +62,40 @@ WantedBy=multi-user.target" > /usr/lib/systemd/system/mysql.service
     
     echo "mysql-single" >> conf/installed.txt
 
-    test_info "mysql-single安装成功，systemctl管理" "mysql-single installation is successful, systemctl management"
+    clear
+    [ $language -eq 1 ] && "mysql-single安装成功，systemctl管理" || "mysql-single installation is successful, systemctl management"
 }
 
 remove_mysql_single() {
     systemctl stop mysql ; systemctl disable mysql
     rm -rf /usr/lib/systemd/system/mysql.service
     
-    test_info "mysql-single卸载完成" "mysql-single uninstall completed" 
+    [ $language -eq 1 ] && "mysql-single卸载完成" || "mysql-single uninstall completed" 
 }
 
 info_mysql_single() {
-test_info "
-名字：mysql-single
+if [ $language -eq 1 ];then
+    echo "名字：mysql-single
+    
 依赖：mysql
+
 介绍：启动单机实例
+
 作者：book
+
 提示：无
-使用：systemctl管理" "
-Name：mysql-single
+
+使用：systemctl管理" 
+else
+    echo "Name：mysql-single
+    
 rely：mysql
+
 Introduction：Only start the instance port
+
 Author：book
+
 Prompt：none
+
 use：systemctl management"
 }
