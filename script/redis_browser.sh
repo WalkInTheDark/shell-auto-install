@@ -38,7 +38,8 @@ install_redis_browser() {
     gem update —system
     gem sources —add https://gems.ruby-china.org/ —remove https://rubygems.org/
     gem sources -l
-    gem install redis redis-browser
+    gem install package/redis-4.0.1.gem
+    gem install package/redis-browser-0.5.1.gem
     
     d=1 #名字，从第2个起
     echo "connections:" >> ${install_dir}/${redis_browser_dir}/config.yml
