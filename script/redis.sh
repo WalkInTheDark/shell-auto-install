@@ -26,30 +26,41 @@ install_redis() {
     test_dir $redis_dir
     
     #安装服务
+    get_redis
     tar -xf package/redis-3.2.9.tar.gz
     mv redis ${install_dir}/${redis_dir}
 
     #环境变量
-    grep -w 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile &> /dev/null
+    grep -w 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile
     [ $? -ne 0 ] && echo 'PATH=$PATH':${install_dir}/${redis_dir}/bin >> /etc/profile
     
     #安装完成
     echo "redis" >> conf/installed.txt
 
-    test_info "redis安装成功，可安装redis-port来启动一个实例
+    clear
+    if [ $language -eq 1 ];then
+        echo "redis安装成功，可安装redis-port来启动一个实例
+        
 安装目录：${install_dir}/${redis_dir}
+
 日志目录：${log_dir}/${redis_dir}
-环境变量设置完毕，请退出当前终端后重新进入" "
-redis installed successfully, You can install redis-port to start an instance
+
+环境变量设置完毕，请退出当前终端后重新进入" 
+    else
+        echo "redis installed successfully, You can install redis-port to start an instance
+        
 installation manual：${install_dir}/${redis_dir}
+
 Log directory：${log_dir}/${redis_dir}
+
 Environment variable is set, please exit the current terminal and re-enter"
+    fi
 }
 
 remove_redis() {
     #删除环境变量
-    hang=`grep -n 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile | awk -F: '{print $1}' &> /dev/null`
-    sed -i "${hang} d" /etc/profile
+    hang=`grep -n 'PATH=$PATH':${install_dir}/${redis_dir}/bin /etc/profile | awk -F: '{print $1}'`
+    [ ! $hang ] || sed -i "${hang} d" /etc/profile
     
     #停止服务并删除
     man-redis stop
@@ -61,17 +72,29 @@ remove_redis() {
 }
 
 info_redis() {
-    test_info "
-名字：redis
+    if [ $language -eq 1 ];then
+        echo "名字：redis
+        
 版本：3.2.9
+
 介绍：仅安装redis
+
 作者：book
+
 提示：无
-使用：无" "
-Name：redis
+
+使用：无" 
+    else
+        echo "Name：redis
+        
 version：3.2.9
+
 Introduction：Only redis is installed, but it does not start the instance
+
 Author：book
+
 Prompt：none
+
 use：none"
+    fi
 }
