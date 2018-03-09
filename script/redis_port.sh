@@ -42,7 +42,8 @@ install_redis_port() {
         
         mkdir -p ${install_dir}/${redis_dir}/cluster/${i}
         cp conf/redis/7000.conf $conf
-    
+        
+        sed -i "/^bind/bind 0.0.0.0" $conf
         sed -i "/^port/cport ${i}" $conf
         sed -i "/^cluster-config-file/ccluster-config-file nodes_${i}.conf" $conf
         sed -i "/^pidfile/cpidfile redis_${i}.pid" $conf
