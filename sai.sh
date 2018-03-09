@@ -13,22 +13,11 @@ log_dir=/ops/log
 #edit选项的编辑器，可选择vim或其他
 editor=vi
 
-#读取语言，不用改动
-language=`cat conf/lang.txt`
 
-
-
-#加载函数
-load() {
-    for i in `ls lib`
-    do
-        source lib/$i
-    done
-}
 
 #中文帮助
 help_cn() {
-echo "提示：所有服务的安装均为默认设置！若自定义安装位置或其它设置请 edit 服务名
+    echo "提示：所有服务的安装均为默认设置！若自定义安装位置或其它设置请 edit 服务名
 当前版本1.5.7
 
 install httpd      安装 httpd
@@ -47,7 +36,7 @@ lang    2          设置 语言  为英文"
 
 #英文帮助
 help_en() {
-echo "Tip: All services are installed by default! If you customize the installation location or other settings, please edit the service name
+    echo "Tip: All services are installed by default! If you customize the installation location or other settings, please edit the service name
 current version：1.5.7
 
 install httpd      installation httpd
@@ -93,7 +82,7 @@ list_all() {
             grep "^${i}" conf/list.txt | head -1
     else
         [ $language -eq 1 ] && echo "$1 相关脚本：" || echo "$1 Related script："
-        grep "^$1" conf/server_name
+        grep "^$1" conf/${server_name}
     fi
 }
 
@@ -116,10 +105,11 @@ server() {
     if [ -f script/${a}.sh ];then
         source script/${a}.sh
         if [ "$1" == "install" ];then
-            grep "^${a}" conf/installed.txt &> /dev/null
-            [ $? -eq 0 ] && test_exit "${a}已安装" "${a} is already installed"
+            grep "^${1}" conf/installed.txt
+            [ $? -eq 0 ] || grep "^${a}" conf/installed.txt
+            [ $? -eq 0 ]&& test_exit "${a}已安装" "${a} is already installed"
             
-            [ $language -eq 1 ] && echo "正在安装${2}，安装中出现错误，将会退出并给出解决办法" || echo "Installing $ {2}, an error occurred during installation, it will exit and give a solution"  
+            [ $language -eq 1 ] && echo "正在安装${2}，安装中出现错误，将会退出并给出解决办法" || echo "Installing $ {2}, an error occurred during installation, it will exit and give a solution"
             sleep 3
             install_${a}
         elif [ "$1" == "remove" ];then
@@ -147,7 +137,8 @@ server() {
 
 #主体
 load
-server_name=list_${language}.txt #如语言改变，则生成新表
+server_name=list_${language}.txt
+language=`cat conf/lang.txt`
 
 if [ $# -eq 0 ];then
     [ $language -eq 1 ] && help_cn || help_en 
