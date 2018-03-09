@@ -24,7 +24,7 @@ get_redis_cluster() {
 }
 
 install_redis_cluster() {  
-    [ $rely -eq 0 ] && test_rely mysql
+    [ $rely -eq 0 ] && test_rely redis
 
     test_install ruby-devel rubygems rpm-build
     bash sai.sh install ruby #这个手动装好点
