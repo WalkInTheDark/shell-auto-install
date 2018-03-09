@@ -21,6 +21,8 @@ cluster_ip=(192.168.2.108:7000 192.168.2.108:7002 192.168.2.108:7004)
 get_redis_browser() {
     bash sai.sh get nodejs
     bash sai.sh get ruby
+    test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-4.0.1.gem" "a4b74c19159531d0aa4c3bf4539b1743"
+    test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-browser-0.5.1.gem" "dbe6a5e711dacbca46e68b10466d9da4"
 }
 
 install_redis_browser() {
@@ -103,7 +105,7 @@ info_redis_browser() {
     if [ $language -eq 1 ];then
         echo "名字：redis-browser
 
-版本：0.4.0
+版本：0.5.1
 
 介绍：安装redis-browser
 
@@ -115,7 +117,7 @@ info_redis_browser() {
     else
         echo "Name：redis-browser
         
-version：0.4.0
+version：0.5.1
 
 Introduction：Install redis-browser, which is a redis visualization tool that can manipulate the database from the web
 
