@@ -24,15 +24,6 @@ else
 fi
 }
 
-#系统是64位则返回0
-test_64bit(){
-    if [ `getconf WORD_BIT` = '32' ] && [ `getconf LONG_BIT` = '64' ] ; then
-        return 0
-    else
-        return 1
-    fi
-}
-
 #测试是否是root
 test_root(){
     if [[ $EUID -ne 0 ]]; then
@@ -44,21 +35,6 @@ test_root(){
 test_www() {
     local a=`curl -o /dev/null --connect-timeout 3 -s -w "%{http_code}" $1`
     [ $a -eq 200 ] || test_exit "无法访问外网，请重试或者调试网络" "Unable to access external network, please try again or debug network" 
-}
-
-#测试输入的是否为ip，$1填写ip
-test_ip() {
-    local status=$(echo $1|awk -F. '$1<=255&&$2<=255&&$3<=255&&$4<=255{print "yes"}')
-    if echo $1|grep -E "^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$">/dev/null;
-then
-	if [ status == "yes" ]; then
-		return 0
-	else
-		return 1
-	fi
-else
-	return 1
-fi
 }
 
 #测试主目录是否存在
