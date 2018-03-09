@@ -59,6 +59,7 @@ installation manual：${install_dir}/${redis_dir}
 Log directory：${log_dir}/${mysql_dir}
 
 Environment variable is set, please exit the current terminal and re-enter"
+    fi
 }
 
 remove_mysql() {
