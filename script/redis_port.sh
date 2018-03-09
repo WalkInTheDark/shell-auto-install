@@ -7,6 +7,9 @@
 #将安装或卸载如下端口实例
 port=(6379)
 
+#监听ip
+listen=0.0.0.0
+
 #非0则不检测依赖
 rely=0
 
@@ -43,7 +46,7 @@ install_redis_port() {
         mkdir -p ${install_dir}/${redis_dir}/cluster/${i}
         cp conf/redis/7000.conf $conf
         
-        sed -i "/^bind/bind 0.0.0.0" $conf
+        sed -i "s/^bind 127.0.0.1/bind ${listen}/g" $conf
         sed -i "/^port/cport ${i}" $conf
         sed -i "/^cluster-config-file/ccluster-config-file nodes_${i}.conf" $conf
         sed -i "/^pidfile/cpidfile redis_${i}.pid" $conf
