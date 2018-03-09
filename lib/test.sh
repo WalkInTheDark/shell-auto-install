@@ -100,7 +100,7 @@ test_package() {
     local a=0 b=`echo ${1##*/}` c i
 
     if [ -f package/$b ];then
-        c=`md5 package/$b`
+        c=`md5sum package/$b`
         [ "$c" == "$2" ] && a=1 || rm -rf package/$b
     else
     	[ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
