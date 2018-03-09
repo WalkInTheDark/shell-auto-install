@@ -3,16 +3,11 @@
 
 
 get_nodejs() {
-    test_package node-v8.9.3-linux-x64.tar.xz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/node-v8.9.3-linux-x64.tar.xz
-
-    if [ ! -n "$1" ];then
-        [ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
-    fi
+    test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/node-v8.9.3-linux-x64.tar.xz" "32948a8ca5e6a7b69c03ec1a23b16cd2"
 }
 
 install_nodejs() {
-    package=`get_nodejs 1`
-
+    get_nodejs
     tar -xf package/${package}
     mv node-v8.9.3-linux-x64 /usr/local/nodejs
     
