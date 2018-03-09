@@ -56,7 +56,7 @@ for i in `ls man-redis*`
 do  
     [ "$i" == "man-redis" ] && continue || $i $1
 done' >> /usr/local/bin/man-redis
-    chmod + /usr/local/bin/man-redis
+    chmod +x /usr/local/bin/man-redis
 
     clear
     [ $language -eq 1 ] && echo "使用man-redis命令来管理这些端口实例" || echo "Use the man-rediscommand to manage these port instances"
