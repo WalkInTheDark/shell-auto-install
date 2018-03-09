@@ -93,7 +93,7 @@ list_all() {
             grep "^${i}" conf/list.txt | head -1
     else
         [ $language -eq 1 ] && echo "$1 相关脚本：" || echo "$1 Related script："
-        grep "^$1" conf/list.txt
+        grep "^$1" conf/server_name
     fi
 }
 
