@@ -123,6 +123,8 @@ server() {
             sleep 3
             install_${a}
         elif [ "$1" == "remove" ];then
+            test_remove
+        
             sed -i "/^${a}/d" conf/installed.txt
             sed -i '/^$/d' conf/installed.txt #删除空行
             
