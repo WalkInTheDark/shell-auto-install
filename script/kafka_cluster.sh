@@ -19,11 +19,7 @@ cluster_ip=(192.168.2.108:2181 192.168.2.109:2181)
 
 
 get_kafka_cluster() {
-    test_package kafka_2.12-0.10.2.1.tgz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka_2.12-0.10.2.1.tgz
-
-    if [ ! -n "$1" ];then
-        [ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
-    fi
+    test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka_2.12-0.10.2.1.tgz" "fab4b35ba536938144489105cb0091e0"
 }
 
 install_kafka_cluster() {
@@ -31,7 +27,7 @@ install_kafka_cluster() {
     test_dir $kafka_cluster_dir
     test_install java-1.8.0-openjdk
     
-    package=`get_kafka_cluster 1`
+    get_kafka_cluster
     tar -xf package/${package}
     mv kafka_2.12-0.10.2.1 ${install_dir}/${kafka_cluster_dir}
 
