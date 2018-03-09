@@ -10,6 +10,9 @@ cluster_ip="127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.
 #默认1主1从，设置2就是1主2从
 node=1
 
+#非0则不检测依赖
+rely=0
+
 
 
 #加载它的依赖
@@ -17,14 +20,15 @@ source script/redis.sh
 
 get_redis_cluster() {
     get_redis
+    test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-4.0.1.gem" "a4b74c19159531d0aa4c3bf4539b1743"
 }
 
 install_redis_cluster() {  
-    test_rely redis
+    [ $rely -eq 0 ] && test_rely mysql
 
     test_install ruby-devel rubygems rpm-build
     bash sai.sh install ruby #这个手动装好点
-    gem install conf/redis/redis-3.0.0.gem
+    gem install package/redis-4.0.1.gem
     
     ${install_dir}/${redis_dir}/src/redis-trib.rb create --replicas ${node} ${cluster_ip}
     
