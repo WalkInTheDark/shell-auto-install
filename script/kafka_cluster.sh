@@ -35,8 +35,8 @@ install_kafka_cluster() {
     rm -rf $conf #删除旧的
     cp conf/kafka/server.properties $conf
     
-    id=`test_id`
-    ip=`test_ip`
+    id=`process_id`
+    ip=`process_ip`
     
     for i in `echo ${cluster_ip[*]}` #算出地址字符串
     do
