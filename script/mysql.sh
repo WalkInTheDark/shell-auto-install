@@ -42,6 +42,7 @@ install_mysql() {
     grep 'PATH=$PATH':${install_dir}/${mysql_dir}/bin /etc/profile
     [ $? -eq 0 ] || echo 'PATH=$PATH':${install_dir}/${mysql_dir}/bin >> /etc/profile
 
+    clear
     if [ $language -eq 1 ];then
         echo "mysql安装完成，可以安装mysql-single启动单点
         
