@@ -55,9 +55,9 @@ install_redis_port() {
 
     echo '#!/bin/bash
 
-for i in `ls man-redis*`
+for i in `ls /usr/local/bin/man-redis*`
 do  
-    [ "$i" == "man-redis" ] && continue || $i $1
+    [ "/usr/local/bin/$i" == "man-redis" ] && continue || $i $1
 done' >> /usr/local/bin/man-redis
     chmod +x /usr/local/bin/man-redis
 
