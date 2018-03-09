@@ -26,6 +26,7 @@ get_redis_cluster() {
 install_redis_cluster() {  
     [ $rely -eq 0 ] && test_rely redis
 
+    get_redis_cluster
     test_install ruby-devel rubygems rpm-build
     bash sai.sh install ruby #这个手动装好点
     gem install package/redis-4.0.1.gem
