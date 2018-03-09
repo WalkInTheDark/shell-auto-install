@@ -102,6 +102,8 @@ test_package() {
     if [ -f package/$b ];then
         c=`md5 package/$b`
         [ "$c" == "$2" ] && a=1 || rm -rf package/$b
+    else
+    	[ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
     fi
     
     if [ $a -eq 0 ];then
