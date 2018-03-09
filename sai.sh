@@ -29,6 +29,7 @@ load() {
 #中文帮助
 help_cn() {
 echo "提示：所有服务的安装均为默认设置！若自定义安装位置或其它设置请 edit 服务名
+当前版本1.5.7
 
 install httpd      安装 httpd
 remove  httpd      卸载 httpd
@@ -47,6 +48,7 @@ lang    2          设置 语言  为英文"
 #英文帮助
 help_en() {
 echo "Tip: All services are installed by default! If you customize the installation location or other settings, please edit the service name
+current version：1.5.7
 
 install httpd      installation httpd
 remove  httpd      Uninstall    httpd
