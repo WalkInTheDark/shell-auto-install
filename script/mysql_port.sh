@@ -64,10 +64,13 @@ echo >> /etc/my.cnf
         ${install_dir}/${mysql_dir}/scripts/mysql_install_db --basedir=${install_dir}/${mysql_dir} --datadir=${install_dir}/${mysql_dir}/data${i} --defaults-file=/etc/my.cnf &> /dev/null
     done
 
-    test_info "
-mysql-port安装成功，请使用mysqld_multi start 来启动所有实例
-登陆： mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock" "
-mysql-many installed successfully, please use the systemctl start mysql to start
+    if [ $language -eq 1 ];then
+        echo "mysql-port安装成功，请使用mysqld_multi start 来启动所有实例
+        
+登陆： mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
+    else
+        echo "mysql-many installed successfully, please use the systemctl start mysql to start
+
 Login：mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
 }
 
@@ -78,21 +81,32 @@ remove_mysql_port() {
         rm -rf ${install_dir}/${mysql_dir}/data${i}
     done
 
-    test_info "mysql-port卸载完成" "mysql-port Uninstall completed"
+    [ $language -eq 1 ] && "mysql-port卸载完成" || "mysql-port Uninstall completed"
 }
 
 info_mysql_port() {
-    test_info "
-名字：mysql-port
+    if [ $language -eq 1 ];then
+        echo "名字：mysql-port
+        
 依赖：mysql
+
 介绍：安装mysql多实例
+
 作者：book
+
 提示：无
-使用：man-mysql-port管理" "
-Name：mysql-port
+
+使用：man-mysql-port管理" 
+    else
+        echo "Name：mysql-port
+        
 rely：mysql
+
 Introduction：Install mysql multi-instance
+
 Author：book
+
 Prompt：none
+
 use：man-mysql-port management"
 }
