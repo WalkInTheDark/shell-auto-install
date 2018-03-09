@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
-language=`cat conf/lang.txt`
 
 
 
-#[实用设置]
+#[使用设置]
 
-#安装目录
+#全局安装目录
 install_dir=/ops/server
     
-#日志目录
+#全局日志目录
 log_dir=/ops/log
     
 #edit选项的编辑器，可选择vim或其他
 editor=vi
+
+#读取语言，不用改动
+language=`cat conf/lang.txt`
 
 
 
@@ -24,22 +26,40 @@ load() {
     done
 }
 
-#显示帮助
-help_all() {
-    [ $language -eq 1 ] && cat conf/zhong_help.txt || cat conf/ying_help.txt
+#中文帮助
+help_cn() {
+echo "提示：所有服务的安装均为默认设置！若自定义安装位置或其它设置请 edit 服务名
+
+install httpd      安装 httpd
+remove  httpd      卸载 httpd
+get     httpd      下载 httpd 所需要的包
+info    httpd      查询 httpd 详细信息
+edit    httpd      编辑 httpd 进行自定义设置
+
+list               列出 支持  的脚本
+list    httpd      列出 httpd 相关脚本
+list    installed  列出 所有  已安装脚本
+
+lang    1          设置 语言  为中文
+lang    2          设置 语言  为英文"
 }
 
-#将已安装记录从list表中查找
-list_all() {
-    if [ "$1" == "installed" ];then
-        for i in `cat conf/installed.txt`
-        do
-            grep "^${i}" conf/${server_name} | head -1
-        done
-    else
-        [ $language -eq 1 ] && echo "$1 相关脚本：" || echo "$1 Related script："
-        grep "^$1" conf/${server_name}
-    fi
+#英文帮助
+help_en() {
+echo "Tip: All services are installed by default! If you customize the installation location or other settings, please edit the service name
+
+install httpd      installation httpd
+remove  httpd      Uninstall    httpd
+get     httpd      Download     httpd required package
+info    httpd      Query        httpd details
+edit	httpd      Edit         httpd for custom settings
+
+list               List supported scripts
+list    httpd      List httpd related scripts
+list    installed  Lists all installed scripts
+
+lang    1          Set the language to Chinese
+lang    2          Set the language to English"
 }
 
 #生成list表
@@ -50,7 +70,6 @@ list_generate() {
         a=`bash sai.sh info $i | awk  -F'：' '{print $2}' | sed -n '1p'`
         b=`bash sai.sh info $i | awk  -F'：' '{print $2}' | sed -n '3p'`
         c=`bash sai.sh info $i | awk  -F'：' '{print $2}' | sed -n '5p'`
-        d=`bash sai.sh info $i | awk  -F'：' '{print $1}' | sed -n '3p'`
         echo "$a:$b:$c" >> conf/a.txt
     done
     sort -n conf/a.txt >> conf/b.txt #排序一下
@@ -66,6 +85,16 @@ list_generate() {
     rm -rf conf/a.txt conf/b.txt
 }
 
+#将已安装记录从list表中查找
+list_all() {
+    if [ "$1" == "installed" ];then
+            grep "^${i}" conf/list.txt | head -1
+    else
+        [ $language -eq 1 ] && echo "$1 相关脚本：" || echo "$1 Related script："
+        grep "^$1" conf/list.txt
+    fi
+}
+
 #设置语言
 yuyan() {
     if [ $1 -eq 1 ];then
@@ -77,35 +106,14 @@ yuyan() {
     fi
 }
 
-#升级sai
-up() {
-    test_install git #是否安装git
-    test_www www.baidu.com #是否连接外网
-
-    local c=`cat conf/installed.txt` #将已安装文件读取
-
-    cd ..
-    git clone https://github.com/goodboy23/shell-auto-install.git temporary
-    if [ -d temporary ];then
-        rm -rf shell-auto-install
-        mv temporary shell-auto-install
-        echo $c >> shell-auto-install/conf/installed.txt
-            
-        [ $language -eq 1 ] && echo "更新完成" || echo "update completed"
-    else
-        [ $language -eq 1 ] && echo "更新失败" || echo "Update failed"
-    fi
-}
-
 #对于服务的操作
 server() {
     local a=`process_bian $2` #将-变成_，方便调用
+    test_root
 
     if [ -f script/${a}.sh ];then
         source script/${a}.sh
         if [ "$1" == "install" ];then
-            test_root
-            
             grep "^${a}" conf/installed.txt &> /dev/null
             [ $? -eq 0 ] && test_exit "${a}已安装" "${a} is already installed"
             
@@ -138,15 +146,11 @@ load
 server_name=list_${language}.txt #如语言改变，则生成新表
 
 if [ $# -eq 0 ];then
-    help_all
+    [ $language -eq 1 ] && help_cn || help_en 
 elif [ $# -eq 1 ];then
     if [ "$1" == "list" ];then
         [ -f conf/${server_name} ] || list_generate
         cat conf/${server_name}
-    elif [ "$1" == "help" ];then
-        help_all
-    elif [ "$1" == "update" ];then
-        up
     fi
 elif [ $# -eq 2 ];then
     if [ "$1" == "list" ];then
