@@ -136,9 +136,9 @@ server() {
 
 
 #主体
-load
 server_name=list_${language}.txt
 language=`cat conf/lang.txt`
+source conf/lib.sh
 
 if [ $# -eq 0 ];then
     [ $language -eq 1 ] && help_cn || help_en 
