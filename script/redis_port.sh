@@ -7,6 +7,9 @@
 #将安装或卸载如下端口实例
 port=(6379)
 
+#非0则不检测依赖
+rely=0
+
 
 
 #加载它的依赖
@@ -17,7 +20,7 @@ get_redis_port() {
 }
 
 install_redis_port() {
-    test_rely redis #检测依赖是否安装
+    [ $rely -eq 0 ] && test_rely mysql
     
     for i in `echo ${port[*]}`
     do
