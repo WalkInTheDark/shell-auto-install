@@ -54,7 +54,7 @@ dynamicConfigFile=${install_dir}/${zookeeper_cluster_dir}/conf/zoo.cfg.dynamic" 
     
     #id号
     mkdir ${install_dir}/${zookeeper_cluster_dir}/data
-    id=`test_id`
+    id=`process_id`
     echo "$id" > ${install_dir}/${zookeeper_cluster_dir}/data/myid
     
     #监听ipv4，默认ipv6
