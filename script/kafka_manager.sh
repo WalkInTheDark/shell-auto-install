@@ -19,11 +19,7 @@ cluster_ip="192.168.2.108:2181,192.168.2.109:2181"
 
 
 get_kafka_manager() {
-    test_package kafka-manager-1.3.3.14.zip http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka-manager-1.3.3.14.zip
-
-    if [ ! -n "$1" ];then
-        [ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
-    fi
+    test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka-manager-1.3.3.14.zip" "297da17fa75969bc66207e991118b35d"
 }
 
 install_kafka_manager() {
@@ -31,7 +27,7 @@ install_kafka_manager() {
     test_dir_master
     test_dir ${kafka_manager_dir}
     
-    package=`get_kafka_manager 1`
+    get_kafka_manager
     unzip package/${package} &> /dev/null
     mv kafka-manager-1.3.3.14 ${install_dir}/${kafka_manager_dir}
     
