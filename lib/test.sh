@@ -100,11 +100,8 @@ test_package() {
     local a=0 b=`echo ${1##*/}` c i
 
     if [ -f package/$b ];then
-        c=`md5sum package/$b`
+        c=`md5sum package/$b | awk '{print $1}'`
         [ "$c" == "$2" ] && a=1 || rm -rf package/$b
-    else
-    	[ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
-	a=1
     fi
     
     if [ $a -eq 0 ];then
