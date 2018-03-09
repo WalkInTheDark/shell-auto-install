@@ -72,6 +72,7 @@ echo >> /etc/my.cnf
         echo "mysql-many installed successfully, please use the systemctl start mysql to start
 
 Login：mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
+    fi
 }
 
 remove_mysql_port() {
@@ -109,4 +110,5 @@ Author：book
 Prompt：none
 
 use：man-mysql-port management"
+    fi
 }
