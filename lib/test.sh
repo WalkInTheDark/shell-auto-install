@@ -112,3 +112,10 @@ test_package() {
         test_package $1 $2 #验证
     fi
 }
+
+test_remove() {
+    [ $language -eq 1 ] && read -p "确定删除[y/n]：" yn || read -p "OK to delete [y/n]：" yn
+    [ "$yn" != "y" ];then
+       exit
+    fi
+}
