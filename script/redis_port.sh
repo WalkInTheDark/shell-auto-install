@@ -20,7 +20,7 @@ get_redis_port() {
 }
 
 install_redis_port() {
-    [ $rely -eq 0 ] && test_rely mysql
+    [ $rely -eq 0 ] && test_rely redis
     
     for i in `echo ${port[*]}`
     do
