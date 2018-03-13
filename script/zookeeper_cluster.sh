@@ -16,12 +16,13 @@ cluster_ip=(192.168.2.108 192.168.2.109)
 
 
 
+source script/zookeeper.sh
+
 get_zookeeper_cluster() {
     echo "Do not download"
 }
 
 install_zookeeper_cluster() {
-    [ ! $zookeeper_dir] || source script/zookeeper.sh
     [ -d ${install_dir}/${zookeeper_dir} ] || test_exit "请先安装mysql"
 
     #配置文件
