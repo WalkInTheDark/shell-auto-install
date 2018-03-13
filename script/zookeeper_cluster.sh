@@ -21,7 +21,8 @@ get_zookeeper_cluster() {
 }
 
 install_zookeeper_cluster() {
-    [ ! $install_dir] || source script/zookeeper.sh
+    [ ! $zookeeper_dir] || source script/zookeeper.sh
+    [ -d ${install_dir}/${zookeeper_dir} ] || test_exit "请先安装mysql"
 
     #配置文件
     echo "clientPort=2181
@@ -66,5 +67,5 @@ info_zookeeper_cluster() {
 
 version：zookeeper
 
-Introduction：安装zookeeper集群"
+Introduction：配置zookeeper集群"
 }
