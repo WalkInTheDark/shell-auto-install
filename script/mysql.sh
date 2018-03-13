@@ -37,65 +37,25 @@ install_mysql() {
     chown -R mysql:mysql ${install_dir}/${mysql_dir}
     chown -R mysql:mysql ${log_dir}/${mysql_dir}
 
-    echo "mysql" >> conf/installed.txt #后面将不会退出
+    echo 'PATH=$PATH':${install_dir}/${mysql_dir}/bin >> /etc/profile
 
-    grep 'PATH=$PATH':${install_dir}/${mysql_dir}/bin /etc/profile
-    [ $? -eq 0 ] || echo 'PATH=$PATH':${install_dir}/${mysql_dir}/bin >> /etc/profile
-
+    #测试
+    
+    
     clear
-    if [ $language -eq 1 ];then
-        echo "mysql安装完成，可以安装mysql-single启动单点
+    echo "install ok
         
-安装目录：${install_dir}/${mysql_dir}
+install_dir=${install_dir}/${redis_dir}
 
-日志目录：${log_dir}/${mysql_dir}
+log_dir=${log_dir}/${mysql_dir}
 
-环境变量设置完毕，请退出当前终端后重新进入" 
-    else
-        echo "mysql installation is complete, you can install mysql-single boot a single point
-        
-installation manual：${install_dir}/${redis_dir}
-
-Log directory：${log_dir}/${mysql_dir}
-
-Environment variable is set, please exit the current terminal and re-enter"
-    fi
-}
-
-remove_mysql() {
-    hang=`grep -n 'PATH=$PATH':${install_dir}/${mysql_dir}/bin /etc/profile | awk -F':' '{print $1}' `
-    [ ! $hang ] || sed -i "${hang} d" /etc/profile
-    
-    rm -rf ${install_dir}/${mysql_dir}
-    userdel -r mysql
-    
-    [ $language -eq 1 ] && "mysql卸载完成" || "mysql Uninstall completed"
+PATH /et/profile"
 }
 
 info_mysql() {
-if [ $language -eq 1 ];then
-    echo "名字：mysql
-
-版本：6.3.9
-
-介绍：仅安装mysql
-
-作者：book
-
-提示：无
-
-使用：无"
-else
     echo "Name：mysql
     
 version：6.3.9
 
-Introduction：Only install mysql
-
-Author：book
-
-Prompt：none
-
-use：none"
-fi
+Introduction：仅按照mysql"
 }
