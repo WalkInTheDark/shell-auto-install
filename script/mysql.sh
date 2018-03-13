@@ -20,8 +20,6 @@ get_mysql() {
 }
 
 install_mysql() {
-    #检测目录
-    test_dir_master
     test_dir $mysql_dir
 
     #清理mariadb的东西
