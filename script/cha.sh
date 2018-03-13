@@ -25,5 +25,5 @@ info_cha() {
         
 version：1.0
 
-Introduction：Display system information"
+Introduction：查看系统信息"
 }
