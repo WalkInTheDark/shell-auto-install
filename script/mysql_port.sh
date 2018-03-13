@@ -4,13 +4,6 @@
 
 #[使用设置]
 
-#可自定义
-#install_dir=
-
-#log_dir=
-
-#mysql_dir=
-
 #开启实例的端口
 cluster_ip=(3307 3308)
 
