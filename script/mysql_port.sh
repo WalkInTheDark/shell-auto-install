@@ -81,3 +81,4 @@ info_mysql_port() {
 rely：mysql
 
 Introduction：配置mysql多实例"
+}
