@@ -4,13 +4,6 @@
 
 #[使用设置]
 
-#可自定义
-#install_dir=
-
-#log_dir=
-
-#mysql_dir=
-
 #默认端口
 port=3306
 
