@@ -17,13 +17,14 @@ node=1
 
 
 
+source script/redis.sh
+
 get_redis_cluster() {
     get_redis
     test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-4.0.1.gem" "a4b74c19159531d0aa4c3bf4539b1743"
 }
 
 install_redis_cluster() {  
-    [ ! $redis_dir ] || source script/redis.sh
     [ -d ${install_dir}/${redis_dir} ] || test_exit "请先安装redis"
 
     get_redis_cluster
