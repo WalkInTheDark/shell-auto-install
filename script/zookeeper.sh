@@ -16,7 +16,7 @@ zookeeper_dir=zookeeper
 
 
 get_zookeeper() {
-    test_package zookeeper-3.5.2-alpha.tar.gz http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/zookeeper-3.5.2-alpha.tar.gz
+    test_package http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/zookeeper-3.5.2-alpha.tar.gz adc27d412f283c0dc6ec9d08e30f4ec0
 }
 
 install_zookeeper() {
