@@ -27,19 +27,21 @@ get_kafka_manager() {
 
 install_kafka_manager() {
     test_install unzip
-    test_dir_master
     test_dir ${kafka_manager_dir}
     
+    #安装包
     get_kafka_manager
     unzip package/kafka-manager-1.3.3.14.zip
     mv kafka-manager-1.3.3.14 ${install_dir}/${kafka_manager_dir}
     
-    
+    #修改配置文件
     conf=${install_dir}/${kafka_manager_dir}/conf/application.conf
     a=kafka-manager.zkhosts='"'${cluster_ip}'"'
     sed -i "23c $a" $conf
 
+    #创建管理脚本
     command=/usr/local/bin/man-kafka-manager
+    rm -rf $command
     cp package/man-kafka-manager $command
     chmod +x $command
 
@@ -47,6 +49,7 @@ install_kafka_manager() {
     sed -i "3a dir=${install_dir}/${kafka_manager_dir}" $command
     sed -i "4a log=${log_dir}/${kafka_manager_dir}" $command
     
+    #完成
     clear
     echo "install ok
         
@@ -56,9 +59,9 @@ log_dir=${log_dir}/${kafka_manager_dir}
 
 bin=/usr/local/bin/man-kafka-manager
 
-man-kafka-manager start
+Start：man-kafka-manager start
 
-curl http://127.0.0.1:9000 login"
+Test：curl http://127.0.0.1:9000 login"
 }
 
 info_kafka_manager() {
