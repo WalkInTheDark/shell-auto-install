@@ -21,7 +21,7 @@ get_mysql_port() {
 }
 
 install_mysql_port() {
-    [ ! $install_dir ] || source script/mysql.sh
+    [ ! $mysql_dir ] || source script/mysql.sh
     [ -d ${install_dir}/${mysql_dir} ] || test_exit "请先安装mysql"
  
      echo "[client]
