@@ -95,7 +95,7 @@ elif [ $# -eq 1 ];then
     fi
 elif [ $# -eq 2 ];then
     if [ "$1" == "list" ];then
-        echo "$1 Related script：" && grep "^$2" conf/${server_name}
+        echo "$1 Related script：" && grep "^$2" conf/list.txt
     else
         server $1 $2
     fi
