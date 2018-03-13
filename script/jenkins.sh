@@ -21,23 +21,24 @@ get_jenkins() {
 }
 
 install_jenkins() {
-    bash sai.sh install jdk-eight
-    test_dir_master
     test_dir $jenkins_dir
     
+    #安装依赖和包
+    bash sai.sh install jdk-eight
     get_jenkins
     cp package/jenkins.war ${install_dir}/${jenkins_dir}/
     
+    #配置启动脚本
     command=/usr/local/bin/man-jenkins
+    rm -rf $command
     cp conf/jenkins/man-jenkins $command
     chmod +x $command
 
     sed -i "2a install_dir=$install_dir" $command
     sed -i "3a log_dir=$log_dir" $command
     sed -i "4a jenkins_dir=$jenkins_dir" $command
-
-    echo "jenkins" >> conf/installed.txt
     
+    #完成
     clear
     echo "install ok
     
@@ -47,9 +48,9 @@ log_dir=${log_dir}/${jenkins_dir}
 
 bin=/usr/local/bin/man-jenkins
 
-man-jenkins start
+Start：man-jenkins start
 
-curl http://127.0.0.1:8080"
+Test：curl http://127.0.0.1:8080"
 }
 
 info_jenkins() {
