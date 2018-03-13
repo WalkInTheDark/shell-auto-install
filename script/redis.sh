@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#只安装redis
+
 
 
 #[使用设置]
@@ -28,9 +28,14 @@ install_redis() {
     get_redis
     tar -xf package/redis-3.2.9.tar.gz
     mv redis ${install_dir}/${redis_dir}
-
+    
     #环境变量
     echo 'PATH=$PATH':${install_dir}/${redis_dir}/bin >> /etc/profile
+    
+    #测试
+    source /etc/profile
+    which redis-cli
+    [ $? -eq 0 ] || test_exit "Installation failed, please check the script" 
 
     clear
         echo "install ok
