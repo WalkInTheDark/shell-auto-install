@@ -30,6 +30,7 @@ install_redis_port() {
     [ ! $install_dir ] && source script/redis.sh
     [ -d ${install_dir}/${redis_dir} ] || test_exit "请先安装redis"
 
+    get_redis_port
     for i in `echo ${port[*]}`
     do
         command=/usr/local/bin/man-redis${i} #创建单独管理脚本
