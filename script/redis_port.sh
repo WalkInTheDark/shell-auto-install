@@ -1,35 +1,39 @@
 #!/usr/bin/env bash
-
+#启动多个端口
 
 
 #[使用设置]
 
-#将安装或卸载如下端口实例
+#可使用非sai安装的redis
+#install_dir=
+
+#log_dir=
+
+#redis_dir=
+
+#将安装如下端口实例
 port=(6379)
 
 #监听ip
 listen=0.0.0.0
 
-#非0则不检测依赖
-rely=0
 
-
-
-#加载它的依赖
-source script/redis.sh
 
 get_redis_port() {
-    get_redis
+    test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/conf/redis_7000.conf
+    
+    test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/conf/man-redis
 }
 
 install_redis_port() {
-    [ $rely -eq 0 ] && test_rely redis
-    
+    #变量不存在，则使用redis.sh脚本的
+    [ ! $install_dir ] && source script/redis.sh
+
     for i in `echo ${port[*]}`
     do
         command=/usr/local/bin/man-redis${i} #创建单独管理脚本
         if [ ! -f $command ];then
-            cp conf/redis/man-redis $command
+            cp package/man-redis $command
         
             sed -i "2a port=${i}" $command
             sed -i "3a install_dir=${install_dir}" $command
@@ -44,7 +48,7 @@ install_redis_port() {
         conf=${install_dir}/${redis_dir}/cluster/${i}/${i}.conf
         
         mkdir -p ${install_dir}/${redis_dir}/cluster/${i}
-        cp conf/redis/7000.conf $conf
+        cp package/redis_7000.conf $conf
         
         sed -i "s/^bind 127.0.0.1/bind ${listen}/g" $conf
         sed -i "/^port/cport ${i}" $conf
@@ -53,6 +57,7 @@ install_redis_port() {
         sed -i "/^dir/cdir ${install_dir}/${redis_dir}/cluster/${i}" $conf 
     done
 
+    #创建总管理脚本
     echo '#!/bin/bash
 
 for i in `ls /usr/local/bin/man-redis*`
@@ -61,45 +66,25 @@ do
 done' >> /usr/local/bin/man-redis
     chmod +x /usr/local/bin/man-redis
 
+    #测试
+    which $i
+    [ $? -eq 0 ] || test_exit "Installation failed, please check the script"
+    
+    
     clear
-    [ $language -eq 1 ] && echo "使用man-redis命令来管理这些端口实例" || echo "Use the man-rediscommand to manage these port instances"
-}
+    echo "install ok
+    
+install_dir=${install_dir}/${redis_dir}/cluster
 
-remove_redis_port() {
-    for i in `echo ${port[*]}`
-    do
-        /usr/local/bin/redis${i} stop
-        rm -rf /usr/local/bin/redis${i}
-        rm -rf ${install_dir}/${redis_dir}/cluster/${i}
-    done
+bin_dir=/usr/local/bin/man-redis*
 
-    [ $language -eq 1 ] && echo "redis ${port[*]} 端口卸载完成" || echo "redis ${port[*]} Port uninstallation is complete" 
+use man-redis start"
 }
 
 info_redis_port() {
-    if [ $language -eq 1 ];then
-        echo "名字：redis-port
-        
-依赖：redis
-
-介绍：仅启动实例端口
-
-作者：book
-
-提示：不管安装或卸载端口，都会安装配置文件写的来
-
-使用：man-redis来管理端口"
-    else
-        echo "Name：redis-port
+    echo "Name：redis-port
        
 rely：redis
 
-Introduction：Only start the instance port
-
-Author：book
-
-Prompt：Whether to install or uninstall the port, will be installed to write the configuration file
-
-use：man-redis to manage the port"
-    fi
+Introduction：配置redis多实例"
 }
