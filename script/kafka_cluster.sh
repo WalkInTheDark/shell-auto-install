@@ -15,13 +15,13 @@
 cluster_ip=(192.168.2.108:2181 192.168.2.109:2181)
 
 
+source script/kafka.sh
 
 get_kafka_cluster() {
     echo "Do not download"
 }
 
 install_kafka_cluster() {
-    [ ! $kafka_dir ] || source script/kafka.sh
     [ -d ${install_dir}/${kafka_dir} ] || test_exit "请先安装kakfa"
     
     conf=${install_dir}/${kafka_dir}/config/server.properties
