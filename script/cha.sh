@@ -9,15 +9,17 @@ get_cha() {
 
 install_cha() {
     get_cha
-    cp package/cha /usr/local/bin/cha
-    chmod +x /usr/local/bin/cha
+    command=/usr/local/bin/cha
+    rm -rf $command
+    cp package/cha $command
+    chmod +x $command
 
     clear
     echo "install ok
     
-dir=/usr/local/bin/cha
+install_dir=/usr/local/bin/cha
     
-use cha -c display Chinese system information"
+Start：cha -c"
 }
 
 info_cha() {
