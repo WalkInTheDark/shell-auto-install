@@ -22,14 +22,15 @@ get_kafka() {
 }
 
 install_kafka() {
-    test_dir_master
     test_dir $kafka_cluster_dir
-    bash sai.sh install jdk-eight
     
+    #安装依赖和包
+    bash sai.sh install jdk-eight
     get_kafka
     tar -xf package/kafka_2.12-0.10.2.1.tgz
     mv kafka_2.12-0.10.2.1 ${install_dir}/${kafka_cluster_dir}
 
+    #完成
     clear
         echo "install ok
         
