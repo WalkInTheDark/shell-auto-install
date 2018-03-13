@@ -4,13 +4,6 @@
 
 #[使用设置]
 
-#可自定义
-#install_dir=
-
-#log_dir=
-
-#kafka_dir=kafka
-
 #zookeeper集群的ip，包括他自己
 cluster_ip=(192.168.2.108:2181 192.168.2.109:2181)
 
