@@ -8,6 +8,8 @@
 cluster_ip=(192.168.2.108:2181 192.168.2.109:2181)
 
 
+
+#如果自定的，修改依赖脚本
 source script/kafka.sh
 
 get_kafka_cluster() {
@@ -15,10 +17,12 @@ get_kafka_cluster() {
 }
 
 install_kafka_cluster() {
+    #检测依赖
     [ -d ${install_dir}/${kafka_dir} ] || test_exit "请先安装kakfa"
-    
+
+    #修改配置
     conf=${install_dir}/${kafka_dir}/config/server.properties
-    rm -rf $conf #删除旧的
+    rm -rf $conf
     cp conf/kafka/server.properties $conf
     
     id=`process_id`
@@ -38,10 +42,12 @@ install_kafka_cluster() {
     sed -i "63s,log.dirs=/ops/log/kafka,log.dirs=${log_dir}/${kafka_dir},g" $conf
     sed -i "119s/zookeeper.connect=B-S-01:2181/zookeeper.connect=${cluster_dizhi}/g" $conf
 
+    #创建脚本
     command=/usr/local/bin/man-kafka
+    rm -rf $command
     cp package/man-kafka $command
     chmod +x $command
-    sed -i "2a dir=${install_dir}/${kafka_cluster_dir}" $command
+    sed -i "2a dir=${install_dir}/${kafka_dir}" $command
     
     echo "install ok
     
