@@ -57,5 +57,5 @@ info_mysql() {
     
 version：6.3.9
 
-Introduction：仅按照mysql"
+Introduction：仅安装mysql"
 }
