@@ -42,6 +42,7 @@ bind-address = 0.0.0.0" > /etc/my.cnf #这里改需要的配置
     ./scripts/mysql_install_db --user=mysql --basedir=${install_dir}/${mysql_dir} --datadir=${install_dir}/${mysql_dir}/data &> /dev/null
     
     #加入systemctl
+    rm -rf /usr/lib/systemd/system/mysql.service
     echo "[Unit]
 Description=mysql
 After=network.target remote-fs.target nss-lookup.target
@@ -61,7 +62,7 @@ WantedBy=multi-user.target" > /usr/lib/systemd/system/mysql.service
     clear
     echo "install ok
     
-systemctl start mysql"
+Start：systemctl start mysql"
 }
 
 info_mysql_single() {
