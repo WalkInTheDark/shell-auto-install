@@ -11,15 +11,17 @@ get_card_life() {
 
 install_card_life() {
     get_card_life
-    cp package/card-life /usr/local/bin/card-life
-    chmod +x /usr/local/bin/card-life
+    command=/usr/local/bin/card-life
+    rm -rf $command
+    cp package/card-life $command
+    chmod +x $command
 
     clear
     echo "install ok
     
-dir=/usr/local/bin/card-life
+install_dir=/usr/local/bin/card-life
 
-card-life starts the game"
+Start：card-life"
 }
 
 info_card_life() {
