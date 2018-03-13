@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#jenkins基本环境
 
 
 #[使用设置]
@@ -15,19 +15,17 @@ jenkins_dir=jenkins
 
 
 get_jenkins() {
-        test_package jenkins.war http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/jenkins.war
-
-    if [ ! -n "$1" ];then
-        [ $language -eq 1 ] && echo "下载完成" || echo "Download completed"
-    fi
+    test_package jenkins.war http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/jenkins.war
+    
+    test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/conf/man-jenkins
 }
 
 install_jenkins() {
-    test_install java-1.8.0-openjdk
+    bash sai.sh install jdk-eight
     test_dir_master
-    test_dir $jenkins
+    test_dir $jenkins_dir
     
-    package=`get_jenkins 1`
+    get_jenkins
     cp package/${package} ${install_dir}/${jenkins_dir}/
     
     command=/usr/local/bin/man-jenkins
@@ -41,41 +39,21 @@ install_jenkins() {
     echo "jenkins" >> conf/installed.txt
     
     clear
-    [ $language -eq 1 ] && echo "jenkins安装完毕，浏览器输入http://127.0.0.1:8080登陆jenkins" || echo "jenkins installation is completed,Browser input http://127.0.0.1:8080 landing jenkins"
-}
-
-remove_jenkins() {
-    man-jenkins stop
-    rm -rf /usr/local/bin/man-jenkins
-    rm -rf ${install_dir}/${jenkins_dir}
+    echo "install ok
     
-    [ $language -eq 1 ] && echo "jenkins已卸载" || echo "jenkins Uninstalled"
+install_dir=${install_dir}/${jenkins_dir}
+
+log_dir=${log_dir}/${jenkins_dir}
+
+bin=/usr/local/bin/man-jenkins
+
+man-jenkins start"
 }
 
 info_jenkins() {
-    if [ $language -eq 1 ];then
-        echo "名字：jenkins
-        
-版本：2.104
-
-介绍：安装jenkins
-
-作者：book
-
-提示：可以配置安装地址
-
-使用：浏览器输入http://127.0.0.1:8080登陆jenkins"
-    else
-        echo "Name：jenkins
+    echo "Name：jenkins
         
 version：2.104
 
-Introduction：Install jenkins, persistence and integration tools
-
-Author：book
-
-Prompt：You can configure the installation address
-
-use：Browser input http://127.0.0.1:8080 landing jenkins"
-    fi
+Introduction：安装jenkins基本"
 }
