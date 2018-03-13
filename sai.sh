@@ -61,7 +61,7 @@ server() {
     if [ -f script/${a}.sh ];then
         source script/${a}.sh
         if [ "$1" == "install" ];then
-            [ $language -eq 1 ] && echo "Installing $ {2}, an error occurred during installation, it will exit and give a solution"
+            echo "Installing $ {2}, an error occurred during installation, it will exit and give a solution"
             sleep 3
             install_${a}
         elif [ "$1" == "get" ];then
