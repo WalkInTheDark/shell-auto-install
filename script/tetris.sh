@@ -9,15 +9,17 @@ get_tetris() {
 
 install_tetris() {
     get_tetris
-    cp conf/alone/tetris /usr/local/bin/tetris
-    chmod +x /usr/local/bin/tetris
+    command=/usr/local/bin/tetris
+    rm -rf $command
+    cp conf/alone/tetris $command
+    chmod +x $command
 
     clear
     echo "install ok
 
 dir=/usr/local/bin/tetris
 
-tetris installation is completed, use tetris Start the game"
+Start：tetris"
 }
 
 info_tetris() {
