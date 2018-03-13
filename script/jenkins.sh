@@ -47,7 +47,9 @@ log_dir=${log_dir}/${jenkins_dir}
 
 bin=/usr/local/bin/man-jenkins
 
-man-jenkins start"
+man-jenkins start
+
+curl http://127.0.0.1:8080"
 }
 
 info_jenkins() {
