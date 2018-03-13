@@ -16,12 +16,13 @@ port=3306
 
 
 
+source script/mysql.sh
+
 get_mysql_single() {
     echo "Do not download"
 }
 
 install_mysql_single() {
-    [ ! $mysql_dir ] || source script/mysql.sh
     [ -d ${install_dir}/${mysql_dir} ] || test_exit "请先安装mysql"
     
     echo "[mysql]
