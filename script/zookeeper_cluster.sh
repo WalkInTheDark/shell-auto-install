@@ -28,6 +28,7 @@ dataLogDir=${install_dir}/${zookeeper_dir}
 dynamicConfigFile=${install_dir}/${zookeeper_dir}/conf/zoo.cfg.dynamic" > ${install_dir}/${zookeeper_dir}/conf/zoo.cfg
 
     #输出配置
+    rm -rf  ${install_dir}/${zookeeper_dir}/conf/zoo.cfg.dynamic
     d=1
     for i in `echo ${cluster_ip[*]}`
     do
@@ -43,17 +44,19 @@ dynamicConfigFile=${install_dir}/${zookeeper_dir}/conf/zoo.cfg.dynamic" > ${inst
     #监听ipv4，默认ipv6
     sed -i '150c "-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Djava.net.preferIPv4Stack=true"  "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}" \/' ${install_dir}/${zookeeper_dir}/bin/zkSserver.sh
 
-    
+    #脚本
+    command=/usr/local/bin/man-zookeeper
+    rm -rf $command
     echo "#!/bin/bash
-${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh" '$1' > /usr/local/bin/man-zookeeper
-    chmod +x /usr/local/bin/man-zookeeper
+${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh" '$1' > $command
+    chmod +x $command
 
     clear
     echo "install ok
 
 bin=/usr/local/bin/man-zookeeper
 
-man-zookeeper start"
+Start：man-zookeeper start"
 }
 
 info_zookeeper_cluster() {
