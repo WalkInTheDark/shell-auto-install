@@ -18,7 +18,6 @@ get_nodejs() {
 
 install_nodejs() {
     #检测目录
-    test_dir_master
     test_dir $nodejs_dir
 
     get_nodejs
@@ -26,6 +25,8 @@ install_nodejs() {
     mv node-v8.9.3-linux-x64 ${install_dir}/${nodejs_dir}
     
     #链接
+    rm -rf /usr/local/bin/node
+    rm -rf /usr/local/bin/npm
     ln -s ${install_dir}/${nodejs_dir}/bin/node /usr/local/bin/node
     ln -s ${install_dir}/${nodejs_dir}/bin/npm /usr/local/bin/npm
 
