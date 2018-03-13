@@ -64,9 +64,9 @@ echo >> /etc/my.cnf
 
 install_dir=${install_dir}/${mysql_dir}/data*
 
-mysqld_multi start
+Start：mysqld_multi start
 
-mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
+Test：mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
 }
 
 info_mysql_port() {
