@@ -22,7 +22,7 @@ install_nodejs() {
     test_dir $nodejs_dir
 
     get_nodejs
-    tar -xf package/${package}
+    tar -xf package/node-v8.9.3-linux-x64.tar.xz
     mv node-v8.9.3-linux-x64 ${install_dir}/${nodejs_dir}
     
     #链接
