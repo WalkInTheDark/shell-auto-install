@@ -16,12 +16,13 @@ cluster_ip=(3307 3308)
 
 
 
+source script/mysql.sh
+
 get_mysql_port() {
     echo "Do not download"
 }
 
 install_mysql_port() {
-    [ ! $mysql_dir ] || source script/mysql.sh
     [ -d ${install_dir}/${mysql_dir} ] || test_exit "请先安装mysql"
  
      echo "[client]
