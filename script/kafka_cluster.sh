@@ -21,7 +21,7 @@ get_kafka_cluster() {
 }
 
 install_kafka_cluster() {
-    [ ! $install_dir ] || source script/kafka.sh
+    [ ! $kafka_dir ] || source script/kafka.sh
     [ -d ${install_dir}/${kafka_dir} ] || test_exit "请先安装kakfa"
     
     conf=${install_dir}/${kafka_dir}/config/server.properties
