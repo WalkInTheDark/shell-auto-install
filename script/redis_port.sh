@@ -28,6 +28,7 @@ get_redis_port() {
 install_redis_port() {
     #变量不存在，则使用redis.sh脚本的
     [ ! $install_dir ] && source script/redis.sh
+    [ -d ${install_dir}/${redis_dir} ] || test_exit "请先安装redis"
 
     for i in `echo ${port[*]}`
     do
