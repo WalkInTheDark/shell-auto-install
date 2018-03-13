@@ -22,6 +22,7 @@ get_mysql_port() {
 
 install_mysql_port() {
     [ ! $install_dir ] || source script/mysql.sh
+    [ -d ${install_dir}/${mysql_dir} ] || test_exit "请先安装mysql"
  
      echo "[client]
 port=3306
@@ -79,4 +80,4 @@ info_mysql_port() {
         
 rely：mysql
 
-Introduction：安装mysql多实例"
+Introduction：配置mysql多实例"
