@@ -40,9 +40,9 @@ log_dir=${log_dir}/${zookeeper_dir}"
 }
 
 info_zookeeper() {
-    echo "Name：mysql
+    echo "Name：zookeeper
     
-version：6.3.9
+version：3.5.2
 
 Introduction：仅安装zookeeper"
 }
