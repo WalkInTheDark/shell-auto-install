@@ -26,7 +26,7 @@ install_jenkins() {
     test_dir $jenkins_dir
     
     get_jenkins
-    cp package/${package} ${install_dir}/${jenkins_dir}/
+    cp package/jenkins.war ${install_dir}/${jenkins_dir}/
     
     command=/usr/local/bin/man-jenkins
     cp conf/jenkins/man-jenkins $command
