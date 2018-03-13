@@ -17,8 +17,6 @@ get_jdk_eight() {
 }
 
 install_jdk_eight() {
-    #检测目录
-    test_dir_master
     test_dir $jdk_eight_dir
     
     #安装服务
