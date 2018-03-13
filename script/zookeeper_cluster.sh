@@ -4,13 +4,6 @@
 
 #[使用设置]
 
-#可自定义
-#install_dir=
-
-#log_dir=
-
-#zookeeper_dir
-
 #集群所有节点的ip
 cluster_ip=(192.168.2.108 192.168.2.109)
 
