@@ -4,23 +4,24 @@
 
 #[使用设置]
 
+#可自定义
+#install_dir=
+
+#log_dir=
+
+#mysql_dir=
+
 #开启实例的端口
 cluster_ip=(3307 3308)
 
-#非0则关闭依赖
-rely=0
 
-
-
-#加载依赖
-source script/mysql.sh
 
 get_mysql_port() {
-    get_mysql
+    echo "Do not download"
 }
 
 install_mysql_port() {
-    [ $rely -eq 0 ] && test_rely mysql
+    [ ! $install_dir ] || source script/mysql.sh
  
      echo "[client]
 port=3306
@@ -64,51 +65,18 @@ echo >> /etc/my.cnf
         ${install_dir}/${mysql_dir}/scripts/mysql_install_db --basedir=${install_dir}/${mysql_dir} --datadir=${install_dir}/${mysql_dir}/data${i} --defaults-file=/etc/my.cnf &> /dev/null
     done
 
-    if [ $language -eq 1 ];then
-        echo "mysql-port安装成功，请使用mysqld_multi start 来启动所有实例
-        
-登陆： mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
-    else
-        echo "mysql-many installed successfully, please use the systemctl start mysql to start
+    echo "install ok
 
-Login：mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
-    fi
-}
+install_dir=${install_dir}/${mysql_dir}/data*
 
-remove_mysql_port() {
-    for i in `echo ${cluster_ip[*]}`
-    do
-        mysqld_multi stop $i
-        rm -rf ${install_dir}/${mysql_dir}/data${i}
-    done
+mysqld_multi start
 
-    [ $language -eq 1 ] && "mysql-port卸载完成" || "mysql-port Uninstall completed"
+mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
 }
 
 info_mysql_port() {
-    if [ $language -eq 1 ];then
-        echo "名字：mysql-port
-        
-依赖：mysql
-
-介绍：安装mysql多实例
-
-作者：book
-
-提示：无
-
-使用：man-mysql-port管理" 
-    else
-        echo "Name：mysql-port
+    echo "Name：mysql-port
         
 rely：mysql
 
-Introduction：Install mysql multi-instance
-
-Author：book
-
-Prompt：none
-
-use：man-mysql-port management"
-    fi
-}
+Introduction：安装mysql多实例"
