@@ -74,7 +74,7 @@ install_dir=${install_dir}/${redis_dir}/cluster
 
 bin_dir=/usr/local/bin/man-redis*
 
-use man-redis start"
+Start：man-redis start"
 }
 
 info_redis_port() {
