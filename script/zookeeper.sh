@@ -21,7 +21,6 @@ get_zookeeper() {
 
 install_zookeeper() {
     #检测目录
-    test_dir_master
     test_dir $zookeeper_dir
     bash sai.sh install jdk-eight
 
