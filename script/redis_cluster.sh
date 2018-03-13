@@ -24,6 +24,7 @@ get_redis_cluster() {
 
 install_redis_cluster() {  
     [ ! $install_dir ] || source script/redis.sh
+    [ -d ${install_dir}/${redis_dir} ] || test_exit "请先安装redis"
 
     get_redis_cluster
     test_install ruby-devel rubygems rpm-build
@@ -44,5 +45,5 @@ info_redis_cluster() {
         
 rely：redis
 
-Introduction：创建集群"
+Introduction：配置redis集群"
 }
