@@ -25,5 +25,5 @@ info_tetris() {
         
 version：1.0
 
-Introduction：Tetris"
+Introduction：俄罗斯方块"
 }
