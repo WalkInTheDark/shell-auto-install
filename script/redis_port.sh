@@ -4,13 +4,6 @@
 
 #[使用设置]
 
-#可使用非sai安装的redis
-#install_dir=
-
-#log_dir=
-
-#redis_dir=
-
 #将安装如下端口实例
 port=(6379)
 
@@ -19,6 +12,9 @@ listen=0.0.0.0
 
 
 
+#加载依赖
+source script/redis.sh
+
 get_redis_port() {
     test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/conf/redis_7000.conf
     
@@ -26,8 +22,6 @@ get_redis_port() {
 }
 
 install_redis_port() {
-    #变量不存在，则使用redis.sh脚本的
-    [ ! $redis_dir ] || source script/redis.sh
     [ -d ${install_dir}/${redis_dir} ] || test_exit "请先安装redis"
 
     get_redis_port
@@ -69,7 +63,7 @@ done' >> /usr/local/bin/man-redis
     chmod +x /usr/local/bin/man-redis
 
     #测试
-    which $i
+    which man-redis${i}
     [ $? -eq 0 ] || test_exit "Installation failed, please check the script"
     
     
