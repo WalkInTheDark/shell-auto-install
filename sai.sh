@@ -27,8 +27,7 @@ info    httpd      Query        httpd details
 edit	httpd      Edit         httpd for custom settings
 
 list               List supported scripts
-list    httpd      List httpd related scripts
-list    installed  Lists all installed scripts"
+list    httpd      List httpd related scripts"
 }
 
 #生成list表
