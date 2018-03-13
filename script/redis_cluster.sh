@@ -23,7 +23,7 @@ get_redis_cluster() {
 }
 
 install_redis_cluster() {  
-    [ ! $install_dir ] || source script/redis.sh
+    [ ! $redis_dir ] || source script/redis.sh
     [ -d ${install_dir}/${redis_dir} ] || test_exit "请先安装redis"
 
     get_redis_cluster
