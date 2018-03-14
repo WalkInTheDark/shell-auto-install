@@ -61,7 +61,7 @@ test_dir() {
     
     [[ ! -d ${log_dir}/$1 ]] &&  mkdir -p ${log_dir}/$1
 
-    [[ -d ${install_dir}/$1 ]] && test_exit  "$ {install_dir}/${1} directory already exists, please check the installation script path or manually delete the directory"
+    [[ -d ${install_dir}/$1 ]] && test_exit  "${install_dir}/${1} directory already exists, please check the installation script path or manually delete the directory"
 }
 
 
