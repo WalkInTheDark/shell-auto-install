@@ -26,6 +26,8 @@ get     httpd      Download     httpd required package
 info    httpd      Query        httpd details
 edit	httpd      Edit         httpd for custom settings
 
+update             update sai
+
 list               List supported scripts
 list    httpd      List httpd related scripts"
 }
@@ -35,6 +37,7 @@ update_sai() {
     test_install git
     ls | grep -v package | xargs rm -rf
     git clone https://github.com/goodboy23/shell-auto-install.git
+    rm -rf shell-auto-install/package
     mv shell-auto-install/* .
     rm -rf shell-auto-install
     clear
@@ -103,6 +106,8 @@ elif [ $# -eq 1 ];then
     if [ "$1" == "list" ];then
         [ -f conf/list.txt ] || list_generate
         cat conf/list.txt
+    elif [ "$1" == "update" ];then
+        update
     fi
 elif [ $# -eq 2 ];then
     if [ "$1" == "list" ];then
