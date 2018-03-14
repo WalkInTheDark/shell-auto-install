@@ -109,7 +109,7 @@ elif [ $# -eq 1 ];then
         [ -f conf/list.txt ] || list_generate
         cat conf/list.txt
     elif [ "$1" == "update" ];then
-        update
+        update_sai
     fi
 elif [ $# -eq 2 ];then
     if [ "$1" == "list" ];then
