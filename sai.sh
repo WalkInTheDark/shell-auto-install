@@ -30,6 +30,17 @@ list               List supported scripts
 list    httpd      List httpd related scripts"
 }
 
+update_sai() {
+    test_root
+    test_install git
+    ls | grep -v package | xargs rm -rf
+    git clone https://github.com/goodboy23/shell-auto-install.git
+    mv shell-auto-install/* .
+    rm -rf shell-auto-install
+    clear
+    echo "update ok!"
+}
+
 #生成list表
 list_generate() {
     for i in `ls script/`
