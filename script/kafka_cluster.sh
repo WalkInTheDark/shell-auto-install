@@ -48,7 +48,7 @@ install_kafka_cluster() {
     if [ "$listen" == "localhost" ];then
         sed -i "36s/advertised.host.name=192.168.100.11/advertised.host.name=${ip}/g" $conf
     else
-        sed -i "36s/advertised.host.name=192.168.100.11/advertised.host.name=${listen]/g" $conf
+        sed -i "36s/advertised.host.name=192.168.100.11/advertised.host.name=${listen}/g" $conf
     fi
     sed -i "64s,log.dirs=/ops/log/kafka,log.dirs=${log_dir}/${kafka_dir},g" $conf
     sed -i "120s/zookeeper.connect=B-S-01:2181/zookeeper.connect=${cluster_dizhi}/g" $conf
