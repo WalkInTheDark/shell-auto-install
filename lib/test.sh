@@ -66,13 +66,11 @@ test_dir_master() {
 
 #创建日志目录，并检测服务目录，$1是目录名
 test_dir() {
-    if [[ ! -d ${log_dir}/$1 ]];then
-        mkdir -p ${log_dir}/$1
-    fi
+    [[ ! -d ${install_dir} ]] && mkdir -p ${install_dir}
+    
+    [[ ! -d ${log_dir}/$1 ]] &&  mkdir -p ${log_dir}/$1
 
-    if [[ -d ${install_dir}/$1 ]];then
-        test_exit  "$ {install_dir}/${1} directory already exists, please check the installation script path or manually delete the directory"
-    fi
+    [[ -d ${install_dir}/$1 ]] && test_exit  "$ {install_dir}/${1} directory already exists, please check the installation script path or manually delete the directory"
 }
 
 
