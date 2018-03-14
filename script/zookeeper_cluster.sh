@@ -42,13 +42,13 @@ dynamicConfigFile=${install_dir}/${zookeeper_dir}/conf/zoo.cfg.dynamic" > ${inst
     echo "$id" > ${install_dir}/${zookeeper_dir}/data/myid
     
     #监听ipv4，默认ipv6
-    sed -i '150c "-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Djava.net.preferIPv4Stack=true"  "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}" \/' ${install_dir}/${zookeeper_dir}/bin/zkSserver.sh
+    sed -i '150c "-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Djava.net.preferIPv4Stack=true"  "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}" \/' ${install_dir}/${zookeeper_dir}/bin/zkServer.sh
 
     #脚本
     command=/usr/local/bin/man-zookeeper
     rm -rf $command
     echo "#!/bin/bash
-${install_dir}/${zookeeper_cluster_dir}/bin/zkServer.sh" '$1' > $command
+${install_dir}/${zookeeper_dir}/bin/zkServer.sh" '$1' > $command
     chmod +x $command
 
     clear
