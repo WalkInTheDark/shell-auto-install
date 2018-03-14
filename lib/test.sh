@@ -55,15 +55,6 @@ else
 fi
 }
 
-
-#测试主目录是否存在
-test_dir_master() {
-    if [[ ! -d ${install_dir} ]];then
-        mkdir -p ${install_dir}
-    fi
-}
-
-
 #创建日志目录，并检测服务目录，$1是目录名
 test_dir() {
     [[ ! -d ${install_dir} ]] && mkdir -p ${install_dir}
@@ -103,4 +94,12 @@ test_package() {
         wget -O package/${b} $1
         test_package $1 $2 #验证
     fi
+}
+
+#关于使用脚本的，$1为脚本名
+test_bin() {
+    command=/usr/local/bin/$1
+    rm -rf $command
+    cp material/$i $command
+    chmod +x $command
 }

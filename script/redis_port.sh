@@ -16,9 +16,7 @@ listen=0.0.0.0
 source script/redis.sh
 
 get_redis_port() {
-    test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/conf/redis_7000.conf
-    
-    test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/conf/man-redis
+    echo "Do not download"
 }
 
 install_redis_port() {
@@ -29,7 +27,7 @@ install_redis_port() {
     do
         command=/usr/local/bin/man-redis${i} #创建单独管理脚本
         if [ ! -f $command ];then
-            cp package/man-redis $command
+            cp material/man-redis $command
         
             sed -i "2a port=${i}" $command
             sed -i "3a install_dir=${install_dir}" $command
@@ -44,7 +42,7 @@ install_redis_port() {
         conf=${install_dir}/${redis_dir}/cluster/${i}/${i}.conf
         
         mkdir -p ${install_dir}/${redis_dir}/cluster/${i}
-        cp package/redis_7000.conf $conf
+        cp material/redis_7000.conf $conf
         
         sed -i "s/^bind 127.0.0.1/bind ${listen}/g" $conf
         sed -i "/^port/cport ${i}" $conf
@@ -63,9 +61,6 @@ done' >> /usr/local/bin/man-redis
     chmod +x /usr/local/bin/man-redis
 
     #测试
-    which man-redis${i}
-    [ $? -eq 0 ] || test_exit "Installation failed, please check the script"
-    
     
     clear
     echo "install ok

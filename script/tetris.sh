@@ -4,15 +4,13 @@
 
 
 get_tetris() {
-    test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/script/tetris
+    echo "Do not download"
 }
 
 install_tetris() {
     get_tetris
-    command=/usr/local/bin/tetris
-    rm -rf $command
-    cp conf/alone/tetris $command
-    chmod +x $command
+    
+    test_bin tetris
 
     clear
     echo "install ok

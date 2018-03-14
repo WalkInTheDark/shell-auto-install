@@ -12,15 +12,19 @@
 #服务目录名
 redis_browser_dir=redis-browser
 
-#填写redis集群的主机名和对应节点，只要主节点
+#填写redis的主机名节点，最少2个
 cluster_name=(service1 service2 service3)
 cluster_ip=(192.168.2.108:7000 192.168.2.108:7002 192.168.2.108:7004) 
+
+#redis_browser的端口
+port=1212
+
+#redis_browser监听
+listen=0.0.0.0
 
 
 
 get_redis_browser() {
-    test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/conf/man-redis-browser
-    test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/conf/redis_browser.yml
     test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-4.0.1.gem" "a4b74c19159531d0aa4c3bf4539b1743"
     test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-browser-0.5.1.gem" "dbe6a5e711dacbca46e68b10466d9da4"
 }
@@ -39,8 +43,8 @@ install_redis_browser() {
     gem update —system
     gem sources —add https://gems.ruby-china.org/ —remove https://rubygems.org/
     gem sources -l
-    gem install package/redis-4.0.1.gem
-    gem install package/redis-browser-0.5.1.gem
+    gem install material/redis-4.0.1.gem
+    gem install material/redis-browser-0.5.1.gem
     
     d=1 #名字，从第2个起
     echo "connections:" >> ${install_dir}/${redis_browser_dir}/config.yml
@@ -53,7 +57,7 @@ install_redis_browser() {
         
         b=`echo $i | awk -F':' '{print $1}'` 
         c=`echo $i | awk -F':' '{print $2}'`
-        cp package/redis_browser.yuml ./one #复制一份格式文件做修改
+        cp material/redis_browser.yuml ./one #复制一份格式文件做修改
         
         sed -i "1s/service3:/${cluster_name[$d]}" one
         sed -i "2s/host: 192.168.1.3/host: $b/g" one
@@ -64,14 +68,14 @@ install_redis_browser() {
         rm -rf one
     done
 
-    command=/usr/local/bin/man-redis-browser
-    cp package/man-redis-browser $command
-    chmod +x $command
-
-    sed -i "2a install_dir=$install_dir" $command
-    sed -i "3a log_dir=$log_dir" $command
-    sed -i "4a redis_browser_dir=$redis_browser_dir" $command
-    sed -i "5a one=${cluster_ip}" $command
+    #启动脚本
+    test_bin man-redis-browser
+    sed -i "2a port=${port}" $command
+    sed -i "3a listen=${listen}" $command
+    sed -i "4a install_dir=$install_dir" $command
+    sed -i "5a log_dir=$log_dir" $command
+    sed -i "6a redis_browser_dir=$redis_browser_dir" $command
+    sed -i "7a one=${cluster_ip}" $command
 
     #测试
     
@@ -87,15 +91,7 @@ bin=/usr/local/bin/man-redis-browser
 
 man-redis-browser start
 
-curl http://127.0.0.1:1212"
-}
-
-remove_redis_browser() {
-    man-redis-browser stop
-    rm -rf /usr/local/bin/man-redis-browser
-    rm -rf ${install_dir}/${redis_browser_dir}
-    
-    [ $language -eq 1 ] && echo "redis-browser已卸载" || echo "redis-browser Uninstalled"
+curl http://127.0.0.1:${port}"
 }
 
 info_redis_browser() {

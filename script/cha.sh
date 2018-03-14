@@ -4,15 +4,12 @@
 
 
 get_cha() {
-    test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/script/cha
+    echo "Do not download"
 }
 
 install_cha() {
     get_cha
-    command=/usr/local/bin/cha
-    rm -rf $command
-    cp package/cha $command
-    chmod +x $command
+    test_bin cha
 
     clear
     echo "install ok

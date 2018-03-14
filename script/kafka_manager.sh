@@ -17,12 +17,13 @@ kafka_manager_dir=kafka-manager
 #zookeeper集群地址用,分隔
 cluster_ip="192.168.2.108:2181,192.168.2.109:2181"
 
+#启动端口
+port=9000
+
 
 
 get_kafka_manager() {
     test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/kafka-manager-1.3.3.14.zip" "297da17fa75969bc66207e991118b35d"
-    
-    test_package https://raw.githubusercontent.com/goodboy23/shell-script/master/conf/man-kafka-manage
 }
 
 install_kafka_manager() {
@@ -40,12 +41,9 @@ install_kafka_manager() {
     sed -i "23c $a" $conf
 
     #创建管理脚本
-    command=/usr/local/bin/man-kafka-manager
-    rm -rf $command
-    cp package/man-kafka-manager $command
-    chmod +x $command
+    test_bin man-kafka-manager
 
-    sed -i "2a port=9000" $command
+    sed -i "2a port=${port}" $command
     sed -i "3a dir=${install_dir}/${kafka_manager_dir}" $command
     sed -i "4a log=${log_dir}/${kafka_manager_dir}" $command
     
@@ -61,7 +59,7 @@ bin=/usr/local/bin/man-kafka-manager
 
 Start：man-kafka-manager start
 
-Test：curl http://127.0.0.1:9000 login"
+Test：curl http://127.0.0.1:${port} login"
 }
 
 info_kafka_manager() {

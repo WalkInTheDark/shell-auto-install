@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#安装jdk-1.8
 
 
 #[使用设置]

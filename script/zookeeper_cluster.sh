@@ -7,6 +7,9 @@
 #集群所有节点的ip
 cluster_ip=(192.168.2.108 192.168.2.109)
 
+#端口
+port=2181
+
 
 
 source script/zookeeper.sh
@@ -19,7 +22,7 @@ install_zookeeper_cluster() {
     [ -d ${install_dir}/${zookeeper_dir} ] || test_exit "请先安装mysql"
 
     #配置文件
-    echo "clientPort=2181
+    echo "clientPort=${port}
 dataDir=${install_dir}/${zookeeper_dir}/data
 syncLimit=5
 tickTime=2000
