@@ -21,7 +21,6 @@ get_redis() {
 
 install_redis() {
     #检测目录
-    test_dir_master
     test_dir $redis_dir
     
     #安装服务
