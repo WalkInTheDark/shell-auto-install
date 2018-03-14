@@ -40,6 +40,8 @@ update_sai() {
     rm -rf shell-auto-install/package
     mv shell-auto-install/* .
     rm -rf shell-auto-install
+    chmod +x sai.sh
+    sai.sh list &> /dev/null
     clear
     echo "update ok!"
 }
