@@ -50,5 +50,5 @@ info_glibc() {
         
 version：2.14
 
-Introduction：仅按照glibc"
+Introduction：仅安装glibc"
 }
