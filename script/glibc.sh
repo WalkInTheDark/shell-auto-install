@@ -29,6 +29,9 @@ install_glibc() {
     cd build
     ../configure --prefix=${install_dir}/${glibc_dir}
     make && make install
+    cd ..
+    cd ..
+    rm -rf glibc-2.14
     
     #清除软连接
     rm -rf /lib64/libc.so.6
