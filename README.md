@@ -11,14 +11,19 @@ sai可以对所支持的所有服务进行安装，查看，卸载，自定义�
 
 当不符合脚本要求时,会退出并提示如何解决，解决后再次安装即可
 
+## 注意事项
+请先进行测试后，再在生产或其他重要场合使用。
+
+当前只支持centos7
+
+当前脚本需要Linux入门知识
 
 ## 使用方法
-[下载地址](https://www.linuxidc.com/Linux/2016-05/131538.htm "下载地址")
 
+[下载地址](https://github.com/goodboy23/shell-auto-install/releases "下载地址")
 
-yum -y install unzip
-
-unzip sai.zip
+下载后
+tar -xf sai.tar.gz
 
 cd shell-auto-install
 
@@ -32,16 +37,24 @@ chmod +x sai.sh
 
 再使用./sai.sh edit mysql 将get_mysql函数中网址部分替换为安装包名，md5部分替换为相应md5值
 
-## 使用扩展脚本
+可能需要修改脚本的安装步骤
 
-若mysql等服务不是使用sai安装的，可以使用./sai.sh edit mysql_single 方式，将rely=0修改为rely=1
+## 设置中文
 
-再使用./sai.sh edit mysql方式，修改安装和日志目录的位置即可
+默认是英文，vim sai.sh 可以修改全局的安装目录，中英文显示
+
+![](http://www.52wiki.cn/uploads/201803/shell/attach_1520aa59400f0727.png)
 
 ## 查看帮助
 
- ![xx](https://github.com/goodboy23/shell-auto-install/blob/master/package/c.png)
+![](http://www.52wiki.cn/uploads/201803/shell/attach_1520aa578d4a5b68.png)
+
+## 查看列表
+
+列表分为3部分，应用名，版本，介绍
+
+![](http://www.52wiki.cn/uploads/201803/shell/attach_1520aa553ba217c0.png)
 
 ## 安装使用
 
-![dd](https://github.com/goodboy23/shell-auto-install/blob/master/package/d.png)
+(http://www.52wiki.cn/uploads/201803/shell/attach_1520aa5cb4ad6362.png)
