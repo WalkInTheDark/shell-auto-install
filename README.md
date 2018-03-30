@@ -57,4 +57,4 @@ chmod +x sai.sh
 
 ## 安装使用
 
-(http://www.52wiki.cn/uploads/201803/shell/attach_1520aa5cb4ad6362.png)
+![](http://www.52wiki.cn/uploads/201803/shell/attach_1520aa5cb4ad6362.png)
