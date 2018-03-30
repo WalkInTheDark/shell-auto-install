@@ -12,11 +12,12 @@ cluster_ip=(3307 3308)
 source script/mysql.sh
 
 get_mysql_port() {
-    echo "Do not download"
+    [ "$language" == "cn" ] && echo "不用下载" || echo "Do not download"
 }
 
 install_mysql_port() {
-    [ -d ${install_dir}/${mysql_dir} ] || test_exit "请先安装mysql"
+	remove_mysql_port
+    [ -f ${install_dir}/${mysql_dir}/scripts/mysql_install_db ] || test_exit "请先安装mysql" "Please install mysql first"
  
      echo "[client]
 port=3306
@@ -60,19 +61,63 @@ echo >> /etc/my.cnf
         ${install_dir}/${mysql_dir}/scripts/mysql_install_db --basedir=${install_dir}/${mysql_dir} --datadir=${install_dir}/${mysql_dir}/data${i} --defaults-file=/etc/my.cnf &> /dev/null
     done
 
-    echo "install ok
+	clear
+	echo "mysql-port" >> conf/installed.txt
+	if [ "$language" == "cn" ];then
+		echo "安装成功
+		
+安装目录：${install_dir}/${mysql_dir}/data*
 
-install_dir=${install_dir}/${mysql_dir}/data*
+日志目录：${log_dir}/${mysql_dir}
+
+启动：mysqld_multi start
+
+访问：mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
+	else
+		echo "install ok
+    
+Installation manual：${install_dir}/${mysql_dir}
+
+Log directory：${log_dir}/${mysql_dir}
 
 Start：mysqld_multi start
 
-Test：mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
+Environment variable setting completed
+
+Access：mysql -S ${install_dir}/${mysql_many_dir}/mysql_${i}.sock"
+	fi
+}
+
+remove_mysql_port() {
+	> /etc/my.cnf
+    for i in `echo ${cluster_ip[*]}`
+    do
+        rm -rf ${install_dir}/${mysql_dir}/data${i}
+	done
+	test_remove mysql-port
+	[ "$language" == "cn" ] && echo "mysql_port卸载完成！" || echo "mysql_port Uninstall completed！"
 }
 
 info_mysql_port() {
-    echo "Name：mysql-port
-        
-rely：mysql
+	if [ "$language" == "cn" ];then
+		echo "名字：mysql-port
+		
+版本：mysql
 
-Introduction：配置mysql多实例"
+介绍：配置mysql多实例
+		
+类型：服务
+
+作者：http://www.52wiki.cn/docs/shell"
+	else
+		echo "Name：mysql-port
+
+Version：mysql
+
+Introduce：Configure mysql multiple instances
+
+Type: server
+
+Author：http://www.52wiki.cn/docs/shell"
+	fi
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#
+
 
 
 #[使用设置]
@@ -14,19 +14,21 @@ port=9092
 listen=localhost
 
 
-#如果自定的，修改依赖脚本
+
+#如果非sai安装的，修改被加载脚本
 source script/kafka.sh
 
 get_kafka_cluster() {
-    echo "Do not download"
+    [ "$language" == "cn" ] && echo "不用下载" || echo "Do not download"
 }
 
 install_kafka_cluster() {
     #检测依赖
-    [ -d ${install_dir}/${kafka_dir} ] || test_exit "请先安装kakfa"
+	remove_kafka_cluster
+	conf=${install_dir}/${kafka_dir}/config/server.properties
+    [ -f $conf ] || test_exit "请先安装kakfa" "Please install kafka first"
 
     #修改配置
-    conf=${install_dir}/${kafka_dir}/config/server.properties
     rm -rf $conf
     cp material/server.properties $conf
     
@@ -54,19 +56,57 @@ install_kafka_cluster() {
     sed -i "120s/zookeeper.connect=B-S-01:2181/zookeeper.connect=${cluster_dizhi}/g" $conf
 
     #创建脚本
-    test_bin man-kafka
+    test_bin man-kafka-cluster
     sed -i "2a port=${port}" $command
     sed -i "3a dir=${install_dir}/${kafka_dir}" $command
+   
+	clear
+	echo "kafka-cluster" >> conf/installed.txt
+    if [ "$language" == "cn" ];then
+		echo "安装成功
+		
+安装目录：${install_dir}/${kafka_dir}
+
+日志目录：${log_dir}/${kafka_dir}
+
+启动：man-kafka-cluster start"
+	else
+		echo "install ok
     
-    echo "install ok
-    
+Installation manual：${install_dir}/${kafka_dir}
+
+Log directory：${log_dir}/${kafka_dir}
+
 Start：man-kafka-cluster start"
+	fi
+}
+
+remove_kafka_cluster() {
+	rm -rf /usr/local/bin/man-kafka-cluster
+	test_remove kafka-cluster
+	[ "$language" == "cn" ] && echo "kafka-cluster卸载完成！" || echo "kafka-cluster Uninstall completed！"
 }
 
 info_kafka_cluster() {
-    echo "Name：kafka-cluster
-        
-version：2.12
+	if [ "$language" == "cn" ];then
+		echo "名字：kafka-cluster
+		
+版本：kafka
 
-Introduction：配置kafka集群"
+介绍：配置kafka集群
+		
+类型：服务
+
+作者：http://www.52wiki.cn/docs/shell"
+	else
+		echo "Name：kafka-cluster
+
+Version：kafka
+
+Introduce：Configure kafka cluster
+
+Type: server
+
+Author：http://www.52wiki.cn/docs/shell"
+	fi
 }

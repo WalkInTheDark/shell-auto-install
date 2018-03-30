@@ -21,8 +21,9 @@ get_zookeeper() {
 
 install_zookeeper() {
     #检测目录
+	remove_zookeeper
     test_dir $zookeeper_dir
-    bash sai.sh install jdk-eight
+    test_rely jdk
 
     get_zookeeper
     tar -xf   package/zookeeper-3.5.2-alpha.tar.gz
@@ -31,17 +32,48 @@ install_zookeeper() {
     #测试
     
     clear
-    echo "install ok
-        
-install_dir=${install_dir}/${zookeeper_dir}
+	echo "zookeeper" >> conf/installed.txt
+	if [ "$language" == "cn" ];then
+		echo "安装成功
+		
+安装目录：${install_dir}/${zookeeper_dir}
 
-log_dir=${log_dir}/${zookeeper_dir}"
+日志目录：${log_dir}/${zookeeper_dir}"
+	else
+		echo "install ok
+    
+Installation manual：${install_dir}/${zookeeper_dir}
+
+Log directory：${log_dir}/${zookeeper_dir}"
+	fi
+}
+
+remove_zookeeper() {
+	rm -rf ${install_dir}/${zookeeper_dir}
+	test_remove zookeeper
+	[ "$language" == "cn" ] && echo "zookeeper卸载完成！" || echo "zookeeper Uninstall completed！"
 }
 
 info_zookeeper() {
-    echo "Name：zookeeper
-    
-version：3.5.2
+	if [ "$language" == "cn" ];then
+		echo "名字：zookeeper
+		
+版本：3.5.2
 
-Introduction：仅安装zookeeper"
+介绍：ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务
+		
+类型：服务
+
+作者：http://www.52wiki.cn/docs/shell"
+	else
+		echo "Name：zookeeper
+
+Version：3.5.2
+
+Introduce：ZooKeeper is a distributed, open source distributed application coordination service
+
+Type: server
+
+Author：http://www.52wiki.cn/docs/shell"
+	fi
 }

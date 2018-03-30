@@ -12,11 +12,12 @@ port=3306
 source script/mysql.sh
 
 get_mysql_single() {
-    echo "Do not download"
+    [ "$language" == "cn" ] && echo "不用下载" || echo "Do not download"
 }
 
 install_mysql_single() {
-    [ -d ${install_dir}/${mysql_dir} ] || test_exit "请先安装mysql"
+	remove_mysql_single
+    [ -f ${install_dir}/${mysql_dir}/scripts/mysql_install_db ] || test_exit "请先安装mysql" "Please install mysql first"
     
     echo "[mysql]
 default-character-set=utf8
@@ -60,15 +61,53 @@ WantedBy=multi-user.target" > /usr/lib/systemd/system/mysql.service
     systemctl daemon-reload
 
     clear
-    echo "install ok
+	echo "caed-single" >> conf/installed.txt
+	if [ "$language" == "cn" ];then
+		echo "安装成功
+		
+安装目录：${install_dir}/${mysql_dir}
+
+日志目录：${log_dir}/${mysql_dir}
+
+启动：systemctl start mysql"
+	else
+		echo "install ok
     
+Installation manual：${install_dir}/${mysql_dir}
+
+Log directory：${log_dir}/${mysql_dir}
+
 Start：systemctl start mysql"
+	fi
+}
+
+remove_mysql_single() {
+	rm -rf rm -rf /usr/lib/systemd/system/mysql.service
+	> /etc/my.cnf
+	test_remove mysql-single
+	[ "$language" == "cn" ] && echo "mysql-single卸载完成！" || echo "mysql-single Uninstall completed！"
 }
 
 info_mysql_single() {
-    echo "Name：mysql-single
-    
-rely：mysql
+	if [ "$language" == "cn" ];then
+		echo "名字：mysql-single
+		
+版本：mysql
 
-Introduction：配置mysql单点"
+介绍：配置mysql单点
+		
+类型：服务
+
+作者：http://www.52wiki.cn/docs/shell"
+	else
+		echo "Name：mysql-single
+
+Version：mysql
+
+Introduce：Configure mysql single point
+
+Type: server
+
+Author：http://www.52wiki.cn/docs/shell"
+	fi
 }

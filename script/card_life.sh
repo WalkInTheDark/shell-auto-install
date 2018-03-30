@@ -1,31 +1,58 @@
 #!/usr/bin/env bash
-#抽卡人生小游戏，当前最快47天通关。
-#启动将生成一个存档，不建议改存档。
-#游戏：具体游戏规则和介绍启动游戏可以看到，均是中文
-#攻略：最好是过天数，不花任何法力买卡牌，然后10连抽
 
 
 
 get_card_life() {
-    echo "Do not download"
+    [ "$language" == "cn" ] && echo "不用下载" || echo "Do not download"
 }
 
 install_card_life() {
-    get_card_life
+	remove_card_life
     test_bin card-life
 
     clear
-    echo "install ok
+	echo "card-life" >> conf/installed.txt
+	if [ "$language" == "cn" ];then
+		echo "安装成功
+
+安装目录：/usr/local/bin/card-life
+
+启动：card-life"
+	else
+		echo "install ok
     
-install_dir=/usr/local/bin/card-life
+Installation manual：/usr/local/bin/card-life
 
 Start：card-life"
+	fi
+}
+
+remove_card_life() {
+	rm -rf /usr/local/bin/card-life
+	test_remove card-life
+	[ "$language" == "cn" ] && echo "card-life卸载完成！" || echo "card-life Uninstall completed！"
 }
 
 info_card_life() {
-        echo "Name：card-life
+	if [ "$language" == "cn" ];then
+		echo "名字：card-life
+		
+版本：1.4
+
+介绍：抽卡人生shell版本
+		
+类型：卡牌游戏
+
+作者：http://www.52wiki.cn/docs/shell"
+	else
+		echo "Name：card-life
 
 Version：1.4
 
-Introduce：抽卡人生"
+Introduce：Draw card life shell version
+
+Type: card game
+
+Author：http://www.52wiki.cn/docs/shell"
+	fi
 }

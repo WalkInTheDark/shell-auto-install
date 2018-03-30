@@ -15,11 +15,12 @@ port=2181
 source script/zookeeper.sh
 
 get_zookeeper_cluster() {
-    echo "Do not download"
+    [ "$language" == "cn" ] && echo "不用下载" || echo "Do not download"
 }
 
 install_zookeeper_cluster() {
-    [ -d ${install_dir}/${zookeeper_dir} ] || test_exit "请先安装mysql"
+	remove_zookeeper_cluster
+    [ -f ${install_dir}/${zookeeper_dir}/conf/zoo.cfg.dynamic ] || test_exit "请先安装mysql"
 
     #配置文件
     echo "clientPort=${port}
@@ -48,24 +49,60 @@ dynamicConfigFile=${install_dir}/${zookeeper_dir}/conf/zoo.cfg.dynamic" > ${inst
     sed -i '150c "-Dzookeeper.log.file=${ZOO_LOG_FILE}" "-Djava.net.preferIPv4Stack=true"  "-Dzookeeper.root.logger=${ZOO_LOG4J_PROP}" \/' ${install_dir}/${zookeeper_dir}/bin/zkServer.sh
 
     #脚本
-    command=/usr/local/bin/man-zookeeper
+    command=/usr/local/bin/man-zookeeper-cluster
     rm -rf $command
     echo "#!/bin/bash
 ${install_dir}/${zookeeper_dir}/bin/zkServer.sh" '$1' > $command
     chmod +x $command
 
     clear
-    echo "install ok
+	echo "zookeeper-cluster" >> conf/installed.txt
+	if [ "$language" == "cn" ];then
+		echo "安装成功
+		
+安装目录：${install_dir}/${zookeeper_dir}
 
-bin=/usr/local/bin/man-zookeeper
+日志目录：${log_dir}/${zookeeper_dir}
 
-Start：man-zookeeper start"
+启动：man-zookeeper-cluster start"
+	else
+		echo "install ok
+    
+Installation manual：${install_dir}/${zookeeper_dir}
+
+Log directory：${log_dir}/${zookeeper_dir}
+
+Start：man-zookeeper-cluster start"
+	fi
+}
+
+remove_zookeeper_cluster() {
+	man-zookeeper-cluster stop
+	rm -rf /usr/local/bin/man-zookeeper-cluster
+	test_remove zookeeper-cluster
+	[ "$language" == "cn" ] && echo "zookeeper_cluster卸载完成！" || echo "zookeeper_cluster Uninstall completed！"
 }
 
 info_zookeeper_cluster() {
-    echo "Name：zookeeper-cluster
+	if [ "$language" == "cn" ];then
+		echo "名字：zookeeper_cluster
+		
+版本：zookeeper
 
-version：zookeeper
+介绍：配置zookeeper集群
+		
+类型：服务
 
-Introduction：配置zookeeper集群"
+作者：http://www.52wiki.cn/docs/shell"
+	else
+		echo "Name：zookeeper_cluster
+
+Version：zookeeper
+
+Introduce：Configure the zookeeper cluster
+
+Type: server
+
+Author：http://www.52wiki.cn/docs/shell"
+	fi
 }

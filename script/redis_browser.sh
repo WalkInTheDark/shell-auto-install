@@ -4,10 +4,10 @@
 
 #[使用设置]
 #主目录，相当于/usr/local
-#install_dir=/ops/server
+#install_dir=
 
-#日志主目录，相当于/var/log
-#log_dir=/ops/log
+#日志主目录
+#log_dir=
 
 #服务目录名
 redis_browser_dir=redis-browser
@@ -30,14 +30,11 @@ get_redis_browser() {
 }
 
 install_redis_browser() {
-    test_dir_master
+	remove_redis_browser
     test_dir $redis_browser_dir
     
-    test_www www.baidu.com
-    
     test_install gem
-    bash sai.sh install nodejs
-    bash sai.sh install ruby
+	test_rely nodejs ruby
     
     get_redis_browser
     gem update —system
@@ -81,23 +78,58 @@ install_redis_browser() {
     
     
     clear
-    echo "install ok
-        
-install_dir=${install_dir}/${redis_browser_dir}
+	echo "redis-browser" >> conf/installed.txt
+	if [ "$language" == "cn" ];then
+		echo "安装成功
+		
+安装目录：${install_dir}/${redis_browser_dir}
 
-log_dir=${log_dir}/${redis_browser_dir}
+日志目录：${log_dir}/${redis_browser_dir}
 
-bin=/usr/local/bin/man-redis-browser
+启动：man-redis-browser start
 
-man-redis-browser start
+访问：curl http://127.0.0.1:${port}"
+	else
+		echo "install ok
+    
+Installation manual：${install_dir}/${redis_browser_dir}
 
-curl http://127.0.0.1:${port}"
+Log directory：${log_dir}/${redis_browser_dir}
+
+Start：man-redis-browser start
+
+Access：curl http://127.0.0.1:${port}"
+	fi
 }
 
-info_redis_browser() {
-        echo "Name：redis-browser
-        
-version：0.5.1
+remove_redis_browser() {
+	rm -rf ${install_dir}/${redis_browser_dir}
+	rm -rf /usr/local/bin/man-redis-browser
+	test_remove redis-browser
+	[ "$language" == "cn" ] && echo "redis-browser卸载完成！" || echo "redis-browser Uninstall completed！"
+}
 
-Introduction：安装redis-browser"
+
+info_redis_browser() {
+	if [ "$language" == "cn" ];then
+		echo "名字：redis-browser
+		
+版本：0.5.1
+
+介绍：redis的web端管理工具
+		
+类型：服务
+
+作者：http://www.52wiki.cn/docs/shell"
+	else
+		echo "Name：redis-browser
+
+Version：0.5.1
+
+Introduce：Redis web-side management tool
+
+Type: server
+
+Author：http://www.52wiki.cn/docs/shell"
+	fi
 }

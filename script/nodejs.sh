@@ -18,6 +18,7 @@ get_nodejs() {
 
 install_nodejs() {
     #检测目录
+	remove_nodejs
     test_dir $nodejs_dir
 
     get_nodejs
@@ -25,7 +26,7 @@ install_nodejs() {
     mv node-v8.9.3-linux-x64 ${install_dir}/${nodejs_dir}
     
     #链接
-    rm -rf /usr/local/bin/node
+	rm -rf /usr/local/bin/node
     rm -rf /usr/local/bin/npm
     ln -s ${install_dir}/${nodejs_dir}/bin/node /usr/local/bin/node
     ln -s ${install_dir}/${nodejs_dir}/bin/npm /usr/local/bin/npm
@@ -35,19 +36,50 @@ install_nodejs() {
     [ $? -eq 0 ] || test_exit "Installation failed, please check the installation script"
     
     clear
-    echo "install ok
+	echo "nodejs" >> conf/installed.txt
+	if [ "$language" == "cn" ];then
+		echo "安装成功
+		
+安装目录：${install_dir}/${nodejs_dir}
 
-install_dir=${install_dir}/${nodejs_dir}
+环境变量设置完成"
+	else
+		echo "install ok
+    
+Installation manual：${install_dir}/${nodejs_dir}
 
-bin_dir=${install_dir}/${nodejs_dir}/node
+Environment variable setting completed"
+	fi
+}
 
-bin_dir=${install_dir}/${nodejs_dir}/npm"
+remove_nodejs() {
+    rm -rf /usr/local/bin/node
+    rm -rf /usr/local/bin/npm
+	rm -rf ${install_dir}/${nodejs_dir}
+	test_remove nodejs
+	[ "$language" == "cn" ] && echo "nodejs卸载完成！" || echo "nodejs Uninstall completed！"
 }
 
 info_nodejs() {
-    echo "Name：nodejs
-        
-version：8.9.3
+	if [ "$language" == "cn" ];then
+		echo "名字：nodejs
+		
+版本：8.9.3
 
-Introduction：安装nodejs"
+介绍： Node.js 就是运行在服务端的 JavaScript。
+		
+类型：语言
+
+作者：http://www.52wiki.cn/docs/shell"
+	else
+		echo "Name：nodejs
+
+Version：8.9.3
+
+Introduce：Node.js is JavaScript that runs on the server.
+
+Type: Language
+
+Author：http://www.52wiki.cn/docs/shell"
+	fi
 }

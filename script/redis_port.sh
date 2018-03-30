@@ -16,10 +16,11 @@ listen=0.0.0.0
 source script/redis.sh
 
 get_redis_port() {
-    echo "Do not download"
+    [ "$language" == "cn" ] && echo "不用下载" || echo "Do not download"
 }
 
 install_redis_port() {
+	remove_redis_port
     [ -d ${install_dir}/${redis_dir} ] || test_exit "请先安装redis"
 
     get_redis_port
@@ -56,26 +57,60 @@ install_redis_port() {
 
 for i in `ls /usr/local/bin/man-redis*`
 do  
-    [ "$i" == "man-redis" ] && continue || $i $1
+    [ "$i" == "/usr/local/bin/man-redis" ] && continue || $i $1
 done' >> /usr/local/bin/man-redis
     chmod +x /usr/local/bin/man-redis
 
-    #测试
-    
     clear
-    echo "install ok
-    
-install_dir=${install_dir}/${redis_dir}/cluster
+	if [ "$language" == "cn" ];then
+		echo "安装成功
+		
+安装目录：${install_dir}/${redis_dir}
 
-bin_dir=/usr/local/bin/man-redis*
+日志目录：${log_dir}/${redis_dir}
+
+启动：man-redis start"
+	else
+		echo "install ok
+    
+Installation manual：${install_dir}/${redis_dir}
+
+Log directory：${log_dir}/${redis_dir}
 
 Start：man-redis start"
+	fi
+}
+
+remove_redis_port() {
+	rm -rf /usr/local/bin/man-redis
+	for i in `echo ${port[*]}`
+    do
+		rm -rf /usr/local/bin/man-redis${i}
+		rm -rf ${install_dir}/${redis_dir}/cluster/${i}
+		[ "$language" == "cn" ] && echo "节点${i}卸载完成！" || echo "node${i} Uninstall completed！"
+	done
 }
 
 info_redis_port() {
-    echo "Name：redis-port
-       
-rely：redis
+	if [ "$language" == "cn" ];then
+		echo "名字：redis-port
+		
+版本：redis
 
-Introduction：配置redis多实例"
+介绍：配置redis多实例
+		
+类型：服务
+
+作者：http://www.52wiki.cn/docs/shell"
+	else
+		echo "redis-port
+
+Version：redis
+
+Introduce：Configure redis multi-instance
+
+Type: server
+
+Author：http://www.52wiki.cn/docs/shell"
+	fi
 }

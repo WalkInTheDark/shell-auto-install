@@ -15,31 +15,46 @@ node=1
 source script/redis.sh
 
 get_redis_cluster() {
-    get_redis
     test_package "http://shell-auto-install.oss-cn-zhangjiakou.aliyuncs.com/package/redis-4.0.1.gem" "a4b74c19159531d0aa4c3bf4539b1743"
 }
 
 install_redis_cluster() {  
-    [ -d ${install_dir}/${redis_dir} ] || test_exit "请先安装redis"
+	remove_redis_cluster
+    [ -f ${install_dir}/${redis_dir}/src/redis-trib.rb ] || test_exit "请先安装redis"
 
     get_redis_cluster
     test_install ruby-devel rubygems rpm-build
-    bash sai.sh install ruby
+    test_rely ruby
     gem install package/redis-4.0.1.gem
     
     #启动
     ${install_dir}/${redis_dir}/src/redis-trib.rb create --replicas ${node} ${cluster_ip}
-    
-    #测试
-    
-    clear
-    echo "install ok"
+}
+
+remove_redis_cluster() {
+	[ "$language" == "cn" ] && echo "redis-cluster无法卸载，需要每个节点删除存储文件再重新创建集群！" || echo "Redis-cluster cannot be unloaded. Each node needs to delete the storage file and re-create the cluster!"
 }
 
 info_redis_cluster() {
-    echo "Name：redis-cluster
-        
-rely：redis
+	if [ "$language" == "cn" ];then
+		echo "名字：redis-cluster
+		
+版本：redis
 
-Introduction：配置redis集群"
+介绍：配置redis集群，需要先创建多个节点
+		
+类型：服务
+
+作者：http://www.52wiki.cn/docs/shell"
+	else
+		echo "Name：redis-cluster
+
+Version：redis
+
+Introduce：Configure a redis cluster, you need to create multiple nodes first
+
+Type: server
+
+Author：http://www.52wiki.cn/docs/shell"
+	fi
 }
