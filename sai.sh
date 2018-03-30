@@ -21,7 +21,7 @@ editor=vi
 #中文帮助
 help_cn() {
 	echo "提示：所有服务默认安装！ 如果您自定义安装位置或其他设置，请编辑服务名称
-当前版本：1.5.7
+当前版本：1.0
 
 install httpd        安装 httpd
 remove  httpd        卸载 httpd
@@ -39,7 +39,7 @@ list    httpd        列出 httpd 相关脚本"
 #英文帮助
 help_en() {
     echo "Tip: All services are installed by default! If you customize the installation location or other settings, please edit the service name
-current version：1.5.7
+current version：1.0
 
 install httpd      installation httpd
 remove  httpd      Uninstall    httpd
