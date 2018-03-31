@@ -103,7 +103,7 @@ info_redis_port() {
 
 作者：http://www.52wiki.cn/docs/shell"
 	else
-		echo "redis-port
+		echo "Name：redis-port
 
 Version：redis
 
