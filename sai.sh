@@ -152,7 +152,7 @@ elif [ $# -eq 1 ];then
 elif [ $# -eq 2 ];then
     if [ "$1" == "list" ];then
         [ "$language" == "cn" ] && echo "$2相关脚本：" || echo "$2 Related script："
-		grep "^$2" conf/list.txt
+		grep "^$2" conf/list_${language}.txt
     else
         server $1 $2
     fi
