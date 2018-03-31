@@ -18,7 +18,7 @@ get_nodejs() {
 
 install_nodejs() {
     #检测目录
-	remove_nodejs
+    remove_nodejs
     test_dir $nodejs_dir
 
     get_nodejs
