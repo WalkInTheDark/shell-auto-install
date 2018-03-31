@@ -9,7 +9,7 @@ get_calibre() {
 install_calibre() {
 	remove_calibre
 	test_rely chinese-font pyqt
-	test_install libGL.so.1 mesa-libGL Mesa-libGL-devel libXcomposit
+	test_install libGL.so.1 mesa-libGL Mesa-libGL-devel libXcomposit qt5-qtquickcontrols qt5-qtdeclarative-devel
 
 	#安装包
 	wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
