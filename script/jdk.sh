@@ -17,8 +17,9 @@ get_jdk() {
 }
 
 install_jdk() {
-	remove_jdk
+    remove_jdk
     test_dir $jdk_dir
+    yum -y remove java-1.8.0-openjdk
     
     #安装服务
     get_jdk
