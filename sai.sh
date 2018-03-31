@@ -23,7 +23,7 @@ log=ok
 
 #用于使用记录的统计，想知道多少人在使用sai /笑脸
 fa_log() {
-	curl http://www.52wiki.cn/docs/saitest?token=88h1354nP0gK
+	curl http://www.52wiki.cn/docs/saitest?token=88h1354nP0gK &> /dev/null
 }
 
 #中文帮助
@@ -136,7 +136,7 @@ do
     source $i
 done
 
-fa_log
+[ "$log" == "ok" ] && fa_log
 
 if [ $# -eq 0 ];then
     [ "$language" == "cn" ] && help_cn || help_en
