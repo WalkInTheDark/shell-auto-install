@@ -3,7 +3,7 @@
 
 
 get_calibre() {
-	
+	[ "$language" == "cn" ] && echo "不用下载" || echo "Do not download"
 }
 
 install_calibre() {
