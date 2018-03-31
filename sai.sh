@@ -16,7 +16,15 @@ log_dir=/var/log
 #edit选项的编辑器，可选择vim或其他
 editor=vi
 
+#是否允许把使用次数发送到互联网，用于统计，默认ok，选择其他则不发送
+log=ok
 
+
+
+#用于使用记录的统计，想知道多少人在使用sai /笑脸
+fa_log() {
+	curl http://www.52wiki.cn/docs/saitest?token=88h1354nP0gK
+}
 
 #中文帮助
 help_cn() {
@@ -127,6 +135,8 @@ for i in `ls lib/*`
 do
     source $i
 done
+
+fa_log
 
 if [ $# -eq 0 ];then
     [ "$language" == "cn" ] && help_cn || help_en
